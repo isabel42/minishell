@@ -1,40 +1,36 @@
-SRCS	= main.c \
-			constants.c \
-			free.c \
-			pipe_fork.c \
-			param.c
+SRCS	= main.c
 
 OBJS 	= ${SRCS:.c=.o}
 
-NAME 	= pipex
+NAME 	= minishell
 
-LIB		= libpipex.a
+FT_NAME = ./libft/libft.a
 
 CC		= gcc
 
 RM		= rm -f
 
-AR		= ar rc
+CFLAGS	= -Wextra -Wall -Werror 
 
-CFLAGS	= -Wextra -Wall -Werror
+INCLUDE = -I./libft/ -I.
 
 .c.o:	
 			${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
-${NAME}: 	${OBJS}
-				make bonus -C ./libft
-				cp ./libft/libft.a ${LIB}
-				${AR} ${LIB} ${OBJS}
-				ranlib ${LIB}
-			${CC} ${CFLAGS} -o ${NAME} main.c -L. -lpipex
+${NAME}: 	${OBJS} ${FT_NAME}
+			${CC} ${CFLAGS} ${INCLUDE} ${OBJS} -o ${NAME} -L./libft/ -lft -lreadline 
 
 all:		${NAME}
 
+${FT_NAME}:
+	make bonus -C ./libft/
+
 clean:
-			make fclean -C ./libft	
+			make clean -C ./libft
 			${RM} ${OBJS}
 
 fclean: 	clean
+			make fclean -C ./libft
 			${RM} ${NAME}
 
 re:			fclean all
