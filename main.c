@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/06/19 19:25:21 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/06/19 19:46:07 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,10 +118,11 @@ char *ft_cp_line(char *prompt, int *i, int j)
 		res[j] = prompt[*i + j];
 		j--;
 	}
+	*i = *i + ft_strlen(res);
 	return(res);
 }
 
-char	*ft_promt_line(char *prompt, int *i)
+char	*ft_promt_line(char *prompt, int *i, char a)
 {
 	char	*res;
 	int		j;
@@ -130,28 +131,17 @@ char	*ft_promt_line(char *prompt, int *i)
 	res = NULL;
 	while (prompt[*i] != '\0')
 	{
-		if (prompt[*i] == '"')
+		if (prompt[*i] == a)
 		{
-			while (prompt[*i + j + 1] != '"' && prompt[*i + j] != '\0')
+			while (prompt[*i + j + 1] != a && prompt[*i + j] != '\0')
 				j++;
 			res = ft_cp_line(prompt, i, j);
 			if (!res)
 				return ("Error in malloc");
-			// res = malloc(sizeof(char) * (j + 1));
-			// if (!res)
-			// 	return ("Error in malloc");
-			// res[j + 1] = prompt[*i + j + 1];
-			// while (j >= 0)
-			// {
-			// 	res[j] = prompt[*i + j];
-			// 	j--;
-			// }
 			break ;
 		}
 		*i = *i + 1;
 	}
-	if(res)
-		*i = *i + ft_strlen(res);
 	return (res);
 }
 
@@ -171,8 +161,13 @@ int main (int argc, char **argv, char **envp)
 		pid = 0;
 		prompt = readline("minishell> ");
 		add_history(prompt);
-		command = ft_promt_line(prompt, &pid);
-		printf("prompt: %s\n", command);
+		while (prompt[pid] != '\0')
+		{
+			command = ft_promt_line(prompt, &pid, '"');
+			printf("txt: %s\n", command);
+			command = ft_promt_line(prompt, &pid, '\'');
+			printf("txt: %s\n", command);
+		}
 		// split_prompt = ft_split(prompt, ' ');
 		// command = ft_find_comm_path(ft_envp(envp, "PATH="), split_prompt[0]);
 		// pid = fork();
