@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/06/19 14:50:08 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/06/19 19:25:21 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,25 +105,80 @@ char	**ft_flags(char **envp, char *prompt)
 	return (flags);
 }
 
+char *ft_cp_line(char *prompt, int *i, int j)
+{
+	char	*res;
+
+	res = malloc(sizeof(char) * (j + 1));
+	if (!res)
+		return (NULL);
+	res[j + 1] = prompt[*i + j + 1];
+	while (j >= 0)
+	{
+		res[j] = prompt[*i + j];
+		j--;
+	}
+	return(res);
+}
+
+char	*ft_promt_line(char *prompt, int *i)
+{
+	char	*res;
+	int		j;
+
+	j = 0;
+	res = NULL;
+	while (prompt[*i] != '\0')
+	{
+		if (prompt[*i] == '"')
+		{
+			while (prompt[*i + j + 1] != '"' && prompt[*i + j] != '\0')
+				j++;
+			res = ft_cp_line(prompt, i, j);
+			if (!res)
+				return ("Error in malloc");
+			// res = malloc(sizeof(char) * (j + 1));
+			// if (!res)
+			// 	return ("Error in malloc");
+			// res[j + 1] = prompt[*i + j + 1];
+			// while (j >= 0)
+			// {
+			// 	res[j] = prompt[*i + j];
+			// 	j--;
+			// }
+			break ;
+		}
+		*i = *i + 1;
+	}
+	if(res)
+		*i = *i + ft_strlen(res);
+	return (res);
+}
+
 int main (int argc, char **argv, char **envp)
 {
 	char	*prompt;
-	char	**split_prompt;
+	// char	**split_prompt;
 	char	*command;
 	int		pid;
 
 	(void) argc;
 	(void) argv;
+	(void) envp;
+
 	while (42)
 	{
+		pid = 0;
 		prompt = readline("minishell> ");
 		add_history(prompt);
-		split_prompt = ft_split(prompt, ' ');
-		command = ft_find_comm_path(ft_envp(envp, "PATH="), split_prompt[0]);
-		pid = fork();
-		if (pid == 0)
-			execve(command, ft_flags(envp, prompt), NULL);
-		waitpid(pid, NULL, 0);
+		command = ft_promt_line(prompt, &pid);
+		printf("prompt: %s\n", command);
+		// split_prompt = ft_split(prompt, ' ');
+		// command = ft_find_comm_path(ft_envp(envp, "PATH="), split_prompt[0]);
+		// pid = fork();
+		// if (pid == 0)
+		// 	execve(command, ft_flags(envp, prompt), NULL);
+		// waitpid(pid, NULL, 0);
 	}
 	return (0);
 }

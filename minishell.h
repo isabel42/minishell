@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/06/19 14:27:07 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/06/19 18:21:33 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,14 @@
 # include <sys/wait.h>
 # include <fcntl.h>
 # include "libft/libft.h"
+
+typedef struct s_elem
+{
+	char	*txt;
+	int		cmd;
+	int		arg;
+	int		infile;
+	int		outifle;
+}				t_elem;
 
 #endif
