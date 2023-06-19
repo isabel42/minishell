@@ -3,22 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/06/19 13:41:00 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/06/19 14:27:01 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <unistd.h>
-# include <stdio.h>
-# include <errno.h>
-# include <sys/wait.h>
-# include <fcntl.h>
-# include "libft/libft.h"
+#include "minishell.h"
 
 char	*ft_envp(char **envp, char *pwd)
 {
@@ -83,14 +75,6 @@ char	*ft_find_comm_path(char *path, char *command)
 	return (NULL);
 }
 
-char	*ft_param(char *prompt, char **envp)
-{
-	char	*param;
-
-	param = ft_find_comm_path(ft_envp(envp, "PATH="), prompt);
-	return (param);
-}
-
 
 char	**ft_flags(char **envp, char *prompt)
 {
@@ -132,7 +116,7 @@ int main (int argc, char **argv, char **envp)
 	(void) argv;
 	while (42)
 	{
-		prompt = readline("minishell >");
+		prompt = readline("minishell> ");
 		add_history(prompt);
 		split_prompt = ft_split(prompt, ' ');
 		command = ft_find_comm_path(ft_envp(envp, "PATH="), split_prompt[0]);
