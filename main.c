@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/06/19 14:38:09 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/06/19 14:50:08 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,4 +125,5 @@ int main (int argc, char **argv, char **envp)
 			execve(command, ft_flags(envp, prompt), NULL);
 		waitpid(pid, NULL, 0);
 	}
+	return (0);
 }
