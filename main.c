@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/06/16 14:29:28 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/06/19 13:41:00 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,15 @@ void	ft_free_cc_c(char **cc, char *c)
 	free(c);
 }
 
-char	*ft_find_path(char *path, char *command)
+char	*ft_find_comm_path(char *path, char *command)
 {
 	char	**path_split;
 	char	*path_command;
 	char	*slash_command;
 	int		i;
 
+	if(access(command, X_OK) == 0)
+		return(command);
 	i = 0;
 	if (command)
 	{
@@ -85,40 +87,58 @@ char	*ft_param(char *prompt, char **envp)
 {
 	char	*param;
 
-	param = ft_find_path(ft_envp(envp, "PATH="), prompt);
+	param = ft_find_comm_path(ft_envp(envp, "PATH="), prompt);
 	return (param);
 }
 
 
+char	**ft_flags(char **envp, char *prompt)
+{
+	char	**flags;
+	char	*only_flag;
+	int		j;
+
+	flags = malloc(sizeof(flags) * 3);
+	if (!flags)
+		exit(0);
+	j = 0;
+	while (prompt[j] != ' ' && prompt[j] != '\0')
+		j++;
+	if (prompt[j] == '\0')
+		only_flag = NULL;
+	else
+	{
+		while (prompt[j] == ' ')
+			j++;
+		if (prompt[j] == '\0')
+			only_flag = NULL;
+		else
+			only_flag = prompt + j;
+	}
+	flags[0] = ft_envp(envp, "PATH=");
+	flags[1] = only_flag;
+	flags[2] = NULL;
+	return (flags);
+}
+
 int main (int argc, char **argv, char **envp)
 {
 	char	*prompt;
+	char	**split_prompt;
 	char	*command;
 	int		pid;
 
-	// prompt = "test";
-		// readline(prompt);
 	(void) argc;
 	(void) argv;
 	while (42)
 	{
 		prompt = readline("minishell >");
-		command = ft_param(prompt, envp);
+		add_history(prompt);
+		split_prompt = ft_split(prompt, ' ');
+		command = ft_find_comm_path(ft_envp(envp, "PATH="), split_prompt[0]);
 		pid = fork();
 		if (pid == 0)
-		{
-			printf("%s\n", command);
-			execve(command, NULL, NULL);
-		}
+			execve(command, ft_flags(envp, prompt), NULL);
 		waitpid(pid, NULL, 0);
-
-		// i = 0;
-		// printf("**%s**\n", prompt);
-		// while (prompt[i] != '\0')
-		// {
-		// 	if (prompt[i] == 'a')
-		// 		return(0);
-		// 	i++;
-		// }
 	}
 }
