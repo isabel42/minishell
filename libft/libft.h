@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 14:07:22 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/06/20 13:13:45 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/06/20 16:42:43 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,13 @@ typedef struct s_list
 {
 	char			*txt;
 	int				cmd;
-	int				arg;
-	int				infile;
-	int				outifle;
+	int				file;
+	int				pipe;
+	int				c_g;
+	int				c_d;
+	int				dc_g;
+	int				dc_d;
+	int				fd;
 	struct s_list	*next;
 }	t_list;
 

@@ -5,12 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/06/20 15:31:16 by ktomat           ###   ########.fr       */
-=======
-/*   Updated: 2023/06/20 15:12:29 by itovar-n         ###   ########.fr       */
->>>>>>> main
+/*   Created: 2023/06/20 16:06:33 by ktomat            #+#    #+#             */
+/*   Updated: 2023/06/20 16:43:04 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +184,7 @@ int	main (int argc, char **argv, char **envp)
 		ft_find_type(&inputs, envp);
 		while (inputs)
 		{
-			printf("%s : infile %d : cmd %d ; arg %d\n", inputs->txt, inputs->infile, inputs->cmd, inputs->arg);
+			printf("%s : infile %d : cmd %d : c_g %d : c_d %d : dc_g %d : dc_d %d : pipe %d\n", inputs->txt, inputs->file, inputs->cmd, inputs->c_g, inputs->c_d, inputs->dc_g, inputs->dc_d, inputs->pipe);
 			inputs = inputs->next;
 		}
 		split_prompt = ft_split(prompt, ' ');
