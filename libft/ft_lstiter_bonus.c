@@ -6,17 +6,17 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 18:34:09 by itovar-n          #+#    #+#             */
-/*   Updated: 2022/11/09 11:07:56 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/06/19 21:58:58 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstiter(t_list *lst, void (*f)(void *))
+void	ft_lstiter(t_list *lst, void (*f)(char *))
 {
 	while (lst)
 	{
-		(f)(lst->content);
+		(f)(lst->txt);
 		lst = lst->next;
 	}
 }

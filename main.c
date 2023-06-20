@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/06/19 19:46:07 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/06/20 10:08:56 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ char	*ft_find_comm_path(char *path, char *command)
 	char	*slash_command;
 	int		i;
 
-	if(access(command, X_OK) == 0)
-		return(command);
+	if (access(command, X_OK) == 0)
+		return (command);
 	i = 0;
 	if (command)
 	{
@@ -74,7 +74,6 @@ char	*ft_find_comm_path(char *path, char *command)
 	}
 	return (NULL);
 }
-
 
 char	**ft_flags(char **envp, char *prompt)
 {
@@ -105,10 +104,41 @@ char	**ft_flags(char **envp, char *prompt)
 	return (flags);
 }
 
-char *ft_cp_line(char *prompt, int *i, int j)
+int	ft_cp_line_long(char *prompt, int *i, char *b)
+{
+	int	j;
+	int	k;
+
+	j = 0;
+	k = 0;
+	while (b[k] != '\0')
+	{
+		if (prompt[*i] == b[k])
+		{
+			while (prompt[*i + j + 1] != b[k] && prompt[*i + j] != '\0')
+				j++;
+			return (j);
+		}
+		k++;
+	}
+	while (prompt[*i + j] != '\0')
+	{
+		k = 0;
+		while (b[k] != '\0' && prompt[*i + j + 1] != b[k])
+			k++;
+		if (k < (int) ft_strlen(b))
+			return (j - 1);
+	j++;
+	}
+	return (j - 1);
+}
+
+char	*ft_cp_line(char *prompt, int *i, char *b)
 {
 	char	*res;
+	int		j;
 
+	j = ft_cp_line_long(prompt, i, b);
 	res = malloc(sizeof(char) * (j + 1));
 	if (!res)
 		return (NULL);
@@ -119,43 +149,21 @@ char *ft_cp_line(char *prompt, int *i, int j)
 		j--;
 	}
 	*i = *i + ft_strlen(res);
-	return(res);
-}
-
-char	*ft_promt_line(char *prompt, int *i, char a)
-{
-	char	*res;
-	int		j;
-
-	j = 0;
-	res = NULL;
-	while (prompt[*i] != '\0')
-	{
-		if (prompt[*i] == a)
-		{
-			while (prompt[*i + j + 1] != a && prompt[*i + j] != '\0')
-				j++;
-			res = ft_cp_line(prompt, i, j);
-			if (!res)
-				return ("Error in malloc");
-			break ;
-		}
-		*i = *i + 1;
-	}
 	return (res);
 }
 
-int main (int argc, char **argv, char **envp)
+int	main (int argc, char **argv, char **envp)
 {
 	char	*prompt;
-	// char	**split_prompt;
 	char	*command;
+	char	*txt;
+	char	**split_prompt;
 	int		pid;
+	t_list	*inputs;
 
 	(void) argc;
 	(void) argv;
 	(void) envp;
-
 	while (42)
 	{
 		pid = 0;
@@ -163,17 +171,16 @@ int main (int argc, char **argv, char **envp)
 		add_history(prompt);
 		while (prompt[pid] != '\0')
 		{
-			command = ft_promt_line(prompt, &pid, '"');
-			printf("txt: %s\n", command);
-			command = ft_promt_line(prompt, &pid, '\'');
-			printf("txt: %s\n", command);
+			txt = ft_cp_line(prompt, &pid, "\'\"");
+			printf("txt: %s\n", txt);
+			ft_lstadd_back(&inputs, ft_lstnew(txt));
 		}
-		// split_prompt = ft_split(prompt, ' ');
-		// command = ft_find_comm_path(ft_envp(envp, "PATH="), split_prompt[0]);
-		// pid = fork();
-		// if (pid == 0)
-		// 	execve(command, ft_flags(envp, prompt), NULL);
-		// waitpid(pid, NULL, 0);
+		split_prompt = ft_split(prompt, ' ');
+		command = ft_find_comm_path(ft_envp(envp, "PATH="), split_prompt[0]);
+		pid = fork();
+		if (pid == 0)
+			execve(command, ft_flags(envp, prompt), NULL);
+		waitpid(pid, NULL, 0);
 	}
 	return (0);
 }
