@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:10:25 by ktomat            #+#    #+#             */
-/*   Updated: 2023/06/20 16:52:05 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/06/20 17:26:21 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,3 +40,19 @@ void	ft_find_type(t_list **list, char **envp)
 	}
 	*list = temp;
 }
+
+void	ft_find_type1(t_list **list, char **envp)
+{
+	t_list	*temp;
+
+	(void)envp;
+	temp = *list;
+	while (*list)
+	{
+		if (!ft_strncmp((*list)->txt, "$", 1))
+			(*list)->dollar = 1;
+		*list = (*list)->next;
+	}
+	*list = temp;
+}
+

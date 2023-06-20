@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 16:06:33 by ktomat            #+#    #+#             */
-/*   Updated: 2023/06/20 16:43:04 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/06/20 17:27:13 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,9 +182,10 @@ int	main (int argc, char **argv, char **envp)
 			ft_lstadd_back(&inputs, ft_lstnew(txt));
 		}
 		ft_find_type(&inputs, envp);
+		ft_find_type1(&inputs, envp);
 		while (inputs)
 		{
-			printf("%s : infile %d : cmd %d : c_g %d : c_d %d : dc_g %d : dc_d %d : pipe %d\n", inputs->txt, inputs->file, inputs->cmd, inputs->c_g, inputs->c_d, inputs->dc_g, inputs->dc_d, inputs->pipe);
+			printf("%s : infile %d : cmd %d : c_g %d : c_d %d : dc_g %d : dc_d %d : pipe %d : dollar %d\n", inputs->txt, inputs->file, inputs->cmd, inputs->c_g, inputs->c_d, inputs->dc_g, inputs->dc_d, inputs->pipe, inputs->dollar);
 			inputs = inputs->next;
 		}
 		split_prompt = ft_split(prompt, ' ');
