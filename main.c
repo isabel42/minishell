@@ -6,7 +6,11 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/06/20 15:31:16 by ktomat           ###   ########.fr       */
+=======
+/*   Updated: 2023/06/20 15:12:29 by itovar-n         ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,33 +108,37 @@ char	**ft_flags(char **envp, char *prompt)
 	return (flags);
 }
 
+int	ft_isspace(char c)
+{
+	char *s;
+
+	s = " \t\n\v\f\r";
+	if (ft_strrchr(s, c))
+		return (1);
+	return (0);
+}
+
 int	ft_cp_line_long(char *prompt, int *i, char *b)
 {
 	int	j;
-	int	k;
+	int	open_quotes;
+	char	*quotes;
 
 	j = 0;
-	k = 0;
-	while (b[k] != '\0')
+	open_quotes = 0;
+	while (prompt[*i + j] != '\0' && (prompt[*i + j] != ' ' || open_quotes == 1))
 	{
-		if (prompt[*i] == b[k])
+		if (ft_strrchr(b, prompt[*i + j]) && open_quotes == 0)
 		{
-			while (prompt[*i + j + 1] != b[k] && prompt[*i + j] != '\0')
-				j++;
-			return (j);
+			open_quotes = 1;
+			quotes = ft_strrchr(b, prompt[*i + j]);
 		}
-		k++;
+		else if (quotes == ft_strrchr(b, prompt[*i + j]) && open_quotes == 1)
+			open_quotes = 0;
+		j++;
 	}
-	while (prompt[*i + j] != '\0')
-	{
-		k = 0;
-		while (b[k] != '\0' && prompt[*i + j + 1] != b[k])
-			k++;
-		if (k < (int) ft_strlen(b))
-			return (j - 1);
-	j++;
-	}
-	return (j - 1);
+	return (j + 1);
+
 }
 
 char	*ft_cp_line(char *prompt, int *i, char *b)
@@ -142,7 +150,8 @@ char	*ft_cp_line(char *prompt, int *i, char *b)
 	res = malloc(sizeof(char) * (j + 1));
 	if (!res)
 		return (NULL);
-	res[j + 1] = prompt[*i + j + 1];
+	res[j] = '\0';
+	j--;
 	while (j >= 0)
 	{
 		res[j] = prompt[*i + j];
