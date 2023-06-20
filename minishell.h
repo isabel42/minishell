@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/06/19 18:21:33 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/06/20 14:47:45 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,8 @@
 # include <fcntl.h>
 # include "libft/libft.h"
 
-typedef struct s_elem
-{
-	char	*txt;
-	int		cmd;
-	int		arg;
-	int		infile;
-	int		outifle;
-}				t_elem;
+void				ft_find_type(t_list **list, char **env);
+char				*ft_find_comm_path(char *path, char *command);
+char				*ft_envp(char **envp, char *pwd);
 
 #endif

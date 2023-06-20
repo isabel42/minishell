@@ -1,4 +1,4 @@
-SRCS	= main.c
+SRCS	= main.c utils.c 
 
 OBJS 	= ${SRCS:.c=.o}
 
@@ -10,7 +10,7 @@ CC		= gcc
 
 RM		= rm -f
 
-CFLAGS	= -Wextra -Wall -Werror 
+CFLAGS	= -Wextra -Wall -Werror -g3
 
 INCLUDE = -I./libft/ -I.
 

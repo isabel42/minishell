@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/06/20 10:08:56 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/06/20 15:31:16 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,7 @@ int	main (int argc, char **argv, char **envp)
 	(void) argc;
 	(void) argv;
 	(void) envp;
+	inputs = NULL;
 	while (42)
 	{
 		pid = 0;
@@ -174,6 +175,12 @@ int	main (int argc, char **argv, char **envp)
 			txt = ft_cp_line(prompt, &pid, "\'\"");
 			printf("txt: %s\n", txt);
 			ft_lstadd_back(&inputs, ft_lstnew(txt));
+		}
+		ft_find_type(&inputs, envp);
+		while (inputs)
+		{
+			printf("%s : infile %d : cmd %d ; arg %d\n", inputs->txt, inputs->infile, inputs->cmd, inputs->arg);
+			inputs = inputs->next;
 		}
 		split_prompt = ft_split(prompt, ' ');
 		command = ft_find_comm_path(ft_envp(envp, "PATH="), split_prompt[0]);

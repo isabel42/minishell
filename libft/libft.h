@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 14:07:22 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/06/19 21:58:58 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/06/20 13:13:45 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@
 
 typedef struct s_list
 {
-	char	*txt;
-	int		cmd;
-	int		arg;
-	int		infile;
-	int		outifle;
+	char			*txt;
+	int				cmd;
+	int				arg;
+	int				infile;
+	int				outifle;
 	struct s_list	*next;
 }	t_list;
 
