@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/06/20 17:25:37 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/06/21 15:00:50 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@
 # include "libft/libft.h"
 
 void				ft_find_type(t_list **list, char **env);
-void				ft_find_type1(t_list **list, char **env);
+int					count_list(t_list **list);
+
 char				*ft_find_comm_path(char *path, char *command);
 char				*ft_envp(char **envp, char *pwd);
+char				**ft_flags(char **envp, char *prompt);
 
 #endif

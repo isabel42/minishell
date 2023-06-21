@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 16:06:33 by ktomat            #+#    #+#             */
-/*   Updated: 2023/06/20 17:27:13 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/06/21 15:09:53 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,9 @@ char	*ft_cp_line(char *prompt, int *i, char *b)
 	return (res);
 }
 
+/*ajouter une erreur si le programme est
+lancé avec plus que 1 arg : que ./minishell*/
+
 int	main (int argc, char **argv, char **envp)
 {
 	char	*prompt;
@@ -178,14 +181,12 @@ int	main (int argc, char **argv, char **envp)
 		while (prompt[pid] != '\0')
 		{
 			txt = ft_cp_line(prompt, &pid, "\'\"");
-			printf("txt: %s\n", txt);
 			ft_lstadd_back(&inputs, ft_lstnew(txt));
 		}
 		ft_find_type(&inputs, envp);
-		ft_find_type1(&inputs, envp);
 		while (inputs)
 		{
-			printf("%s : infile %d : cmd %d : c_g %d : c_d %d : dc_g %d : dc_d %d : pipe %d : dollar %d\n", inputs->txt, inputs->file, inputs->cmd, inputs->c_g, inputs->c_d, inputs->dc_g, inputs->dc_d, inputs->pipe, inputs->dollar);
+			printf("%s: infile %d : cmd %d : c_g %d : c_d %d : dc_g %d : dc_d %d : pipe %d : dollar %d\n", inputs->txt, inputs->file, inputs->cmd, inputs->c_g, inputs->c_d, inputs->dc_g, inputs->dc_d, inputs->pipe, inputs->dollar);
 			inputs = inputs->next;
 		}
 		split_prompt = ft_split(prompt, ' ');
