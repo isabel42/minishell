@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/06/21 15:15:12 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/06/21 17:50:41 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,32 +75,57 @@ char	*ft_find_comm_path(char *path, char *command)
 	return (NULL);
 }
 
-char	**ft_flags(char **envp, char *prompt)
+char *ft_arg_q(char *arg)
+{
+	int		i;
+	char	*new;
+	int		len;
+
+	len = (int) ft_strlen(arg);
+	i = 1;
+	new = malloc(sizeof(char) * (len + 3));
+	if (!new)
+		return (0);
+	new[0] = '"';
+	while(i < len + 1)
+	{
+		new[i] = arg[i - 1];
+		i++;
+	}
+	new[i] = '"';
+	new[i + 1] = '\0';
+	free(arg);
+	return (new);
+}
+
+char	**ft_flags(char **envp, t_list **inputs)
 {
 	char	**flags;
-	char	*only_flag;
-	int		j;
+	t_list	*one;
+	t_list	*two;
+	int		count;
+	int		i;
 
-	flags = malloc(sizeof(flags) * 3);
+	count = 0;
+	one = *inputs;
+	two = *inputs;
+	i = 1;
+	while (one && one->arg == 1)
+	{
+		count++;
+		one = one->next;
+	}
+	flags = malloc(sizeof(char *) * count + 2);
 	if (!flags)
 		exit(0);
-	j = 0;
-	while (prompt[j] != ' ' && prompt[j] != '\0')
-		j++;
-	if (prompt[j] == '\0')
-		only_flag = NULL;
-	else
-	{
-		while (prompt[j] == ' ')
-			j++;
-		if (prompt[j] == '\0')
-			only_flag = NULL;
-		else
-			only_flag = prompt + j;
-	}
 	flags[0] = ft_envp(envp, "PATH=");
-	flags[1] = only_flag;
-	flags[2] = NULL;
+	while (i < count + 1)
+	{
+		flags[i] = two->txt;
+		two = two->next;
+		i++;	
+	}
+	flags[i] = NULL;
 	return (flags);
 }
 
@@ -108,10 +133,9 @@ int	main (int argc, char **argv, char **envp)
 {
 	char	*prompt;
 	char	*command;
-	// char	*txt;
-	char	**split_prompt;
 	int		pid;
 	t_list	*inputs;
+	t_list	*test;
 
 	(void) argc;
 	(void) argv;
@@ -124,18 +148,18 @@ int	main (int argc, char **argv, char **envp)
 		add_history(prompt);
 		inputs = ft_parsing(prompt, "\'\"");
 		ft_find_type(&inputs, envp);
-
-	//printf("txt_file : %s\n", inputs->txt);
-		while (inputs)
+		test = inputs;
+		while (test)
 		{
-			printf("%s :  cmd %d ; arg %d ; redir %d ; file %d \n", inputs->txt, inputs->cmd, inputs->arg, inputs->redir, inputs->file);
-			inputs = inputs->next;
+			// printf("txt:%s\n",test->txt);
+			// printf("%s : infile %d : cmd %d : c_g %d : c_d %d : dc_g %d : dc_d %d : pipe %d : arg %d\n", test->txt, test->file, test->cmd, test->c_g, test->c_d, test->dc_g, test->dc_d, test->pipe, test->arg);
+			test = test->next;
 		}
-		split_prompt = ft_split(prompt, ' ');
-		command = ft_find_comm_path(ft_envp(envp, "PATH="), split_prompt[0]);
+		command = ft_find_comm_path(ft_envp(envp, "PATH="), inputs->txt);
+		inputs = inputs->next;
 		pid = fork();
 		if (pid == 0)
-			execve(command, ft_flags(envp, prompt), NULL);
+			execve(command, ft_flags(envp, &inputs), NULL);
 		waitpid(pid, NULL, 0);
 		free(prompt);
 	}
