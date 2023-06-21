@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/06/20 17:26:48 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/06/21 15:15:12 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,154 +104,11 @@ char	**ft_flags(char **envp, char *prompt)
 	return (flags);
 }
 
-int	ft_isspace(char c)
-{
-	char *s;
-
-	s = " \t\n\v\f\r";
-	if (ft_strrchr(s, c))
-		return (1);
-	return (0);
-}
-
-int	ft_cp_line_long(char *prompt, int *i, char *b)
-{
-	int	j;
-	int	open_quotes;
-	char	*quotes;
-
-	j = 0;
-	open_quotes = 0;
-	while (prompt[*i + j] != '\0' && (prompt[*i + j] != ' ' || open_quotes == 1))
-	{
-		if (ft_strrchr(b, prompt[*i + j]) && open_quotes == 0)
-		{
-			open_quotes = 1;
-			quotes = ft_strrchr(b, prompt[*i + j]);
-		}
-		else if (quotes == ft_strrchr(b, prompt[*i + j]) && open_quotes == 1)
-			open_quotes = 0;
-		j++;
-	}
-	return (j + 1);
-}
-
-char	*ft_cp_line(char *prompt, int *i, char *b)
-{
-	char	*res;
-	int		j;
-
-	j = ft_cp_line_long(prompt, i, b);
-	res = malloc(sizeof(char) * (j + 1));
-	if (!res)
-		return (NULL);
-	res[j] = '\0';
-	// ft_memcpy(res, prompt + *i, j - 1);
-	j--;
-	while (j >= 0)
-	{
-		res[j] = prompt[*i + j];
-		j--;
-	}
-	*i = *i + ft_strlen(res);
-	return (res);
-}
-
-// void ft_replace_dolar(char *text)
-// {
-// 	int i;
-
-// 	i = 1;
-// 	if (!ft_strrchr("\"", text))
-// 		return ;
-// 	while (text[i] !='\0' && !ft_strrchr("\"", text[i]))
-// 	{
-
-// 		i++;
-// 	}
-// }
-
-int	ft_cp_line_long_clean(char *text, char *b)
-{
-	int	i;
-	int	j;
-	int	open_quotes;
-	char	*quotes;
-
-	i = 0;
-	j = 0;
-	open_quotes = 0;
-	text = ft_strtrim(text, " ");
-	while (text[i] != '\0')
-	{
-		if (ft_strrchr(b, text[i]) && open_quotes == 0)
-		{
-			open_quotes = 1;
-			quotes = ft_strrchr(b, text[i]);
-		}
-		else if (quotes == ft_strrchr(b, text[i]) && open_quotes == 1)
-			open_quotes = 0;
-		else
-			j++;
-		i++;
-	}
-	return (j);
-}
-
-char	*ft_cp_line_clean(char *text, char *b)
-{
-	char	*res;
-	int		i;
-	int		j;
-	int		open_quotes;
-	char	*quotes;
-
-	i = 0;
-	j = 0;
-	open_quotes = 0;
-	quotes = NULL;
-	res = malloc(sizeof(char) * (ft_cp_line_long_clean(text, b) + 1));
-	if (!res)
-		return (NULL);
-	while (j < ft_cp_line_long_clean(text, b))
-	{
-		if(ft_strrchr(b, text[i]) && open_quotes == 0)
-		{
-			open_quotes = 1;
-			quotes = ft_strrchr(b, text[i]);
-		}
-		else if (quotes == ft_strrchr(b, text[i]) && open_quotes == 1)
-			open_quotes = 0;
-		else
-		{
-			res[j] = text[i];
-			j++;
-		}
-		i++;
-	}
-	free (text);
-	res[j] = '\0';
-	return (res);
-}
-
-// void ft_list_creat(**inputs, char *txt)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (txt[i] =! 0)
-// 	{
-// 		if()
-// 		i++;
-// 	}
-
-// }
-
 int	main (int argc, char **argv, char **envp)
 {
 	char	*prompt;
 	char	*command;
-	char	*txt;
+	// char	*txt;
 	char	**split_prompt;
 	int		pid;
 	t_list	*inputs;
@@ -265,25 +122,22 @@ int	main (int argc, char **argv, char **envp)
 		pid = 0;
 		prompt = readline("minishell> ");
 		add_history(prompt);
-		while (prompt[pid] != '\0')
-		{
-			txt = ft_cp_line(prompt, &pid, "\'\"");
-			txt = ft_cp_line_clean(txt, "\'\"");
-			printf("txt:%s\n", txt);
-			ft_lstadd_back(&inputs, ft_lstnew(txt));
-		}
+		inputs = ft_parsing(prompt, "\'\"");
 		ft_find_type(&inputs, envp);
-		// while (inputs)
-		// {
-		// 	printf("%s : infile %d : cmd %d ; arg %d\n", inputs->txt, inputs->infile, inputs->cmd, inputs->arg);
-		// 	inputs = inputs->next;
-		// }
+
+	//printf("txt_file : %s\n", inputs->txt);
+		while (inputs)
+		{
+			printf("%s :  cmd %d ; arg %d ; redir %d ; file %d \n", inputs->txt, inputs->cmd, inputs->arg, inputs->redir, inputs->file);
+			inputs = inputs->next;
+		}
 		split_prompt = ft_split(prompt, ' ');
 		command = ft_find_comm_path(ft_envp(envp, "PATH="), split_prompt[0]);
 		pid = fork();
 		if (pid == 0)
 			execve(command, ft_flags(envp, prompt), NULL);
 		waitpid(pid, NULL, 0);
+		free(prompt);
 	}
 	return (0);
 }

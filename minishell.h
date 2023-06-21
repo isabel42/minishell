@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/06/20 14:47:45 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/06/21 14:03:51 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,13 @@
 # include <fcntl.h>
 # include "libft/libft.h"
 
-void				ft_find_type(t_list **list, char **env);
-char				*ft_find_comm_path(char *path, char *command);
-char				*ft_envp(char **envp, char *pwd);
+void	ft_find_type(t_list **list, char **env);
+char	*ft_find_comm_path(char *path, char *command);
+char	*ft_envp(char **envp, char *pwd);
+
+// parsing.c
+int		ft_cp_line_long(char *prompt, int *i, char *b);
+char	*ft_cp_line(char *prompt, int *i, char *b);
+t_list *ft_parsing(char *prompt, char *b);
 
 #endif

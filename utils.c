@@ -3,33 +3,62 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:10:25 by ktomat            #+#    #+#             */
-/*   Updated: 2023/06/20 15:41:57 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/06/21 15:22:28 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+int	ft_is_redir(char *txt)
+{
+	char	*redir;
+	char	**redir_split;
+	int		i;
+	
+	redir = "<<,<,>,>>";
+	redir_split = ft_split(redir,',');
+	i = 0;
+	while (i < 4)
+	{
+		if (ft_strncmp(redir_split[i],txt,2) == 0)
+		{
+			free(redir_split);
+			return (1);
+		}
+	}
+	free(redir_split);
+	return (0);
+}
+
+
+
 //permet de donner un type a chaque maillon de la liste chainee
 void	ft_find_type(t_list **list, char **envp)
 {
-	t_list	*temp;
-	int		fd;
+	// t_list	*list;
 
-	temp = *list;
+	// list = *temp;
 	while (*list)
 	{
-		fd = open((*list)->txt, O_RDONLY);
 		if (ft_find_comm_path(ft_envp(envp, "PATH="), (*list)->txt))
 			(*list)->cmd = 1;
-		else if (fd > 0)
-			(*list)->infile = 1;
+		else if (ft_is_redir((*list)->txt) == 1)
+		{
+			(*list)->redir = 1;
+			if ((*list)->next)
+			{
+				(*list)->next->file = 1;
+				*list = (*list)->next;
+				if (!*list)
+					break ;
+			}
+		}
 		else
 			(*list)->arg = 1;
-		close(fd);
 		*list = (*list)->next;
 	}
-	*list = temp;
+	// *temp = list;
 }
