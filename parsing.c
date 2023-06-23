@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:01:58 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/06/23 17:03:37 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/06/23 17:18:16 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	ft_cp_line_long(char *prompt, int *i, char *b)
 	j = 0;
 	k = 0;
 	open_quotes = 0;
+	while (prompt[*i + j] != '\0' && prompt[*i + j] == ' ' )
+		*i = *i + 1;
 	while (prompt[*i + j] != '\0'
 		&& (prompt[*i + j] != ' ' || open_quotes == 1))
 	{
@@ -39,23 +41,16 @@ int	ft_cp_line_long(char *prompt, int *i, char *b)
 	return (k + 1);
 }
 
-char	*ft_cp_line(char *prompt, int *i, char *b)
+int	ft_cp_line_core(char *prompt, int *i, char *b, char *res)
 {
-	char	*res;
 	int		j;
-	int		k;
 	int		open_quotes;
 	char	*quotes;
-	char	*final;
+	int		k;
 
+	j = 0;
 	open_quotes = 0;
 	k = ft_cp_line_long(prompt, i, b);
-	j = 0;
-	if (*i == (int)ft_strlen(prompt))
-		return (NULL);
-	res = malloc(sizeof(char) * (k + 1));
-	if (!res)
-		return (NULL);
 	while (j < k && prompt[*i] != '\0')
 	{
 		if (ft_strrchr(b, prompt[*i]) && open_quotes == 0)
@@ -72,6 +67,23 @@ char	*ft_cp_line(char *prompt, int *i, char *b)
 		}
 		*i = *i + 1;
 	}
+	return (j);
+}
+
+char	*ft_cp_line(char *prompt, int *i, char *b)
+{
+	char	*res;
+	int		k;
+	char	*final;
+	int		j;
+
+	if (*i == (int)ft_strlen(prompt))
+		return (NULL);
+	k = ft_cp_line_long(prompt, i, b);
+	res = malloc(sizeof(char) * (k + 1));
+	if (!res)
+		return (NULL);
+	j = ft_cp_line_core(prompt, i, b, res);
 	res[j] = '\0';
 	final = ft_strtrim(res, " ");
 	free(res);
