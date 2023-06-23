@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/06/23 10:31:51 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/06/23 14:28:27 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,23 @@
 # include <sys/wait.h>
 # include <fcntl.h>
 # include "libft/libft.h"
+
+typedef struct s_type
+{
+	char			*txt;
+	int				cmd;
+	int				infile;
+	int				outfile;
+	int				infile_d;
+	int				outfile_d;
+	int				pipe;
+	int				c_g;
+	int				c_d;
+	int				dc_g;
+	int				dc_d;
+	int				dollar;
+	int				arg;
+}	t_type;
 
 void	ft_find_type(t_list **list);
 char	*ft_find_comm_path(char *path, char *command);

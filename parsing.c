@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:01:58 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/06/23 10:33:37 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/06/23 15:21:42 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ char	*ft_cp_line(char *prompt, int *i, char *b)
 t_list	*ft_parsing(char *prompt, char *b)
 {
 	t_list	*inputs;
+	t_type	*content;
 	char	*txt;
 	int		i;
 
@@ -89,7 +90,11 @@ t_list	*ft_parsing(char *prompt, char *b)
 	while (prompt[i] != '\0')
 	{
 		txt = ft_cp_line(prompt, &i, b);
-		ft_lstadd_back(&inputs, ft_lstnew(txt));
+		content = malloc(sizeof(t_type));
+		if (!content)
+			return (NULL);
+		content->txt = txt;
+		ft_lstadd_back(&inputs, ft_lstnew(&(*content)));
 	}
 	return (inputs);
 
