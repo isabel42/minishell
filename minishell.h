@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/06/22 17:58:51 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/06/23 10:31:51 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ char	*ft_envp(char **envp, char *pwd);
 // parsing.c
 int		ft_cp_line_long(char *prompt, int *i, char *b);
 char	*ft_cp_line(char *prompt, int *i, char *b);
-t_list *ft_parsing(char *prompt, char *b);
-int					count_list(t_list **list);
+t_list	*ft_parsing(char *prompt, char *b);
+int		count_list(t_list **list);
 
-char				**ft_flags(char **envp, t_list **inputs);
+char	**ft_flags(char **envp, t_list **inputs);
 
 #endif

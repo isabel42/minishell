@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:01:58 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/06/21 16:27:14 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/06/23 10:33:37 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*ft_cp_line(char *prompt, int *i, char *b)
 		return (NULL);
 	while (j < k && prompt[*i] != '\0')
 	{
-		if(ft_strrchr(b, prompt[*i]) && open_quotes == 0)
+		if (ft_strrchr(b, prompt[*i]) && open_quotes == 0)
 		{
 			open_quotes = 1;
 			quotes = ft_strrchr(b, prompt[*i]);
@@ -78,9 +78,9 @@ char	*ft_cp_line(char *prompt, int *i, char *b)
 	return (final);
 }
 
-t_list *ft_parsing(char *prompt, char *b)
+t_list	*ft_parsing(char *prompt, char *b)
 {
-	t_list *inputs;
+	t_list	*inputs;
 	char	*txt;
 	int		i;
 
@@ -91,7 +91,7 @@ t_list *ft_parsing(char *prompt, char *b)
 		txt = ft_cp_line(prompt, &i, b);
 		ft_lstadd_back(&inputs, ft_lstnew(txt));
 	}
-	return(inputs);
+	return (inputs);
 
 
 
