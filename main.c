@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/06/21 17:50:41 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/06/22 18:11:34 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,12 +147,12 @@ int	main (int argc, char **argv, char **envp)
 		prompt = readline("minishell> ");
 		add_history(prompt);
 		inputs = ft_parsing(prompt, "\'\"");
-		ft_find_type(&inputs, envp);
+		ft_find_type(&inputs);
 		test = inputs;
 		while (test)
 		{
 			// printf("txt:%s\n",test->txt);
-			// printf("%s : infile %d : cmd %d : c_g %d : c_d %d : dc_g %d : dc_d %d : pipe %d : arg %d\n", test->txt, test->file, test->cmd, test->c_g, test->c_d, test->dc_g, test->dc_d, test->pipe, test->arg);
+			printf("%s : infile %d : cmd %d : c_g %d : c_d %d : dc_g %d : dc_d %d : pipe %d : arg %d\n", test->txt, test->infile, test->cmd, test->c_g, test->c_d, test->dc_g, test->dc_d, test->pipe, test->arg);
 			test = test->next;
 		}
 		command = ft_find_comm_path(ft_envp(envp, "PATH="), inputs->txt);
