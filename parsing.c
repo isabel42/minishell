@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:01:58 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/06/23 15:21:42 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/06/23 17:03:37 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	ft_cp_line_long(char *prompt, int *i, char *b)
 	j = 0;
 	k = 0;
 	open_quotes = 0;
-	while (prompt[*i + j] != '\0' && (prompt[*i + j] != ' ' || open_quotes == 1))
+	while (prompt[*i + j] != '\0'
+		&& (prompt[*i + j] != ' ' || open_quotes == 1))
 	{
 		if (ft_strrchr(b, prompt[*i + j]) && open_quotes == 0)
 		{
@@ -37,7 +38,6 @@ int	ft_cp_line_long(char *prompt, int *i, char *b)
 	}
 	return (k + 1);
 }
-
 
 char	*ft_cp_line(char *prompt, int *i, char *b)
 {
@@ -78,6 +78,22 @@ char	*ft_cp_line(char *prompt, int *i, char *b)
 	return (final);
 }
 
+void	ft_init_content(char *txt, t_type *content)
+{
+	content->txt = txt;
+	content->cmd = 0;
+	content->infile = 0;
+	content->outfile = 0;
+	content->infile_d = 0;
+	content->outfile_d = 0;
+	content->pipe = 0;
+	content->c_g = 0;
+	content->c_d = 0;
+	content->dc_g = 0;
+	content->dc_d = 0;
+	content->arg = 0;
+}
+
 t_list	*ft_parsing(char *prompt, char *b)
 {
 	t_list	*inputs;
@@ -93,11 +109,8 @@ t_list	*ft_parsing(char *prompt, char *b)
 		content = malloc(sizeof(t_type));
 		if (!content)
 			return (NULL);
-		content->txt = txt;
+		ft_init_content(txt, content);
 		ft_lstadd_back(&inputs, ft_lstnew(&(*content)));
 	}
 	return (inputs);
-
-
-
 }

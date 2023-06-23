@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:10:25 by ktomat            #+#    #+#             */
-/*   Updated: 2023/06/23 15:19:42 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/06/23 16:57:33 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,10 @@ int	ft_treat_redir_after(t_list **temp)
 	{	
 		(*temp) = (*temp)->next;
 		if(!(*temp))
+		{
+			printf("aaaa\n");
 			return (-1);
+		}
 		content = (t_type *)(*temp)->content;
 		content->outfile = 1;
 		return (1);
@@ -114,16 +117,18 @@ void	ft_find_type(t_list **l)
 	while (temp)
 	{
 		ft_is_redir(temp);
+		content = (t_type *)temp->content;
 		simple = ft_treat_redir_after(&temp);
+		if (simple == -1)
+			break ;
 		twice = ft_treat_dredir_after(&temp);
-		if (simple == -1 || twice == -1)
+		if (twice == -1)
 			break ;
 		content = (t_type *)temp->content;
 		if (simple == 0 && twice == 0 && content->pipe == 0)
 			ft_is_command(&temp);
-		if (!temp)
-			break ;
-		temp = temp->next;
+		else
+			temp = temp->next;
 	}
 }
 

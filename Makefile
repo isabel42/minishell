@@ -23,7 +23,7 @@ ${NAME}: 	${OBJS} ${FT_NAME}
 all:		${NAME}
 
 ${FT_NAME}:
-	make bonus -C ./libft/
+	make -C ./libft/
 
 clean:
 			make clean -C ./libft
