@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/06/22 18:11:34 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/06/23 14:57:09 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,24 +123,42 @@ char	**ft_flags(char **envp, t_list **inputs)
 	{
 		flags[i] = two->txt;
 		two = two->next;
-		i++;	
+		i++;
 	}
 	flags[i] = NULL;
 	return (flags);
 }
 
-int	main (int argc, char **argv, char **envp)
+// les handler font des segfault avec tout les autres signaux, mais ctrl c marche bien
+void	custom_handler(int signal)
+{
+	(void)signal;
+	printf("\n");
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+}
+
+void	custom_handler1(int signal)
+{
+	(void)signal;
+	exit(0);
+}
+
+int	boucle(int argc, char **argv, char **envp)
 {
 	char	*prompt;
 	char	*command;
 	int		pid;
 	t_list	*inputs;
-	t_list	*test;
+	t_list	*temp;
 
 	(void) argc;
 	(void) argv;
 	(void) envp;
 	inputs = NULL;
+	signal(SIGINT, custom_handler);
+	signal(SIGQUIT, custom_handler1);
 	while (42)
 	{
 		pid = 0;
@@ -148,20 +166,27 @@ int	main (int argc, char **argv, char **envp)
 		add_history(prompt);
 		inputs = ft_parsing(prompt, "\'\"");
 		ft_find_type(&inputs);
-		test = inputs;
-		while (test)
+		temp = inputs;
+		while (inputs)
 		{
-			// printf("txt:%s\n",test->txt);
-			printf("%s : infile %d : cmd %d : c_g %d : c_d %d : dc_g %d : dc_d %d : pipe %d : arg %d\n", test->txt, test->infile, test->cmd, test->c_g, test->c_d, test->dc_g, test->dc_d, test->pipe, test->arg);
-			test = test->next;
+			printf("txt:%s:\n", inputs->txt);
+			inputs = inputs->next;
 		}
+		inputs = temp;
 		command = ft_find_comm_path(ft_envp(envp, "PATH="), inputs->txt);
-		inputs = inputs->next;
 		pid = fork();
 		if (pid == 0)
 			execve(command, ft_flags(envp, &inputs), NULL);
 		waitpid(pid, NULL, 0);
 		free(prompt);
+		inputs = NULL;
 	}
+	return (0);
+}
+
+int	main (int argc, char **argv, char **envp)
+{
+	init_termios();
+	boucle(argc, argv, env_copy(envp));
 	return (0);
 }

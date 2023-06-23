@@ -1,0 +1,13 @@
+1. Finir les signaux
+	- le ctrl d et le ctrl \
+2. Faire les builtin
+	- echo
+	- cd
+	- pwd
+	- export
+	- unset
+	- env
+	- exit
+3. Faire le gestionaire de builtin
+4. Faire le gestionaire de code de sortie
+5. 

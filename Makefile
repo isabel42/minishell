@@ -18,7 +18,7 @@ INCLUDE = -I./libft/ -I.
 			${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 ${NAME}: 	${OBJS} ${FT_NAME}
-			${CC} ${CFLAGS} ${INCLUDE} ${OBJS} -o ${NAME} -L./libft/ -lft -lreadline 
+			${CC} ${CFLAGS} ${INCLUDE} ${OBJS} -o ${NAME} -lreadline -L./libft/ -lft -L/Users/ktomat/.brew/opt/readline/lib -I/Users/ktomat/.brew/opt/readline/include
 
 all:		${NAME}
 
