@@ -1,4 +1,4 @@
-SRCS	= main.c utils.c 
+SRCS	= main.c utils.c parsing.c type.c
 
 OBJS 	= ${SRCS:.c=.o}
 
@@ -18,12 +18,12 @@ INCLUDE = -I./libft/ -I.
 			${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 ${NAME}: 	${OBJS} ${FT_NAME}
-			${CC} ${CFLAGS} ${INCLUDE} ${OBJS} -o ${NAME} -L./libft/ -lft -lreadline 
+			${CC} ${CFLAGS} ${INCLUDE} ${OBJS} -o ${NAME} -lreadline -L./libft/ -lft -L/Users/ktomat/.brew/opt/readline/lib -I/Users/ktomat/.brew/opt/readline/include
 
 all:		${NAME}
 
 ${FT_NAME}:
-	make bonus -C ./libft/
+	make -C ./libft/
 
 clean:
 			make clean -C ./libft

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 14:07:22 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/06/20 16:42:43 by ktomat           ###   ########.fr       */
+/*   Updated: 2022/11/04 15:17:07 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,7 @@
 
 typedef struct s_list
 {
-	char			*txt;
-	int				cmd;
-	int				file;
-	int				pipe;
-	int				c_g;
-	int				c_d;
-	int				dc_g;
-	int				dc_d;
-	int				fd;
+	void			*content;
 	struct s_list	*next;
 }	t_list;
 
@@ -36,13 +28,13 @@ void	ft_bzero(void *b, size_t n);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_itoa(int n);
 t_list	*ft_lstlast(t_list *lst);
-t_list	*ft_lstnew(char *content);
+t_list	*ft_lstnew(void *content);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstadd_front(t_list **lst, t_list *new);
-void	ft_lstclear(t_list **lst, void (*del)(char *));
-void	ft_lstiter(t_list *lst, void (*f)(char *));
-void	ft_lstdelone(t_list *lst, void (*del)(char *));
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(char *));
+void	ft_lstclear(t_list **lst, void (*del)(void *));
+void	ft_lstiter(t_list *lst, void (*f)(void *));
+void	ft_lstdelone(t_list *lst, void (*del)(void *));
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 int		ft_lstsize(t_list *lst);
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);

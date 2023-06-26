@@ -3,40 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:10:25 by ktomat            #+#    #+#             */
-/*   Updated: 2023/06/20 16:52:05 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/06/23 17:20:51 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//permet de donner un type a chaque maillon de la liste chainee
-void	ft_find_type(t_list **list, char **envp)
+int	count_list(t_list **list)
 {
 	t_list	*temp;
+	int		i;
 
+	i = 0;
 	temp = *list;
 	while (*list)
 	{
-		(*list)->fd = open((*list)->txt, O_RDONLY);
-		if (ft_find_comm_path(ft_envp(envp, "PATH="), (*list)->txt))
-			(*list)->cmd = 1;
-		else if ((*list)->fd > 0)
-			(*list)->file = 1;
-		else if (!ft_strncmp((*list)->txt, "<", 1))
-			(*list)->c_g = 1;
-		else if (!ft_strncmp((*list)->txt, ">", 1))
-			(*list)->c_d = 1;
-		else if (!ft_strncmp((*list)->txt, "<<", 2))
-			(*list)->dc_g = 1;
-		else if (!ft_strncmp((*list)->txt, ">>", 2))
-			(*list)->dc_d = 1;
-		else if (!ft_strncmp((*list)->txt, "|", 1))
-			(*list)->pipe = 1;
-		close((*list)->fd);
+		i++;
 		*list = (*list)->next;
 	}
 	*list = temp;
+	return (i);
 }

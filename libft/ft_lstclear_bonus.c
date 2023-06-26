@@ -6,13 +6,13 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 18:22:53 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/06/19 21:58:58 by itovar-n         ###   ########.fr       */
+/*   Updated: 2022/11/08 12:11:15 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(char *))
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
 	t_list	*cp;
 
@@ -25,7 +25,7 @@ void	ft_lstclear(t_list **lst, void (*del)(char *))
 			return ;
 		else
 		{
-			del((*lst)->txt);
+			del((*lst)->content);
 			free(*lst);
 		}
 		*lst = cp;
