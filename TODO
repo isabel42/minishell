@@ -10,4 +10,8 @@
 	- exit
 3. Faire le gestionaire de builtin
 4. Faire le gestionaire de code de sortie
-5. 
+
+
+ATTENTION !!!
+
+- pour les builtin, il faudra surement faire une struct qui prends le env_copy, pour pouvoir le modifier partout, via l'adresse de la struct
