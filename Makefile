@@ -1,4 +1,4 @@
-SRCS	= main.c utils.c parsing.c
+SRCS	= main.c utils.c parsing.c type.c
 
 OBJS 	= ${SRCS:.c=.o}
 
@@ -23,7 +23,7 @@ ${NAME}: 	${OBJS} ${FT_NAME}
 all:		${NAME}
 
 ${FT_NAME}:
-	make bonus -C ./libft/
+	make -C ./libft/
 
 clean:
 			make clean -C ./libft

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/06/23 13:42:59 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/06/23 17:45:03 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,42 @@
 # include <sys/wait.h>
 # include <fcntl.h>
 # include "libft/libft.h"
-# include <signal.h>
-# include <termios.h>
 
-void		ft_find_type(t_list **list);
-char		*ft_find_comm_path(char *path, char *command);
-char		*ft_envp(char **envp, char *pwd);
+typedef struct s_type
+{
+	char			*txt;
+	int				cmd;
+	int				infile;
+	int				outfile;
+	int				infile_d;
+	int				outfile_d;
+	int				pipe;
+	int				c_g;
+	int				c_d;
+	int				dc_g;
+	int				dc_d;
+	int				arg;
+}	t_type;
+
+typedef struct s_block
+{
+	char	*cmd;
+	char	**arg;
+	char	**infile;
+	char	**outfile;
+}	t_block;
+
+//type.c
+void	ft_find_type(t_list **list);
+char	*ft_find_comm_path(char *path, char *command);
+char	*ft_envp(char **envp, char *pwd);
 
 // parsing.c
-int			ft_cp_line_long(char *prompt, int *i, char *b);
-char		*ft_cp_line(char *prompt, int *i, char *b);
-t_list		*ft_parsing(char *prompt, char *b);
-int			count_list(t_list **list);
+int		ft_cp_line_long(char *prompt, int *i, char *b);
+char	*ft_cp_line(char *prompt, int *i, char *b);
+t_list	*ft_parsing(char *prompt, char *b);
+int		count_list(t_list **list);
 
-char		**ft_flags(char **envp, t_list **inputs);
-char		**env_copy(char **env);
-int			tab_len(char **tab);
-
-void		init_termios(void);
-extern void	rl_replace_line(const char *text, int clear_undo);
+char	**ft_flags(char **envp, t_list **inputs);
 
 #endif
