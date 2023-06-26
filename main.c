@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: kimitomat <kimitomat@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/06/23 16:26:30 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/06/26 10:14:33 by kimitomat        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ int	main (int argc, char **argv, char **envp)
 {
 	char	*prompt;
 	// char	*command;
-	int		pid;
+	//int		pid;
 	t_list	*inputs;
 	t_list	*test;
 	t_type	*content;
@@ -144,7 +144,7 @@ int	main (int argc, char **argv, char **envp)
 	inputs = NULL;
 	while (42)
 	{
-		pid = 0;
+		//pid = 0;
 		prompt = readline("minishell> ");
 		add_history(prompt);
 		inputs = ft_parsing(prompt, "\'\"");
