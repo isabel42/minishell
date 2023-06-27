@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:44:18 by ktomat            #+#    #+#             */
-/*   Updated: 2023/06/27 15:12:35 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/06/27 15:54:36 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	ft_pwd(char *cmd, char **flags, char **env_copy)
 	{
 		if (!ft_strncmp("PWD=", env_copy[i], 4))
 		{
-			printf("%s\n", env_copy[i]);
+			printf("%s\n", env_copy[i] + 5); //je ne suis pas sur si ca marche, a voir au moment de la compilation le +5
 			break ;
 		}
 		i++;

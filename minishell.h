@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/06/27 12:25:00 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/06/27 16:15:12 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <sys/wait.h>
 # include <fcntl.h>
 # include "libft/libft.h"
+
+# define BUFFER_SIZE 1000
 
 typedef struct s_type
 {
