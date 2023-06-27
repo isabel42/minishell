@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/06/26 13:13:15 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/06/27 12:25:00 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int		count_list(t_list **list);
 char	**ft_flags(char **envp, t_list **inputs);
 
 //builtin
+void	check_builtin(char *cmd, char **flags);
 char	**env_copy(char **env);
 int		count_list(t_list **list);
 void	ft_env(char *cmd, char **flags, char **env_copy);

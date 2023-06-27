@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:44:18 by ktomat            #+#    #+#             */
-/*   Updated: 2023/06/26 13:13:08 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/06/27 15:12:35 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ int	count_list(t_list **list)
 	*list = temp;
 	return (i);
 }
+//malloc de 1000, comme ca c'est plus simple pour ajouter ou enlever des elem dans la copy
+//surement que je vais devoir gerer la derniere ligne manuellement
+//_=/User/....
 
 char	**env_copy(char **env)
 {
@@ -34,12 +37,12 @@ char	**env_copy(char **env)
 	int		i;
 
 	i = 0;
-	env_copy = ft_calloc(char **, count_list(env) + 1);
+	env_copy = ft_calloc(char **, 1000);
 	if (!env_copy)
 		return (NULL);
 	while (env[i])
 	{
-		env_copy[i] = ft_strdup(env[i]);
+		env_copy[i] = ft_strdup(env[i]); //est ce que j'inclus la ligne _=/User ou pas, sinon je l'affiche manuellement a la fin quand env est appele
 		i++;
 	}
 	return (env_copy);
