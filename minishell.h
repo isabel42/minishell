@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/06/27 16:15:12 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/06/27 16:28:33 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <fcntl.h>
 # include "libft/libft.h"
 
-# define BUFFER_SIZE 1000
+# define BUFFER_SIZE 1000 //pour la fonction getcwd
 
 typedef struct s_type
 {
