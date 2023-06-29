@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/06/27 16:28:33 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/06/29 15:10:15 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@
 # include "libft/libft.h"
 
 # define BUFFER_SIZE 1000 //pour la fonction getcwd
+
+typedef struct s_data//ajouter t_data	g_data; in tall files
+{
+	char					**env_copy;
+	volatile sig_atomic_t	status;
+}				t_data;
 
 typedef struct s_type
 {

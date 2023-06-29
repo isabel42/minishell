@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/06/27 12:25:41 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/06/29 15:08:41 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ int	main (int argc, char **argv, char **envp)
 	//int		pid;
 	t_list	*inputs;
 	t_list	*test;
-	t_type	*content;
+	//t_type	*content;
 
 	(void) argc;
 	(void) argv;
@@ -150,7 +150,7 @@ int	main (int argc, char **argv, char **envp)
 		inputs = ft_parsing(prompt, "\'\"");
 		ft_find_type(&inputs);
 		test = inputs;
-		check_builtin()
+		//check_builtin()
 		// while (test)
 		// {
 		// 	content = (t_type *) test->content;

@@ -262,5 +262,5 @@ int	main(int ac, char **av, char **env)
 		printf("%s\n", env_copy1[i]);
 		i++;
 	}
-	return (0);
+	exit(0);
 }
