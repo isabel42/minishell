@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:44:18 by ktomat            #+#    #+#             */
-/*   Updated: 2023/06/27 15:54:36 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/06/30 11:31:44 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,21 +67,22 @@ void	ft_env(char *cmd, char **flags, char **env_copy)
 
 void	ft_pwd(char *cmd, char **flags, char **env_copy)
 {
-	int	i;
+	char	cwd[4096];
 
-	i = 0;
-	while (env_copy[i])
-	{
-		if (!ft_strncmp("PWD=", env_copy[i], 4))
-		{
-			printf("%s\n", env_copy[i] + 5); //je ne suis pas sur si ca marche, a voir au moment de la compilation le +5
-			break ;
-		}
-		i++;
-	}
-}
+	if (get_cwd(cwd, sizeof(cwd)) != NULL)
+		printf("%s\n", cwd);
+	else
+		perror(salut);
+}	
 
+//checker comment je vais verifier avec la gestion d'erreure finale
 void	ft_cd(char *cmd, char **flags, char **env_copy)
 {
-	
+	if (!flags[0])
+		printf("args_needed\n");
+	else
+	{
+		if (chdir(flags[0]) != 0)
+			perror("can't acces to the directtory\n");
+	}
 }
