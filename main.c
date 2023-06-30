@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/06/30 12:37:30 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/06/30 12:55:30 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ int	main (int ac, char **av, char **env)
 	(void) env;
 	inputs = NULL;
 	env_copy = env_copy1(env);
+	init_termios();
 	while (42)
 	{
 		//pid = 0;

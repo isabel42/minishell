@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/06/30 12:39:20 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/06/30 12:57:37 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <sys/wait.h>
 # include <fcntl.h>
 # include "libft/libft.h"
+# include <termios.h>
+# include <signal.h>
 
 # define BUFFER_SIZE 1000 //pour la fonction getcwd
 
@@ -81,6 +83,7 @@ void	ft_export(char *cmd, char **flags, char **env_copy);
 char	**ft_unset(char *cmd, char **flags, char **env_copy);
 
 //signal
-void	init_termios(void);
+int		rl_replace_line();
+int		init_termios(void);
 
 #endif
