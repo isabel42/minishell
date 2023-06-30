@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 13:16:16 by ktomat            #+#    #+#             */
-/*   Updated: 2023/06/27 15:16:54 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/06/30 12:00:02 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ char	**ft_unset(char *cmd, char **flags, char **env_copy)
 {
 	int	i;
 	int	j;
-	int	t;
 
+	(void)cmd;
 	i = 0;
 	while (flags[i])
 	{

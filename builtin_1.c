@@ -6,13 +6,13 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:44:18 by ktomat            #+#    #+#             */
-/*   Updated: 2023/06/30 11:31:44 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/06/30 12:02:22 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	count_list(t_list **list)
+int	count_list1(t_list **list)
 {
 	t_list	*temp;
 	int		i;
@@ -31,13 +31,13 @@ int	count_list(t_list **list)
 //surement que je vais devoir gerer la derniere ligne manuellement
 //_=/User/....
 
-char	**env_copy(char **env)
+char	**env_copy1(char **env)
 {
 	char	**env_copy;
 	int		i;
 
 	i = 0;
-	env_copy = ft_calloc(char **, 1000);
+	env_copy = ft_calloc(sizeof(char **), 1000);
 	if (!env_copy)
 		return (NULL);
 	while (env[i])
@@ -52,6 +52,7 @@ void	ft_env(char *cmd, char **flags, char **env_copy)
 {
 	int	i;
 
+	(void)cmd;
 	i = 0;
 	if (flags[0])
 		printf("env: %s: No such file or directory", flags[0]);
@@ -69,20 +70,24 @@ void	ft_pwd(char *cmd, char **flags, char **env_copy)
 {
 	char	cwd[4096];
 
-	if (get_cwd(cwd, sizeof(cwd)) != NULL)
+	(void)cmd;
+	(void)flags;
+	(void)env_copy;
+	if (getcwd(cwd, sizeof(cwd)) != NULL)
 		printf("%s\n", cwd);
 	else
-		perror(salut);
+		perror("salut");
 }	
 
 //checker comment je vais verifier avec la gestion d'erreure finale
 void	ft_cd(char *cmd, char **flags, char **env_copy)
 {
+	(void)cmd;
+	(void)env_copy;
 	if (!flags[0])
 		printf("args_needed\n");
 	else
 	{
-		if (chdir(flags[0]) != 0)
-			perror("can't acces to the directtory\n");
+		chdir(flags[0]);
 	}
 }

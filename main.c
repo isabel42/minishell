@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/06/29 15:28:18 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/06/30 12:37:30 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,11 +137,13 @@ int	main (int ac, char **av, char **env)
 	t_list	*inputs;
 	t_list	*test;
 	t_type	*content;
+	char	**env_copy;
 
 	(void) ac;
 	(void) av;
 	(void) env;
 	inputs = NULL;
+	env_copy = env_copy1(env);
 	while (42)
 	{
 		//pid = 0;
@@ -153,7 +155,7 @@ int	main (int ac, char **av, char **env)
 		while (test)
 		{
 			content = (t_type *) test->content;
-			check_builtin("%s\n", content->txt);
+			check_builtin("", ft_split(prompt, ' '), env_copy);
 			test = test->next;
 		}
 		// command = ft_find_comm_path(ft_envp(envp, "PATH="), inputs->txt);

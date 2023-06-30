@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:13:27 by ktomat            #+#    #+#             */
-/*   Updated: 2023/06/27 13:16:01 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/06/30 12:00:17 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	ft_export(char *cmd, char **flags, char **env_copy)
 {
 	int	i;
 
+	(void)cmd;
 	i = 0;
 	if (!flags[0])
 	{

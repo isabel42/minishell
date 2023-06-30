@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/06/29 15:10:15 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/06/30 12:39:20 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 # define BUFFER_SIZE 1000 //pour la fonction getcwd
 
-typedef struct s_data//ajouter t_data	g_data; in tall files
+typedef struct s_data//ajouter t_data	g_data; in all files
 {
 	char					**env_copy;
 	volatile sig_atomic_t	status;
@@ -69,13 +69,18 @@ int		count_list(t_list **list);
 char	**ft_flags(char **envp, t_list **inputs);
 
 //builtin
-void	check_builtin(char *cmd, char **flags);
-char	**env_copy(char **env);
+void	check_builtin(char *cmd, char **flags, char **env_copy);
+char	**env_copy1(char **env);
 int		count_list(t_list **list);
 void	ft_env(char *cmd, char **flags, char **env_copy);
 void	ft_echo(char *cmd, char **flags);
 void	ft_exit(char *cmd, char **flags);
 void	ft_pwd(char *cmd, char **flags, char **env_copy);
 void	ft_cd(char *cmd, char **flags, char **env_copy);
+void	ft_export(char *cmd, char **flags, char **env_copy);
+char	**ft_unset(char *cmd, char **flags, char **env_copy);
+
+//signal
+void	init_termios(void);
 
 #endif
