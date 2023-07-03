@@ -1,4 +1,4 @@
-SRCS	= main.c utils.c parsing.c type.c signal.c builtin.c builtin_1.c unset.c export.c 
+SRCS	= main.c 
 
 OBJS 	= ${SRCS:.c=.o}
 

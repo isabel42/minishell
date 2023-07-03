@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/03 13:46:02 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/03 13:58:52 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,46 +129,26 @@
 // 	return (flags);
 // }
 
-int	main (int ac, char **av, char **env)
+int	main(int ac, char **av, char **env)
 {
 	char	*prompt;
-	// char	*command;
-	//int		pid;
-	t_list	*inputs;
-	t_list	*test;
-	//t_type	*content;
-	char	**env_copy;
 
-	(void) ac;
 	(void) av;
 	(void) env;
-	inputs = NULL;
-	env_copy = env_copy1(env);
-	init_termios();
-	signal(SIGINT, custom_handler);
-	while (42)
+	if (ac == 1)
 	{
-		//pid = 0;
-		prompt = readline("minishell$ ");
-		if (prompt == NULL)
-			exit(0);
-		add_history(prompt);
-		inputs = ft_parsing(prompt, "\'\"");
-		ft_find_type(&inputs);
-		test = inputs;
-		check_builtin("echo", ft_split(prompt, ' '), env_copy);
-		// while (test)
-		// {
-		// 	content = (t_type *) test->content;
-		// 	test = test->next;
-		// }
-		// command = ft_find_comm_path(ft_envp(envp, "PATH="), inputs->txt);
-		// inputs = inputs->next;
-		// pid = fork();
-		// if (pid == 0)
-		// 	execve(command, ft_flags(envp, &inputs), NULL);
-		// waitpid(pid, NULL, 0);
-		// free(prompt);
+		while (42)
+		{
+			prompt = readline("minishell$ ");
+			if (prompt == NULL)
+				exit(0);
+			add_history(prompt);
+		}
 	}
-	return (0);
+	else
+	{
+		printf("Minishell work without any argument\n");
+		exit (1);
+	}
+	exit (0);
 }
