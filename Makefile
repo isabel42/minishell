@@ -10,7 +10,7 @@ CC		= gcc
 
 RM		= rm -f
 
-CFLAGS	= -Wextra -Wall -Werror -g3
+CFLAGS	= -Wextra -Wall -Werror
 
 INCLUDE = -I./libft/ -I.
 
@@ -18,7 +18,7 @@ INCLUDE = -I./libft/ -I.
 			${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 ${NAME}: 	${OBJS} ${FT_NAME}
-			${CC} ${CFLAGS} ${INCLUDE} ${OBJS} -o ${NAME} -L./libft/ -lft -lreadline 
+			${CC} ${CFLAGS} ${INCLUDE} ${OBJS} -o ${NAME} -L./libft/ -lft -lreadline
 
 all:		${NAME}
 

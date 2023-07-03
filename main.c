@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/03 14:35:17 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/03 17:44:41 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,46 +129,94 @@
 // 	return (flags);
 // }
 
+void *ft_clean_type(void *content)
+{
+	t_type	*content_cast;
+
+	if (!content)
+		return (NULL);
+	content_cast = (t_type *)content;
+	free(content_cast->txt);
+	free(content_cast);
+	return (NULL);
+}
+void *ft_clean_block(void *content)
+{
+	t_block	*content_cast;
+	int		i;
+
+	content_cast = (t_block *)content;
+	i = 0;
+	free(content_cast->cmd);
+	while (content_cast->arg[i])
+	{
+		free(content_cast->arg[i]);
+		i++;
+	}
+	free(content_cast->arg);
+	i = 0;
+	while (content_cast->infile[i])
+	{
+		free(content_cast->infile[i]);
+		i++;
+	}
+	free(content_cast->infile);
+	i = 0;
+	while (content_cast->outfile[i])
+	{
+		free(content_cast->outfile[i]);
+		i++;
+	}
+	free(content_cast->outfile);
+	free(content_cast);
+	return (NULL);
+}
+
 int	main (int argc, char **argv, char **envp)
 {
 	char	*prompt;
 	// char	*command;
 	// int		pid;
 	t_list	*inputs;
-	t_list	*test;
+	// t_list	*test;
 	// t_type	*content;
 	t_list	*block;
-	t_block	*block_content;
+	// t_block	*block_content;
 
+			// t_list	÷*cp;
 	(void) argc;
 	(void) argv;
 	(void) envp;
 	inputs = NULL;
-	while (42)
-	{
+	// while (42)
+	// {
 		// pid = 0;
 		prompt = readline("minishell> ");
 		add_history(prompt);
 		inputs = ft_parsing(prompt, "\'\"");
 		ft_find_type(&inputs);
 		block = ft_block(&inputs);
-		test = block;
-		while (test)
-		{
-			// content = (t_type *) test->content;
-			block_content = (t_block *) test->content;
-			// printf("txt:%s\n",content->txt);
-			printf("infile0 %s : outfile0 %s :cmd %s : args0 %s\n", block_content->infile[0], block_content->outfile[0], block_content->cmd, block_content->arg[0]);
-			// printf("%s : infile %d : outfile %d :cmd %d : c_g %d : c_d %d : dc_g %d : dc_d %d : pipe %d : arg %d\n", content->txt, content->infile, content->outfile, content->cmd, content->c_g, content->c_d, content->dc_g, content->dc_d, content->pipe, content->arg);
-			test = test->next;
-		}
+		ft_lstclear(&inputs, (void *) &ft_clean_type);
+		// test = inputs;
+		// test = block;
+		// while (test)
+		// {
+		// 	// content = (t_type *) test->content;
+		// 	block_content = (t_block *) test->content;
+		// 	// printf("txt:%s\n",content->txt);
+		// 	printf("infile0 %s : outfile0 %s :cmd %s : args0 %s\n", block_content->infile[0], block_content->outfile[0], block_content->cmd, block_content->arg[0]);
+		// 	// printf("%s : infile %d : outfile %d :cmd %d : c_g %d : c_d %d : dc_g %d : dc_d %d : pipe %d : arg %d\n", content->txt, content->infile, content->outfile, content->cmd, content->c_g, content->c_d, content->dc_g, content->dc_d, content->pipe, content->arg);
+		// 	test = test->next;
+		// }
+		ft_lstclear(&block, (void *) &ft_clean_block);
 		// command = ft_find_comm_path(ft_envp(envp, "PATH="), inputs->txt);
 		// inputs = inputs->next;
 		// pid = fork();
 		// if (pid == 0)
 		// 	execve(command, ft_flags(envp, &inputs), NULL);
 		// waitpid(pid, NULL, 0);
-		// free(prompt);
-	}
+		// ft_lstclear(&block, ft_clean_block(block->content));
+		free(prompt);
+	// }
 	return (0);
 }

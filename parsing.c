@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:01:58 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/03 12:55:48 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/03 16:12:30 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,18 @@ char	*ft_cp_line(char *prompt, int *i, char *b)
 
 void	ft_init_type(char *txt, t_type *content)
 {
-	content->txt = txt;
+	int	i;
+
+	i = 0;
+	content->txt = malloc(sizeof(char) * (int) ft_strlen(txt) + 1);
+	if (!content->txt)
+		return ;
+	while (i < (int) ft_strlen(txt))
+	{
+		content->txt[i] = txt[i];
+		i++;
+	}
+	content->txt[i] = '\0';
 	content->cmd = 0;
 	content->infile = 0;
 	content->outfile = 0;
@@ -102,6 +113,7 @@ void	ft_init_type(char *txt, t_type *content)
 	content->dc_g = 0;
 	content->dc_d = 0;
 	content->arg = 0;
+	free (txt);
 }
 
 t_list	*ft_parsing(char *prompt, char *b)
