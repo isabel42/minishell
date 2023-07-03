@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 15:38:36 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/03 12:53:05 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/03 13:44:12 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,6 @@ void	custom_handler(int signal)
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
-}
-
-void	custom_handler1(int signal)
-{
-	(void)signal;
-	exit(0);
 }
 
 void	init_termios(void)

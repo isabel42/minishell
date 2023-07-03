@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/03 12:53:19 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/03 13:46:02 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,11 +146,12 @@ int	main (int ac, char **av, char **env)
 	env_copy = env_copy1(env);
 	init_termios();
 	signal(SIGINT, custom_handler);
-	signal(SIGQUIT, custom_handler1);
 	while (42)
 	{
 		//pid = 0;
 		prompt = readline("minishell$ ");
+		if (prompt == NULL)
+			exit(0);
 		add_history(prompt);
 		inputs = ft_parsing(prompt, "\'\"");
 		ft_find_type(&inputs);
