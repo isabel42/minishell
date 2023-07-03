@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/06/24 10:51:39 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/03 14:34:54 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,6 @@ int		count_list(t_list **list);
 
 char	**ft_flags(char **envp, t_list **inputs);
 
-void	ft_block(t_list **type);
+t_list	*ft_block(t_list **type);
 
 #endif

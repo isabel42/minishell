@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 17:20:13 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/06/24 10:59:08 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/03 12:58:36 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	ft_is_command(t_list **temp)
 	*temp = (*temp)->next;
 	while (*temp && ft_is_redir(*temp) == 0)
 	{
-		printf("aaaa\n");
 		content = (t_type *)(*temp)->content;
 		content->arg = 1;
 		*temp = (*temp)->next;
@@ -118,7 +117,6 @@ void	ft_find_type(t_list **l)
 	while (temp)
 	{
 		ft_is_redir(temp);
-		printf("txt: %s\n", content->txt);
 		content = (t_type *)temp->content;
 		simple = ft_treat_redir_after(&temp);
 		if (simple == -1)

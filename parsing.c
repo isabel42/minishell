@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:01:58 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/06/24 10:20:37 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/03 12:55:48 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,6 @@ void	ft_init_type(char *txt, t_type *content)
 	content->cmd = 0;
 	content->infile = 0;
 	content->outfile = 0;
-	content->infile_d = 0;
-	content->outfile_d = 0;
 	content->pipe = 0;
 	content->c_g = 0;
 	content->c_d = 0;

@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/06/24 10:45:25 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/03 14:35:17 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,9 +136,9 @@ int	main (int argc, char **argv, char **envp)
 	// int		pid;
 	t_list	*inputs;
 	t_list	*test;
-	t_type	*content;
-	// t_list	*block;
-	// t_block	*block_content;
+	// t_type	*content;
+	t_list	*block;
+	t_block	*block_content;
 
 	(void) argc;
 	(void) argv;
@@ -151,18 +151,17 @@ int	main (int argc, char **argv, char **envp)
 		add_history(prompt);
 		inputs = ft_parsing(prompt, "\'\"");
 		ft_find_type(&inputs);
-		test = inputs;
+		block = ft_block(&inputs);
+		test = block;
 		while (test)
 		{
-			content = (t_type *) test->content;
-			// block_content = (t_block *) test->content;
+			// content = (t_type *) test->content;
+			block_content = (t_block *) test->content;
 			// printf("txt:%s\n",content->txt);
-			// printf("infile0 %s : outfile0 %s :cmd %s : args0 %s\n", block_content->infile[0], block_content->outfile[0], block_content->cmd, block_content->arg[0]);
-			printf("%s : infile %d : outfile %d :cmd %d : c_g %d : c_d %d : dc_g %d : dc_d %d : pipe %d : arg %d\n", content->txt, content->infile, content->outfile, content->cmd, content->c_g, content->c_d, content->dc_g, content->dc_d, content->pipe, content->arg);
+			printf("infile0 %s : outfile0 %s :cmd %s : args0 %s\n", block_content->infile[0], block_content->outfile[0], block_content->cmd, block_content->arg[0]);
+			// printf("%s : infile %d : outfile %d :cmd %d : c_g %d : c_d %d : dc_g %d : dc_d %d : pipe %d : arg %d\n", content->txt, content->infile, content->outfile, content->cmd, content->c_g, content->c_d, content->dc_g, content->dc_d, content->pipe, content->arg);
 			test = test->next;
 		}
-		ft_block(&inputs);
-
 		// command = ft_find_comm_path(ft_envp(envp, "PATH="), inputs->txt);
 		// inputs = inputs->next;
 		// pid = fork();
