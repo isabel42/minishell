@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 17:20:13 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/06/23 17:21:13 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/06/24 10:59:08 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ int	ft_is_redir(t_list *temp)
 
 	content = (t_type *) temp->content;
 	if (!ft_strncmp(content->txt, "<<", 2) && ft_strlen(content->txt) == 2)
+	{
 		content->dc_g = 1;
+	}
 	else if (!ft_strncmp(content->txt, ">>", 2) && ft_strlen(content->txt) == 2)
 		content->dc_d = 1;
 	else if (!ft_strncmp(content->txt, "<", 1) && ft_strlen(content->txt) == 1)
@@ -43,6 +45,7 @@ void	ft_is_command(t_list **temp)
 	*temp = (*temp)->next;
 	while (*temp && ft_is_redir(*temp) == 0)
 	{
+		printf("aaaa\n");
 		content = (t_type *)(*temp)->content;
 		content->arg = 1;
 		*temp = (*temp)->next;
@@ -68,7 +71,6 @@ int	ft_treat_redir_after(t_list **temp)
 		(*temp) = (*temp)->next;
 		if (!(*temp))
 		{
-			printf("aaaa\n");
 			return (-1);
 		}
 		content = (t_type *)(*temp)->content;
@@ -89,7 +91,7 @@ int	ft_treat_dredir_after(t_list **temp)
 		if (!(*temp))
 			return (-1);
 		content = (t_type *)(*temp)->content;
-		content->infile_d = 1;
+		content->infile = 2;
 		return (1);
 	}
 	if (content->dc_d == 1)
@@ -98,7 +100,7 @@ int	ft_treat_dredir_after(t_list **temp)
 		if (!(*temp))
 			return (-1);
 		content = (t_type *)(*temp)->content;
-		content->outfile_d = 1;
+		content->outfile = 2;
 		return (1);
 	}
 	return (0);
@@ -116,6 +118,7 @@ void	ft_find_type(t_list **l)
 	while (temp)
 	{
 		ft_is_redir(temp);
+		printf("txt: %s\n", content->txt);
 		content = (t_type *)temp->content;
 		simple = ft_treat_redir_after(&temp);
 		if (simple == -1)

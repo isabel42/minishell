@@ -6,62 +6,43 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 17:23:20 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/06/23 17:45:03 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/06/24 10:43:38 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_init_content(char *txt, t_type *content)
+
+void	ft_init_block(t_block *block)
 {
-	content->txt = txt;
-	content->cmd = 0;
-	content->infile = 0;
-	content->outfile = 0;
-	content->infile_d = 0;
-	content->outfile_d = 0;
-	content->pipe = 0;
-	content->c_g = 0;
-	content->c_d = 0;
-	content->dc_g = 0;
-	content->dc_d = 0;
-	content->arg = 0;
+	// char	**arg;
+	// char	**infile;
+	// char	**outfile;
+	block->cmd = NULL;
+	block->arg = malloc(sizeof(char *));
+	block->infile = malloc(sizeof(char *));
+	block->outfile = malloc(sizeof(char *));
 }
 
-t_list	*ft_parsing(char *prompt, char *b)
-{
-	t_list	*inputs;
-	t_type	*content;
-	char	*txt;
-	int		i;
-
-	i = 0;
-	inputs = NULL;
-	while (prompt[i] != '\0')
-	{
-		txt = ft_cp_line(prompt, &i, b);
-		content = malloc(sizeof(t_type));
-		if (!content)
-			return (NULL);
-		ft_init_content(txt, content);
-		ft_lstadd_back(&inputs, ft_lstnew(&(*content)));
-	}
-	return (inputs);
-}
-
-ft_block(**t_list type)
+void ft_block(t_list **type)
 {
 	t_list *type_temp;
 	t_type *type_content;
-	t_list *block;
+	// t_type *type_content_next;
+	// t_list *block;
+	// t_block *block_content;
+	// int		i;
 
 	type_temp = *type;
-	type_content = (t_type *)temp->content;
+	// i = 0;
+	type_content = (t_type *)type_temp->content;
+	// block = NULL;
 	while (type_content)
 	{
-		if (type_content->cg == 1)
-			
+		printf("%s\n", type_content->txt);
+		type_temp = type_temp->next;
+		if(!type_temp)
+			break ;
+		type_content = (t_type *)type_temp->content;
 	}
-
-
 }

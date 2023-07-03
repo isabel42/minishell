@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/06/23 17:45:03 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/06/24 10:51:39 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ typedef struct s_type
 	int				cmd;
 	int				infile;
 	int				outfile;
-	int				infile_d;
-	int				outfile_d;
 	int				pipe;
 	int				c_g;
 	int				c_d;
@@ -59,5 +57,7 @@ t_list	*ft_parsing(char *prompt, char *b);
 int		count_list(t_list **list);
 
 char	**ft_flags(char **envp, t_list **inputs);
+
+void	ft_block(t_list **type);
 
 #endif

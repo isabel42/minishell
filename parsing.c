@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:01:58 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/06/23 17:18:16 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/06/24 10:20:37 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ char	*ft_cp_line(char *prompt, int *i, char *b)
 	return (final);
 }
 
-void	ft_init_content(char *txt, t_type *content)
+void	ft_init_type(char *txt, t_type *content)
 {
 	content->txt = txt;
 	content->cmd = 0;
@@ -121,7 +121,7 @@ t_list	*ft_parsing(char *prompt, char *b)
 		content = malloc(sizeof(t_type));
 		if (!content)
 			return (NULL);
-		ft_init_content(txt, content);
+		ft_init_type(txt, content);
 		ft_lstadd_back(&inputs, ft_lstnew(&(*content)));
 	}
 	return (inputs);
