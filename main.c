@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/06/30 12:55:30 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/03 12:53:19 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ int	main (int ac, char **av, char **env)
 	//int		pid;
 	t_list	*inputs;
 	t_list	*test;
-	t_type	*content;
+	//t_type	*content;
 	char	**env_copy;
 
 	(void) ac;
@@ -145,20 +145,22 @@ int	main (int ac, char **av, char **env)
 	inputs = NULL;
 	env_copy = env_copy1(env);
 	init_termios();
+	signal(SIGINT, custom_handler);
+	signal(SIGQUIT, custom_handler1);
 	while (42)
 	{
 		//pid = 0;
-		prompt = readline("minishell> ");
+		prompt = readline("minishell$ ");
 		add_history(prompt);
 		inputs = ft_parsing(prompt, "\'\"");
 		ft_find_type(&inputs);
 		test = inputs;
-		while (test)
-		{
-			content = (t_type *) test->content;
-			check_builtin("", ft_split(prompt, ' '), env_copy);
-			test = test->next;
-		}
+		check_builtin("echo", ft_split(prompt, ' '), env_copy);
+		// while (test)
+		// {
+		// 	content = (t_type *) test->content;
+		// 	test = test->next;
+		// }
 		// command = ft_find_comm_path(ft_envp(envp, "PATH="), inputs->txt);
 		// inputs = inputs->next;
 		// pid = fork();

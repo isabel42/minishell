@@ -6,19 +6,13 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 15:38:36 by ktomat            #+#    #+#             */
-/*   Updated: 2023/06/30 12:59:28 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/03 12:53:05 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	handle_sigquit(int signal)
-{
-	(void)signal;
-	exit(1);
-}
-
-void	handle_sigint(int signal)
+void	custom_handler(int signal)
 {
 	(void)signal;
 	printf("\n");
@@ -27,26 +21,19 @@ void	handle_sigint(int signal)
 	rl_redisplay();
 }
 
-void	custom_handler(int signal)
+void	custom_handler1(int signal)
 {
-	if (signal == SIGINT)
-		handle_sigint(signal);
-	else if (signal == SIGQUIT)
-		handle_sigquit(signal);
+	(void)signal;
+	exit(0);
 }
 
-int	init_termios(void)
+void	init_termios(void)
 {
-	struct sigaction	sig;
-	struct termios		tp;
+	struct termios	termios;
 
-	sig.sa_handler = &custom_handler;
-	sigaction(SIGINT, &sig, NULL);
-	sigaction(SIGQUIT, &sig, NULL);
-	if (tcgetattr(STDIN_FILENO, &tp) == -1)
-		return (-1);
-	tp.c_lflag &= ~ECHOCTL;
-	if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &tp) == -1)
-		return (-1);
-	return (0);
+	if ((tcgetattr(STDIN_FILENO, &termios)) == -1)
+		exit(EXIT_FAILURE);
+	termios.c_lflag &= ~(ECHOCTL);
+	if ((tcsetattr(STDIN_FILENO, TCSANOW, &termios)) == -1)
+		exit(EXIT_FAILURE);
 }

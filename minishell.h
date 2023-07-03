@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/06/30 12:57:37 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/03 12:55:07 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ typedef struct s_data//ajouter t_data	g_data; in all files
 	char					**env_copy;
 	volatile sig_atomic_t	status;
 }				t_data;
+
+t_data	g_data;
 
 typedef struct s_type
 {
@@ -83,7 +85,9 @@ void	ft_export(char *cmd, char **flags, char **env_copy);
 char	**ft_unset(char *cmd, char **flags, char **env_copy);
 
 //signal
-int		rl_replace_line();
-int		init_termios(void);
+int		rl_replace_line(const char *text, int i);
+void	init_termios(void);
+void	custom_handler(int signal);
+void	custom_handler1(int signal);
 
 #endif

@@ -4,7 +4,6 @@
 3. Quand la struct avec le env_copy sera fait, changer tout les env_copy dans check_builtins
 
 ATTENTION !!!
-
 - pour les builtin, il faudra surement faire une struct qui prends le env_copy, pour pouvoir le modifier partout, via l'adresse de la struct
 
 
