@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/04 12:31:11 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/04 15:42:23 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ typedef struct s_block
 }	t_block;
 
 //type.c
-void	ft_find_type(t_list **list);
+char	**ft_nl_charchar(char **tab, char *txt);
+void	ft_init_block(t_block *block);
+t_list	*ft_find_type(t_list **list);
 
 // parsing.c
 t_list	*ft_parsing(char *prompt, char *b);

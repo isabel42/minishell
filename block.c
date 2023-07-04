@@ -6,52 +6,52 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 17:23:20 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/04 12:40:20 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/04 15:50:42 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**ft_nl_charchar(char **tab, char *txt)
-{
-	char	**sol;
-	int		i;
-	int		j;
+// char	**ft_nl_charchar(char **tab, char *txt)
+// {
+// 	char	**sol;
+// 	int		i;
+// 	int		j;
 
-	i = 0;
-	j = 0;
-	while (tab[i] != NULL)
-		i++;
-	sol = malloc(sizeof(char *) * (i + 2));
-	if (!sol)
-		return (NULL);
-	while (j < i)
-	{
-		sol[j] = tab[j];
-		j++;
-	}
-	sol[i] = txt;
-	sol[i + 1] = NULL;
-	free(tab);
-	return (sol);
-}
+// 	i = 0;
+// 	j = 0;
+// 	while (tab[i] != NULL)
+// 		i++;
+// 	sol = malloc(sizeof(char *) * (i + 2));
+// 	if (!sol)
+// 		return (NULL);
+// 	while (j < i)
+// 	{
+// 		sol[j] = tab[j];
+// 		j++;
+// 	}
+// 	sol[i] = txt;
+// 	sol[i + 1] = NULL;
+// 	free(tab);
+// 	return (sol);
+// }
 
-void	ft_init_block(t_block *block)
-{
-	block->cmd = NULL;
-	block->arg = malloc(sizeof(char *));
-	if (!block->arg)
-		return ;
-	block->arg[0] = NULL;
-	block->infile = malloc(sizeof(char *));
-	if (!block->infile)
-		return ;
-	block->infile[0] = NULL;
-	block->outfile = malloc(sizeof(char *));
-	if (!block->outfile)
-		return ;
-	block->outfile[0] = NULL;
-}
+// void	ft_init_block(t_block *block)
+// {
+// 	block->cmd = NULL;
+// 	block->arg = malloc(sizeof(char *));
+// 	if (!block->arg)
+// 		return ;
+// 	block->arg[0] = NULL;
+// 	block->infile = malloc(sizeof(char *));
+// 	if (!block->infile)
+// 		return ;
+// 	block->infile[0] = NULL;
+// 	block->outfile = malloc(sizeof(char *));
+// 	if (!block->outfile)
+// 		return ;
+// 	block->outfile[0] = NULL;
+// }
 
 t_block	*ft_add_block(t_type *t_c,
 	t_block *b_c, t_list **block)
@@ -115,9 +115,9 @@ t_list	*ft_block(void)
 	prompt = readline("minishell> ");
 	add_history(prompt);
 	inputs = ft_parsing(prompt, "\'\"");
-	ft_find_type(&inputs);
-	block = ft_block_build(&inputs);
-	ft_lstclear(&inputs, (void *) &ft_clean_type);
+	block = ft_find_type(&inputs);
+	// block = ft_block_build(&inputs);
+	// ft_lstclear(&inputs, (void *) &ft_clean_type);
 	free(prompt);
 	return (block);
 }
