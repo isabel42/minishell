@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 17:23:20 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/03 17:37:54 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/04 12:40:20 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,37 +53,34 @@ void	ft_init_block(t_block *block)
 	block->outfile[0] = NULL;
 }
 
-t_block	*ft_add_block(t_type *type_content,
-	t_block *block_content, t_list **block)
+t_block	*ft_add_block(t_type *t_c,
+	t_block *b_c, t_list **block)
 {
-	if (type_content->cmd == 1)
+	if (t_c->cmd == 1)
 	{
-		block_content->cmd = malloc(sizeof(char) * ft_strlen(type_content->txt));
-		if (!block_content->cmd)
+		b_c->cmd = malloc(sizeof(char) * ft_strlen(t_c->txt));
+		if (!b_c->cmd)
 			return (NULL);
-		ft_strlcpy(block_content->cmd, type_content->txt, ft_strlen(type_content->txt) + 1);
+		ft_strlcpy(b_c->cmd, t_c->txt, ft_strlen(t_c->txt) + 1);
 	}
-	else if (type_content->arg == 1)
-		block_content->arg
-			= ft_nl_charchar(block_content->arg, type_content->txt);
-	else if (type_content->infile == 1)
-		block_content->infile
-			= ft_nl_charchar(block_content->infile, type_content->txt);
-	else if (type_content->outfile == 1)
-		block_content->outfile
-			= ft_nl_charchar(block_content->outfile, type_content->txt);
-	else if (type_content->pipe == 1)
+	else if (t_c->arg == 1)
+		b_c->arg = ft_nl_charchar(b_c->arg, t_c->txt);
+	else if (t_c->infile == 1)
+		b_c->infile = ft_nl_charchar(b_c->infile, t_c->txt);
+	else if (t_c->outfile == 1)
+		b_c->outfile = ft_nl_charchar(b_c->outfile, t_c->txt);
+	else if (t_c->pipe == 1)
 	{
-		ft_lstadd_back(block, ft_lstnew(&(*block_content)));
-		block_content = malloc(sizeof(t_block));
-		if (!block_content)
+		ft_lstadd_back(block, ft_lstnew(&(*b_c)));
+		b_c = malloc(sizeof(t_block));
+		if (!b_c)
 			return (NULL);
-		ft_init_block(block_content);
+		ft_init_block(b_c);
 	}
-	return (block_content);
+	return (b_c);
 }
 
-t_list	*ft_block(t_list **type)
+t_list	*ft_block_build(t_list **type)
 {
 	t_list	*type_temp;
 	t_type	*type_content;
@@ -106,5 +103,21 @@ t_list	*ft_block(t_list **type)
 		type_content = (t_type *)type_temp->content;
 	}
 	ft_lstadd_back(&block, ft_lstnew(&(*block_content)));
+	return (block);
+}
+
+t_list	*ft_block(void)
+{
+	char	*prompt;
+	t_list	*inputs;
+	t_list	*block;
+
+	prompt = readline("minishell> ");
+	add_history(prompt);
+	inputs = ft_parsing(prompt, "\'\"");
+	ft_find_type(&inputs);
+	block = ft_block_build(&inputs);
+	ft_lstclear(&inputs, (void *) &ft_clean_type);
+	free(prompt);
 	return (block);
 }
