@@ -6,11 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 17:23:20 by itovar-n          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/07/04 15:50:42 by itovar-n         ###   ########.fr       */
-=======
-/*   Updated: 2023/06/30 11:04:40 by ktomat           ###   ########.fr       */
->>>>>>> kimi
+/*   Updated: 2023/07/05 11:27:26 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +102,6 @@ t_list	*ft_block_build(t_list **type)
 			break ;
 		type_content = (t_type *)type_temp->content;
 	}
-<<<<<<< HEAD
 	ft_lstadd_back(&block, ft_lstnew(&(*block_content)));
 	return (block);
 }
@@ -125,6 +120,4 @@ t_list	*ft_block(void)
 	// ft_lstclear(&inputs, (void *) &ft_clean_type);
 	free(prompt);
 	return (block);
-=======
->>>>>>> kimi
 }

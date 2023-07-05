@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/05 11:08:46 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/05 11:39:54 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,11 +135,9 @@
 int	main (int argc, char **argv, char **envp)
 {
 	char	*prompt;
-	// char	*command;
-	//int		pid;
+	int		pid;
 	t_list	*inputs;
 	t_list	*test;
-	t_list	*block;
 	t_block	*block_content;
 
 	(void) argc;
@@ -147,7 +145,7 @@ int	main (int argc, char **argv, char **envp)
 	(void) envp;
 	while (42)
 	{
-		//pid = 0;
+		pid = 0;
 		prompt = readline("minishell$ ");
 		if (prompt == NULL)
 			exit(0);
@@ -165,20 +163,20 @@ int	main (int argc, char **argv, char **envp)
 				pid++;
 			}
 			pid = 0;
-			while(block_content->outfile[pid])
+			while (block_content->outfile[pid])
 			{
 				printf("outfile: %s\n", block_content->outfile[pid]);
 				pid++;
 			}
 			printf("cmd: %s\n", block_content->cmd);
 			pid = 0;
-			while(block_content->arg[pid])
+			while (block_content->arg[pid])
 			{
 				printf("arg: %s\n", block_content->arg[pid]);
 				pid++;
 			}
 			printf("\n");
-			// printf("infile0 %s : outfile0 %s :cmd %s : args0 %s\n", block_content->infile[0], block_content->outfile[0], block_content->cmd, block_content->arg[0]);
+			
 			test = test->next;
 		}
 		// ft_lstclear(&block, (void *) &ft_clean_block);
