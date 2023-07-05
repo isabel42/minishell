@@ -6,12 +6,11 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 11:50:48 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/05 16:20:07 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/05 16:38:49 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 void	ft_free_cc(char **tab)
 {
@@ -24,6 +23,12 @@ void	ft_free_cc(char **tab)
 		i++;
 	}
 	free(tab);
+}
+
+void	ft_free_cc_c(char **cc, char *c)
+{
+	ft_free_cc(cc);
+	free(c);
 }
 
 void	*ft_clean_inputs(void *content)
