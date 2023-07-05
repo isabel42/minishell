@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 14:54:47 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/03 12:50:44 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/05 11:06:45 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,13 @@ void	ft_echo(char *cmd, char **flags) //je penses qu'il faudra ajouter le $? pou
 	int	i;
 
 	(void)cmd;
-	if (!flags[0])
+	if (!flags[0][0])
 		printf("\n");
 	else if (flags[0][0] == '-' && flags[0][1] == 'n' && flags[0][2] == '\0')
 	{
 		i = 1;
 		while (flags[i])
 		{
-			if (flags[i][0] == '-' && flags[i][1] == 'n' && flags[i][2] == '\0')
-				//print_last_status();
 			printf("%s", flags[i]);
 			i++;
 		}
@@ -68,8 +66,6 @@ void	ft_echo(char *cmd, char **flags) //je penses qu'il faudra ajouter le $? pou
 		i = 0;
 		while (flags[i])
 		{
-			if (flags[i][0] == '-' && flags[i][1] == 'n' && flags[i][2] == '\0')
-				//print_last_status();
 			printf("%s", flags[i]);
 			i++;
 		}
