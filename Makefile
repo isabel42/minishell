@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 SRCS	= main.c utils.c parsing.c type.c block.c free_clean.c 
+=======
+SRCS	= main.c utils.c parsing.c type.c signal.c builtin.c builtin_1.c unset.c export.c 
+>>>>>>> kimi
 
 OBJS 	= ${SRCS:.c=.o}
 

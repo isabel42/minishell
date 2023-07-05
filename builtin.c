@@ -6,13 +6,12 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 14:54:47 by ktomat            #+#    #+#             */
-/*   Updated: 2023/06/23 15:25:43 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/03 12:50:44 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//toutes les entree seront changee en minuscule et la comparaison se fera en minuscule
 char	*all_lower(char *str)
 {
 	int	i;
@@ -27,20 +26,87 @@ char	*all_lower(char *str)
 	return (str);
 }
 
-// le echo avec -N affiche -N et le message
-void	check_builtin(char *cmd, char **flags)
+void	check_builtin(char *cmd, char **flags, char **env_copy)
 {
 	if (!ft_strncmp(all_lower(cmd), "echo", 4) && ft_strlen(cmd) == 4)
 		ft_echo(cmd, flags);
 	if (!ft_strncmp(all_lower(cmd), "cd", 2) && ft_strlen(cmd) == 2)
+		ft_cd(cmd, flags, env_copy);
 	if (!ft_strncmp(all_lower(cmd), "pwd", 3) && ft_strlen(cmd) == 3)
-	if (!ft_strncmp(all_lower(cmd), "export", 6) && ft_strlen(cmd) == 6)
-	if (!ft_strncmp(all_lower(cmd), "unset", 5) && ft_strlen(cmd) == 5)
+		ft_pwd(cmd, flags, env_copy);
+	if (!ft_strncmp(cmd, "export", 6) && ft_strlen(cmd) == 6)
+		ft_export(cmd, flags, env_copy);
+	if (!ft_strncmp(cmd, "unset", 5) && ft_strlen(cmd) == 5)
+		ft_unset(cmd, flags, env_copy);
 	if (!ft_strncmp(all_lower(cmd), "env", 3) && ft_strlen(cmd) == 3)
-	if (!ft_strncmp(all_lower(cmd), "exit", 4) && ft_strlen(cmd) == 4)
+		ft_env(cmd, flags, env_copy);
+	if (!ft_strncmp(cmd, "exit", 4) && ft_strlen(cmd) == 4)
+		ft_exit(cmd, flags);
 }
 
-void	ft_echo(char *cmd, char **flags)
+void	ft_echo(char *cmd, char **flags) //je penses qu'il faudra ajouter le $? pour afficher le dernier status
 {
-	if ()
+	int	i;
+
+	(void)cmd;
+	if (!flags[0])
+		printf("\n");
+	else if (flags[0][0] == '-' && flags[0][1] == 'n' && flags[0][2] == '\0')
+	{
+		i = 1;
+		while (flags[i])
+		{
+			if (flags[i][0] == '-' && flags[i][1] == 'n' && flags[i][2] == '\0')
+				//print_last_status();
+			printf("%s", flags[i]);
+			i++;
+		}
+		return ;
+	}
+	else
+	{
+		i = 0;
+		while (flags[i])
+		{
+			if (flags[i][0] == '-' && flags[i][1] == 'n' && flags[i][2] == '\0')
+				//print_last_status();
+			printf("%s", flags[i]);
+			i++;
+		}
+		printf("\n");
+	}
+}
+
+int	is_digit1(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] < 48 || str[i] > 57)
+			return (-1);
+		i++;
+	}
+	return (0);
+}
+
+void	ft_exit(char *cmd, char **flags)
+{
+	(void)flags;
+	(void)cmd;
+	if (flags[1])
+		printf("exit\nminishell: exit: too many arguments\n");
+	else if (flags[0])
+	{
+		if (is_digit1(flags[0]) == -1)
+		{
+			printf("exit\nminishell: exit:");
+			printf(" %s: numeric argument required\n", flags[0]);
+			exit(255);
+		}
+		exit(ft_atoi(flags[0]));
+	}
+	else
+		exit(0);
 }
