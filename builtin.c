@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 14:54:47 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/05 11:06:45 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/05 15:05:55 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,29 @@ char	*all_lower(char *str)
 
 void	check_builtin(char *cmd, char **flags, char **env_copy)
 {
+	int		pid;
+
 	if (!ft_strncmp(all_lower(cmd), "echo", 4) && ft_strlen(cmd) == 4)
 		ft_echo(cmd, flags);
-	if (!ft_strncmp(all_lower(cmd), "cd", 2) && ft_strlen(cmd) == 2)
+	else if (!ft_strncmp(all_lower(cmd), "cd", 2) && ft_strlen(cmd) == 2)
 		ft_cd(cmd, flags, env_copy);
-	if (!ft_strncmp(all_lower(cmd), "pwd", 3) && ft_strlen(cmd) == 3)
+	else if (!ft_strncmp(all_lower(cmd), "pwd", 3) && ft_strlen(cmd) == 3)
 		ft_pwd(cmd, flags, env_copy);
-	if (!ft_strncmp(cmd, "export", 6) && ft_strlen(cmd) == 6)
+	else if (!ft_strncmp(cmd, "export", 6) && ft_strlen(cmd) == 6)
 		ft_export(cmd, flags, env_copy);
-	if (!ft_strncmp(cmd, "unset", 5) && ft_strlen(cmd) == 5)
+	else if (!ft_strncmp(cmd, "unset", 5) && ft_strlen(cmd) == 5)
 		ft_unset(cmd, flags, env_copy);
-	if (!ft_strncmp(all_lower(cmd), "env", 3) && ft_strlen(cmd) == 3)
+	else if (!ft_strncmp(all_lower(cmd), "env", 3) && ft_strlen(cmd) == 3)
 		ft_env(cmd, flags, env_copy);
-	if (!ft_strncmp(cmd, "exit", 4) && ft_strlen(cmd) == 4)
+	else if (!ft_strncmp(cmd, "exit", 4) && ft_strlen(cmd) == 4)
 		ft_exit(cmd, flags);
+	else
+	{
+		pid = fork();
+		if (pid == 0)
+			execve("/bin/ls", NULL, NULL);
+		waitpid(pid, NULL, 0);
+	}
 }
 
 void	ft_echo(char *cmd, char **flags) //je penses qu'il faudra ajouter le $? pour afficher le dernier status
@@ -49,7 +58,7 @@ void	ft_echo(char *cmd, char **flags) //je penses qu'il faudra ajouter le $? pou
 	int	i;
 
 	(void)cmd;
-	if (!flags[0][0])
+	if (!flags[0])
 		printf("\n");
 	else if (flags[0][0] == '-' && flags[0][1] == 'n' && flags[0][2] == '\0')
 	{

@@ -1,6 +1,6 @@
 2. Faire le gestionaire de code de sortie
 3. Quand la struct avec le env_copy sera fait, changer tout les env_copy dans check_builtins
-4. Faire le arg checker au lancement de minishell
+6. gerer le pipe vide : sytax error
 
 ATTENTION !!!
 - pour les builtin, il faudra surement faire une struct qui prends le env_copy, pour pouvoir le modifier partout, via l'adresse de la struct

@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/05 12:59:39 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/05 14:57:30 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,139 +14,84 @@
 
 #include "minishell.h"
 
-// char	*ft_envp(char **envp, char *pwd)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (envp[i])
-// 	{
-// 		if (ft_strncmp(envp[i], pwd, ft_strlen(pwd)) == 0)
-// 			return (envp[i] + ft_strlen(pwd));
-// 		i++;
-// 	}
-// 	return (NULL);
-// }
-
-// void	ft_free_cc(char **split)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (split[i])
-// 	{
-// 		free(split[i]);
-// 		i++;
-// 	}
-// 	free(split);
-// }
-
-// void	ft_free_cc_c(char **cc, char *c)
-// {
-// 	ft_free_cc(cc);
-// 	free(c);
-// }
-
-// char	*ft_find_comm_path(char *path, char *command)
-// {
-// 	char	**path_split;
-// 	char	*path_command;
-// 	char	*slash_command;
-// 	int		i;
-
-// 	if (access(command, X_OK) == 0)
-// 		return (command);
-// 	i = 0;
-// 	if (command)
-// 	{
-// 		slash_command = ft_strjoin("/", command);
-// 		path_split = ft_split(path, ':');
-// 		while (path_split[i])
-// 		{
-// 			path_command = ft_strjoin(path_split[i], slash_command);
-// 			if (access(path_command, X_OK) == 0)
-// 			{
-// 				ft_free_cc_c(path_split, slash_command);
-// 				return (path_command);
-// 			}
-// 			free(path_command);
-// 			i++;
-// 		}
-// 		ft_free_cc_c(path_split, slash_command);
-// 	}
-// 	return (NULL);
-// }
-
-// char *ft_arg_q(char *arg)
-// {
-// 	int		i;
-// 	char	*new;
-// 	int		len;
-
-// 	len = (int) ft_strlen(arg);
-// 	i = 1;
-// 	new = malloc(sizeof(char) * (len + 3));
-// 	if (!new)
-// 		return (0);
-// 	new[0] = '"';
-// 	while(i < len + 1)
-// 	{
-// 		new[i] = arg[i - 1];
-// 		i++;
-// 	}
-// 	new[i] = '"';
-// 	new[i + 1] = '\0';
-// 	free(arg);
-// 	return (new);
-// }
-
-// char	**ft_flags(char **envp, t_list **inputs)
-// {
-// 	char	**flags;
-// 	t_list	*one;
-// 	t_list	*two;
-// 	int		count;
-// 	int		i;
-
-// 	count = 0;
-// 	one = *inputs;
-// 	two = *inputs;
-// 	i = 1;
-// 	while (one && one->arg == 1)
-// 	{
-// 		count++;
-// 		one = one->next;
-// 	}
-// 	flags = malloc(sizeof(char *) * count + 2);
-// 	if (!flags)
-// 		exit(0);
-// 	flags[0] = ft_envp(envp, "PATH=");
-// 	while (i < count + 1)
-// 	{
-// 		flags[i] = two->txt;
-// 		two = two->next;
-// 		i++;	
-// 	}
-// 	flags[i] = NULL;
-// 	return (flags);
-// }
-
-
-int	main (int argc, char **argv, char **envp)
+void	free_tab(char **str)
 {
-	char	*prompt;
-	t_list	*inputs;
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
+}
+
+int	find_index_envp(char **envp)
+{
+	int		i;
+
+	i = -1;
+	while (envp[++i])
+	{
+		if (ft_strncmp("PATH=", envp[i], 5) == 0)
+			break ;
+	}
+	return (i);
+}
+
+char	*ft_getpath(char **envp, char *prog)
+{
+	char	**env;
+	char	*path;
+	char	*new_path;
+	char	*temp;
+	int		i;
+
+	path = NULL;
+	i = find_index_envp(envp);
+	env = ft_split(envp[i] + 5, ':');
+	i = -1;
+	while (env[++i])
+	{
+		temp = ft_strjoin(env[i], "/");
+		new_path = ft_strjoin(temp, prog);
+		free(temp);
+		if (access(new_path, X_OK | F_OK) == 0)
+		{
+			path = new_path;
+			break ;
+		}
+		else
+			free(new_path);
+	}
+	free_tab(env);
+	return (path);
+}
+
+int	main (int argc, char **argv, char **env)
+{
+	t_list	*block;
+	t_list	*test;
 	t_block	*block_content;
-	t_block	*block;
 
 	(void) argc;
 	(void) argv;
-	(void) envp;
+	init_termios();
+	signal(SIGINT, custom_handler);
+	signal(SIGQUIT, custom_handler);
 	while (42)
 	{
 		block = ft_block();
-		if (ft_exec(&block) == -1)
-			exit(-1);
+		test = block;
+		while (block)
+		{
+			block_content = (t_block *) test->content;
+			check_builtin(block_content->cmd, block_content->arg, env_copy1(env));
+			block = block->next;
+		}
+		// if (ft_exec(&block) == -1)
+		// 	exit(-1);
 	}
 		// ft_lstclear(&block, (void *) &ft_clean_block);
 		//check_builtin("cd", ft_split(prompt, ' '), env_copy);
@@ -162,6 +107,5 @@ int	main (int argc, char **argv, char **envp)
 		// 	execve(command, ft_flags(envp, &inputs), NULL);
 		// waitpid(pid, NULL, 0);
 		// ft_lstclear(&block, ft_clean_block(block->content));
-	}
 	return (0);
 }

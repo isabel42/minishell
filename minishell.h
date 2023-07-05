@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/05 13:00:11 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/05 14:55:25 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,8 @@ int		rl_replace_line(const char *text, int i);
 void	init_termios(void);
 void	custom_handler(int signal);
 void	custom_handler1(int signal);
+
+//TEST//
+char	*ft_getpath(char **envp, char *prog);
 
 #endif
