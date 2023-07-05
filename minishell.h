@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/05 11:29:10 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/05 13:00:11 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,11 @@ t_data	g_data;
 typedef struct s_type
 {
 	char			*txt;
-	int				cmd;
-	int				infile;
-	int				outfile;
 	int				pipe;
 	int				c_g;
 	int				c_d;
 	int				dc_g;
 	int				dc_d;
-	int				arg;
 }	t_type;
 
 typedef struct s_block

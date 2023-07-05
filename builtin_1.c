@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:44:18 by ktomat            #+#    #+#             */
-/*   Updated: 2023/06/30 12:02:22 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/05 13:04:19 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	ft_cd(char *cmd, char **flags, char **env_copy)
 	(void)cmd;
 	(void)env_copy;
 	if (!flags[0])
-		printf("args_needed\n");
+		return ;
 	else
 	{
 		chdir(flags[0]);

@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/05 11:39:54 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/05 12:59:39 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,50 +135,19 @@
 int	main (int argc, char **argv, char **envp)
 {
 	char	*prompt;
-	int		pid;
 	t_list	*inputs;
-	t_list	*test;
 	t_block	*block_content;
+	t_block	*block;
 
 	(void) argc;
 	(void) argv;
 	(void) envp;
 	while (42)
 	{
-		pid = 0;
-		prompt = readline("minishell$ ");
-		if (prompt == NULL)
-			exit(0);
-		add_history(prompt);
-		inputs = ft_parsing(prompt, "\'\"");
-		ft_find_type(&inputs);
-		test = inputs;
-		while (test)
-		{
-			block_content = (t_block *) test->content;
-			pid = 0;
-			while (block_content->infile[pid])
-			{
-				printf("inifle: %s\n", block_content->infile[pid]);
-				pid++;
-			}
-			pid = 0;
-			while (block_content->outfile[pid])
-			{
-				printf("outfile: %s\n", block_content->outfile[pid]);
-				pid++;
-			}
-			printf("cmd: %s\n", block_content->cmd);
-			pid = 0;
-			while (block_content->arg[pid])
-			{
-				printf("arg: %s\n", block_content->arg[pid]);
-				pid++;
-			}
-			printf("\n");
-			
-			test = test->next;
-		}
+		block = ft_block();
+		if (ft_exec(&block) == -1)
+			exit(-1);
+	}
 		// ft_lstclear(&block, (void *) &ft_clean_block);
 		//check_builtin("cd", ft_split(prompt, ' '), env_copy);
 		// while (test)
