@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/05 14:57:30 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/05 16:27:06 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,16 +90,7 @@ int	main (int argc, char **argv, char **env)
 			check_builtin(block_content->cmd, block_content->arg, env_copy1(env));
 			block = block->next;
 		}
-		// if (ft_exec(&block) == -1)
-		// 	exit(-1);
-	}
-		// ft_lstclear(&block, (void *) &ft_clean_block);
-		//check_builtin("cd", ft_split(prompt, ' '), env_copy);
-		// while (test)
-		// {
-		// 	content = (t_type *) test->content;
-		// 	test = test->next;
-		// }
+		ft_lstclear(&block, (void *) &ft_clean_block);
 		// command = ft_find_comm_path(ft_envp(envp, "PATH="), inputs->txt);
 		// inputs = inputs->next;
 		// pid = fork();
@@ -107,5 +98,6 @@ int	main (int argc, char **argv, char **env)
 		// 	execve(command, ft_flags(envp, &inputs), NULL);
 		// waitpid(pid, NULL, 0);
 		// ft_lstclear(&block, ft_clean_block(block->content));
+	}
 	return (0);
 }

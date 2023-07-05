@@ -6,7 +6,11 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/07/05 14:55:25 by ktomat           ###   ########.fr       */
+=======
+/*   Updated: 2023/07/05 16:12:37 by itovar-n         ###   ########.fr       */
+>>>>>>> isa
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +57,26 @@ typedef struct s_block
 	char	**outfile;
 }	t_block;
 
-//type.c
+// block_utils.c
 char	**ft_nl_charchar(char **tab, char *txt);
-void	ft_init_block(t_block *block);
-t_list	*ft_find_type(t_list **list);
+t_block	*ft_init_block(void);
+int		ft_is_redir(t_list *temp);
+void	ft_is_command(t_list **temp, t_block *b_c);
+int		ft_treat_redir_after(t_list **temp, t_block *b_c);
 
 // parsing.c
 t_list	*ft_parsing(char *prompt, char *b);
 
 // block.c
+t_list	*ft_block_build(t_list **list);
 t_list	*ft_block(void);
 
 // free_clan.c
-void	*ft_clean_type(void *content);
+void	*ft_clean_inputs(void *content);
 void	*ft_clean_block(void *content);
+
+// utils.c
+void	ft_exit(char *s);
 
 // char	**ft_flags(char **envp, t_list **inputs);
 
