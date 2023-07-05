@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/06/23 17:45:03 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/04 15:42:23 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ typedef struct s_type
 	int				cmd;
 	int				infile;
 	int				outfile;
-	int				infile_d;
-	int				outfile_d;
 	int				pipe;
 	int				c_g;
 	int				c_d;
@@ -48,16 +46,20 @@ typedef struct s_block
 }	t_block;
 
 //type.c
-void	ft_find_type(t_list **list);
-char	*ft_find_comm_path(char *path, char *command);
-char	*ft_envp(char **envp, char *pwd);
+char	**ft_nl_charchar(char **tab, char *txt);
+void	ft_init_block(t_block *block);
+t_list	*ft_find_type(t_list **list);
 
 // parsing.c
-int		ft_cp_line_long(char *prompt, int *i, char *b);
-char	*ft_cp_line(char *prompt, int *i, char *b);
 t_list	*ft_parsing(char *prompt, char *b);
-int		count_list(t_list **list);
 
-char	**ft_flags(char **envp, t_list **inputs);
+// block.c
+t_list	*ft_block(void);
+
+// free_clan.c
+void	*ft_clean_type(void *content);
+void	*ft_clean_block(void *content);
+
+// char	**ft_flags(char **envp, t_list **inputs);
 
 #endif

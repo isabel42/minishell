@@ -1,4 +1,4 @@
-SRCS	= main.c utils.c parsing.c type.c
+SRCS	= main.c utils.c parsing.c type.c block.c free_clean.c 
 
 OBJS 	= ${SRCS:.c=.o}
 
@@ -10,7 +10,7 @@ CC		= gcc
 
 RM		= rm -f
 
-CFLAGS	= -Wextra -Wall -Werror -g3
+CFLAGS	= -Wextra -Wall -Werror
 
 INCLUDE = -I./libft/ -I.
 
@@ -18,7 +18,11 @@ INCLUDE = -I./libft/ -I.
 			${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 ${NAME}: 	${OBJS} ${FT_NAME}
+<<<<<<< HEAD
 			${CC} ${CFLAGS} ${INCLUDE} ${OBJS} -o ${NAME} -lreadline -L./libft/ -lft -L/Users/ktomat/.brew/opt/readline/lib -I/Users/ktomat/.brew/opt/readline/include
+=======
+			${CC} ${CFLAGS} ${INCLUDE} ${OBJS} -o ${NAME} -L./libft/ -lft -lreadline
+>>>>>>> isa
 
 all:		${NAME}
 

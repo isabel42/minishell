@@ -6,7 +6,11 @@
 /*   By: kimitomat <kimitomat@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/06/26 10:14:33 by kimitomat        ###   ########.fr       */
+=======
+/*   Updated: 2023/07/04 15:50:42 by itovar-n         ###   ########.fr       */
+>>>>>>> isa
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,41 +133,71 @@
 // 	return (flags);
 // }
 
+
 int	main (int argc, char **argv, char **envp)
 {
+<<<<<<< HEAD
 	char	*prompt;
 	// char	*command;
 	//int		pid;
 	t_list	*inputs;
+=======
+	int		pid;
+>>>>>>> isa
 	t_list	*test;
-	t_type	*content;
+	t_list	*block;
+	t_block	*block_content;
 
 	(void) argc;
 	(void) argv;
 	(void) envp;
-	inputs = NULL;
 	while (42)
 	{
+<<<<<<< HEAD
 		//pid = 0;
 		prompt = readline("minishell> ");
 		add_history(prompt);
 		inputs = ft_parsing(prompt, "\'\"");
 		ft_find_type(&inputs);
 		test = inputs;
+=======
+		block = ft_block();
+		test = block;
+>>>>>>> isa
 		while (test)
 		{
-			content = (t_type *) test->content;
-			// printf("txt:%s\n",content->txt);
-			printf("%s : infile %d : outfile %d :cmd %d : c_g %d : c_d %d : dc_g %d : dc_d %d : pipe %d : arg %d\n", content->txt, content->infile, content->outfile, content->cmd, content->c_g, content->c_d, content->dc_g, content->dc_d, content->pipe, content->arg);
+			block_content = (t_block *) test->content;
+			pid = 0;
+			while(block_content->infile[pid])
+			{
+				printf("inifle: %s\n", block_content->infile[pid]);
+				pid++;
+			}
+			pid = 0;
+			while(block_content->outfile[pid])
+			{
+				printf("outfile: %s\n", block_content->outfile[pid]);
+				pid++;
+			}
+			printf("cmd: %s\n", block_content->cmd);
+			pid = 0;
+			while(block_content->arg[pid])
+			{
+				printf("arg: %s\n", block_content->arg[pid]);
+				pid++;
+			}
+			printf("\n");
+			// printf("infile0 %s : outfile0 %s :cmd %s : args0 %s\n", block_content->infile[0], block_content->outfile[0], block_content->cmd, block_content->arg[0]);
 			test = test->next;
 		}
+		// ft_lstclear(&block, (void *) &ft_clean_block);
 		// command = ft_find_comm_path(ft_envp(envp, "PATH="), inputs->txt);
 		// inputs = inputs->next;
 		// pid = fork();
 		// if (pid == 0)
 		// 	execve(command, ft_flags(envp, &inputs), NULL);
 		// waitpid(pid, NULL, 0);
-		// free(prompt);
+		// ft_lstclear(&block, ft_clean_block(block->content));
 	}
 	return (0);
 }
