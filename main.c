@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/05 16:29:05 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/05 17:16:58 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,11 @@ int	main (int argc, char **argv, char **env)
 	{
 		block = ft_block();
 		test = block;
-		while (block)
+		while (test)
 		{
 			block_content = (t_block *) test->content;
 			check_builtin(block_content->cmd, block_content->arg, env_copy1(env));
-			block = block->next;
+			test = test->next;
 		}
 		ft_lstclear(&block, (void *) &ft_clean_block);
 		// command = ft_find_comm_path(ft_envp(envp, "PATH="), inputs->txt);
