@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:10:25 by ktomat            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/07/03 14:00:28 by ktomat           ###   ########.fr       */
-=======
-/*   Updated: 2023/07/05 16:18:58 by itovar-n         ###   ########.fr       */
->>>>>>> isa
+/*   Updated: 2023/07/05 16:30:23 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +28,7 @@ int	count_list(t_list **list)
 	return (i);
 }
 
-void	ft_exit(char *s)
+void	ft_exit_isa(char *s)
 {
 	printf("%s\n", s);
 	exit(0);

@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/07/05 14:55:25 by ktomat           ###   ########.fr       */
-=======
-/*   Updated: 2023/07/05 16:12:37 by itovar-n         ###   ########.fr       */
->>>>>>> isa
+/*   Updated: 2023/07/05 16:30:23 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +72,7 @@ void	*ft_clean_inputs(void *content);
 void	*ft_clean_block(void *content);
 
 // utils.c
-void	ft_exit(char *s);
+void	ft_exit_isa(char *s);
 
 // char	**ft_flags(char **envp, t_list **inputs);
 
