@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/03 14:01:31 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/05 11:00:13 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ int	main (int ac, char **av, char **env)
 		inputs = ft_parsing(prompt, "\'\"");
 		ft_find_type(&inputs);
 		test = inputs;
-		//check_builtin("cd", ft_split(prompt, ' '), env_copy);
+		check_builtin("echo", ft_split(prompt, ' '), env_copy);
 		// while (test)
 		// {
 		// 	content = (t_type *) test->content;
