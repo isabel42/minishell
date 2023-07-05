@@ -6,16 +6,10 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-<<<<<<< HEAD
-<<<<<<< HEAD
-/*   Updated: 2023/06/26 10:14:33 by kimitomat        ###   ########.fr       */
-=======
-/*   Updated: 2023/07/04 15:50:42 by itovar-n         ###   ########.fr       */
->>>>>>> isa
-=======
-/*   Updated: 2023/07/03 14:01:31 by ktomat           ###   ########.fr       */
->>>>>>> kimi
+/*   Updated: 2023/07/05 10:55:47 by ktomat           ###   ########.fr       */
 /*                                                                            */
+/* ************************************************************************** */
+
 /* ************************************************************************** */
 
 #include "minishell.h"
@@ -137,44 +131,22 @@
 // 	return (flags);
 // }
 
-<<<<<<< HEAD
 
 int	main (int argc, char **argv, char **envp)
-=======
-int	main (int ac, char **av, char **env)
->>>>>>> kimi
 {
-<<<<<<< HEAD
 	char	*prompt;
 	// char	*command;
 	//int		pid;
 	t_list	*inputs;
-=======
-	int		pid;
->>>>>>> isa
 	t_list	*test;
-<<<<<<< HEAD
 	t_list	*block;
 	t_block	*block_content;
 
 	(void) argc;
 	(void) argv;
 	(void) envp;
-=======
-	//t_type	*content;
-	char	**env_copy;
-
-	(void) ac;
-	(void) av;
-	(void) env;
-	inputs = NULL;
-	env_copy = env_copy1(env);
-	init_termios();
-	signal(SIGINT, custom_handler);
->>>>>>> kimi
 	while (42)
 	{
-<<<<<<< HEAD
 		//pid = 0;
 		prompt = readline("minishell$ ");
 		if (prompt == NULL)
@@ -183,16 +155,11 @@ int	main (int ac, char **av, char **env)
 		inputs = ft_parsing(prompt, "\'\"");
 		ft_find_type(&inputs);
 		test = inputs;
-<<<<<<< HEAD
-=======
-		block = ft_block();
-		test = block;
->>>>>>> isa
 		while (test)
 		{
 			block_content = (t_block *) test->content;
 			pid = 0;
-			while(block_content->infile[pid])
+			while (block_content->infile[pid])
 			{
 				printf("inifle: %s\n", block_content->infile[pid]);
 				pid++;
@@ -215,14 +182,12 @@ int	main (int ac, char **av, char **env)
 			test = test->next;
 		}
 		// ft_lstclear(&block, (void *) &ft_clean_block);
-=======
 		//check_builtin("cd", ft_split(prompt, ' '), env_copy);
 		// while (test)
 		// {
 		// 	content = (t_type *) test->content;
 		// 	test = test->next;
 		// }
->>>>>>> kimi
 		// command = ft_find_comm_path(ft_envp(envp, "PATH="), inputs->txt);
 		// inputs = inputs->next;
 		// pid = fork();
