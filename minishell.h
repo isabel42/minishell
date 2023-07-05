@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/04 15:42:23 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/04 17:22:31 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,11 @@
 typedef struct s_type
 {
 	char			*txt;
-	int				cmd;
-	int				infile;
-	int				outfile;
 	int				pipe;
 	int				c_g;
 	int				c_d;
 	int				dc_g;
 	int				dc_d;
-	int				arg;
 }	t_type;
 
 typedef struct s_block

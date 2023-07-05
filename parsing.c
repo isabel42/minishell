@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:01:58 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/03 16:12:30 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/04 17:20:21 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,15 +104,11 @@ void	ft_init_type(char *txt, t_type *content)
 		i++;
 	}
 	content->txt[i] = '\0';
-	content->cmd = 0;
-	content->infile = 0;
-	content->outfile = 0;
 	content->pipe = 0;
 	content->c_g = 0;
 	content->c_d = 0;
 	content->dc_g = 0;
 	content->dc_d = 0;
-	content->arg = 0;
 	free (txt);
 }
 

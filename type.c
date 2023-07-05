@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 17:20:13 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/04 16:05:33 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/04 17:19:56 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,23 +75,24 @@ int	ft_is_redir(t_list *temp)
 	return (1);
 }
 
-void	ft_is_command(t_list **temp, t_block *block_content)
+void	ft_is_command(t_list **temp, t_block *b_c)
 {
 	t_type	*content;
 
 	if (!(*temp))
 		return ;
-	// content->cmd = 1;
-	// content = (t_type *)(*temp)->content;
-	// *temp = (*temp)->next;
 	while (*temp && ft_is_redir(*temp) == 0)
 	{
-		if (block_content->cmd == NULL)
-			ft_strlcpy(block_content->cmd, content->txt, ft_strlen(content->txt) + 1);
-		else 
-			block_content->arg = ft_nl_charchar(block_content->arg, content->txt);
 		content = (t_type *)(*temp)->content;
-		content->arg = 1;
+		if (b_c->cmd == NULL)
+		{
+			b_c->cmd = malloc(sizeof(char) * ft_strlen(content->txt));
+			if (!b_c->cmd)
+				return ;
+			ft_strlcpy(b_c->cmd, content->txt, ft_strlen(content->txt) + 1);
+		}
+		else 
+			b_c->arg = ft_nl_charchar(b_c->arg, content->txt);
 		*temp = (*temp)->next;
 	}
 }
@@ -107,7 +108,6 @@ int	ft_treat_redir_after(t_list **temp, t_block *block_content)
 		if (!(*temp))
 			return (-1);
 		content = (t_type *)(*temp)->content;
-		content->infile = 1;
 		block_content->infile = ft_nl_charchar(block_content->infile, ft_strjoin("1", content->txt));
 		return (1);
 	}
@@ -117,7 +117,6 @@ int	ft_treat_redir_after(t_list **temp, t_block *block_content)
 		if (!(*temp))
 			return (-1);
 		content = (t_type *)(*temp)->content;
-		content->outfile = 1;
 		block_content->outfile = ft_nl_charchar(block_content->outfile, ft_strjoin("1", content->txt));
 		return (1);
 	}
@@ -135,7 +134,6 @@ int	ft_treat_dredir_after(t_list **temp, t_block *block_content)
 		if (!(*temp))
 			return (-1);
 		content = (t_type *)(*temp)->content;
-		content->infile = 2;
 		block_content->infile = ft_nl_charchar(block_content->infile, ft_strjoin("2", content->txt));
 		return (1);
 	}
@@ -145,7 +143,6 @@ int	ft_treat_dredir_after(t_list **temp, t_block *block_content)
 		if (!(*temp))
 			return (-1);
 		content = (t_type *)(*temp)->content;
-		content->outfile = 2;
 		block_content->outfile = ft_nl_charchar(block_content->outfile, ft_strjoin("2", content->txt));
 		return (1);
 	}
@@ -181,6 +178,15 @@ t_list	*ft_find_type(t_list **l)
 		content = (t_type *)temp->content;
 		if (simple == 0 && twice == 0 && content->pipe == 0)
 			ft_is_command(&temp, block_content);
+		else if (content->pipe == 1)
+		{
+			ft_lstadd_back(&block, ft_lstnew(&(*block_content)));
+			block_content = malloc(sizeof(t_block));
+			if (!block_content)
+				return (NULL);
+			ft_init_block(block_content);
+			temp = temp->next;
+		}
 		else
 			temp = temp->next;
 	}
