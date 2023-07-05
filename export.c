@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kimitomat <kimitomat@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:13:27 by ktomat            #+#    #+#             */
-/*   Updated: 2023/06/30 12:00:17 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/05 19:54:56 by kimitomat        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,9 @@ int	is_equal_sign(char *str)
 void	add_new_var(char *flags, char **env_copy)
 {
 	int		i;
-	int		j;
 	char	*temp;
 
 	i = 0;
-	j = 0;
 	while (ft_strncmp(env_copy[i], "_=", 2))
 		i++;
 	temp = ft_strdup(env_copy[i]);
