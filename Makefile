@@ -1,4 +1,4 @@
-SRCS	= main.c utils.c parsing.c type.c block.c free_clean.c 
+SRCS	= main.c utils.c parsing.c block_build_utils.c block.c free_clean.c 
 
 OBJS 	= ${SRCS:.c=.o}
 

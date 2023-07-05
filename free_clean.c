@@ -6,14 +6,27 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 11:50:48 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/04 12:31:11 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/05 16:20:07 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 
-void	*ft_clean_type(void *content)
+void	ft_free_cc(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+}
+
+void	*ft_clean_inputs(void *content)
 {
 	t_type	*content_cast;
 
@@ -32,8 +45,8 @@ void	*ft_clean_block(void *content)
 	content_cast = (t_block *)content;
 	free(content_cast->cmd);
 	free(content_cast->arg);
-	free(content_cast->infile);
-	free(content_cast->outfile);
+	ft_free_cc(content_cast->infile);
+	ft_free_cc(content_cast->outfile);
 	free(content_cast);
 	return (NULL);
 }
