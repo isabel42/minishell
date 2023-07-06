@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:01:58 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/06 18:00:28 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/06 18:14:45 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,10 @@ int	ft_cp_line_core(char *prompt, int *i, char *b, char *res)
 	int		j;
 	int		open_quotes;
 	char	*quotes;
-	int		k;
 
 	j = 0;
 	open_quotes = 0;
-	k = ft_cp_line_long(prompt, *i, b);
-	while (j < k && prompt[*i] != '\0')
+	while (j < ft_cp_line_long(prompt, *i, b) && prompt[*i] != '\0')
 	{
 		if (ft_strrchr(b, prompt[*i]) && open_quotes == 0)
 		{
@@ -60,13 +58,11 @@ int	ft_cp_line_core(char *prompt, int *i, char *b, char *res)
 		}
 		else if (quotes == ft_strrchr(b, prompt[*i]) && open_quotes == 1)
 			open_quotes = 0;
+		else if (prompt[*i] == '$' && (open_quotes == 0 || (quotes[0] == '"' && open_quotes == 1)))
+			res = ft_dolar_char(i, prompt, &j, res);
 		else
 		{
-			if (prompt[*i] == '$' && (open_quotes == 0 || (quotes[0] == '"' && open_quotes == 1)))
-
-				res = ft_dolar_char(i, prompt, &j, res);
-			else
-				res[j] = prompt[*i];
+			res[j] = prompt[*i];
 			j++;
 		}
 		*i = *i + 1;

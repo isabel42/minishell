@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:26:33 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/06 18:00:28 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/06 18:14:45 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char * ft_dolar_char(int *i, char *prompt, int *j, char *res)
 	cp[z + 1] = '\0';
 	dolar = ft_envp(g_data.env_copy, cp);
 	ft_strlcpy(res + *j, dolar, ft_strlen(dolar) + 1);
-	*j = *j + (int)ft_strlen(dolar);
+	*j = *j + (int)ft_strlen(dolar) + 1;
 	*i = *i + z; 
 	free(cp);
 	return(res);
