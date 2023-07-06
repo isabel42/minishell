@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:44:18 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/05 13:11:57 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/06 11:23:12 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,28 +27,26 @@ int	count_list1(t_list **list)
 	*list = temp;
 	return (i);
 }
-//malloc de 1000, comme ca c'est plus simple pour ajouter ou enlever des elem dans la copy
-//surement que je vais devoir gerer la derniere ligne manuellement
-//_=/User/....
 
-char	**env_copy1(char **env)
+int	env_copy1(char **env)
 {
-	char	**env_copy;
 	int		i;
 
 	i = 0;
-	env_copy = ft_calloc(sizeof(char **), 1000);
-	if (!env_copy)
-		return (NULL);
+	g_data.env_copy = ft_calloc(sizeof(char **), 1000);
+	if (!g_data.env_copy)
+		return (-1);
 	while (env[i])
 	{
-		env_copy[i] = ft_strdup(env[i]); //est ce que j'inclus la ligne _=/User ou pas, sinon je l'affiche manuellement a la fin quand env est appele
+		if (env[i + 1] == NULL)
+			break ;
+		g_data.env_copy[i] = ft_strdup(env[i]);
 		i++;
 	}
-	return (env_copy);
+	return (0);
 }
 
-void	ft_env(char *cmd, char **flags, char **env_copy)
+void	ft_env(char *cmd, char **flags)
 {
 	int	i;
 
@@ -58,21 +56,20 @@ void	ft_env(char *cmd, char **flags, char **env_copy)
 		printf("env: %s: No such file or directory", flags[0]);
 	else
 	{
-		while (env_copy[i])
+		while (g_data.env_copy[i])
 		{
-			printf("%s\n", env_copy[i]);
+			printf("%s\n", g_data.env_copy[i]);
 			i++;
 		}
 	}
 }
 
-void	ft_pwd(char *cmd, char **flags, char **env_copy)
+void	ft_pwd(char *cmd, char **flags)
 {
 	char	cwd[4096];
 
 	(void)cmd;
 	(void)flags;
-	(void)env_copy;
 	if (getcwd(cwd, sizeof(cwd)) != NULL)
 		printf("%s\n", cwd);
 	else
@@ -80,10 +77,9 @@ void	ft_pwd(char *cmd, char **flags, char **env_copy)
 }	
 
 //checker comment je vais verifier avec la gestion d'erreure finale et print si le file n'existe pas
-void	ft_cd(char *cmd, char **flags, char **env_copy)
+void	ft_cd(char *cmd, char **flags)
 {
 	(void)cmd;
-	(void)env_copy;
 	if (!flags[0])
 		return ;
 	else
