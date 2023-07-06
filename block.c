@@ -3,63 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   block.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 17:23:20 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/06/30 11:04:40 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/05 16:27:06 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_init_content(char *txt, t_type *content)
+//permet de donner un type a chaque maillon de la liste chainee
+t_list	*ft_block_build(t_list **l)
 {
-	content->txt = txt;
-	content->cmd = 0;
-	content->infile = 0;
-	content->outfile = 0;
-	content->infile_d = 0;
-	content->outfile_d = 0;
-	content->pipe = 0;
-	content->c_g = 0;
-	content->c_d = 0;
-	content->dc_g = 0;
-	content->dc_d = 0;
-	content->arg = 0;
-}
-
-t_list	*ft_parsing(char *prompt, char *b)
-{
-	t_list	*inputs;
+	int		sign;
+	t_list	*temp;
 	t_type	*content;
-	char	*txt;
-	int		i;
+	t_list	*block;
+	t_block	*block_content;
 
-	i = 0;
-	inputs = NULL;
-	while (prompt[i] != '\0')
+	temp = *l;
+	block = NULL;
+	block_content = ft_init_block();
+	while (temp)
 	{
-		txt = ft_cp_line(prompt, &i, b);
-		content = malloc(sizeof(t_type));
-		if (!content)
-			return (NULL);
-		ft_init_content(txt, content);
-		ft_lstadd_back(&inputs, ft_lstnew(&(*content)));
+		ft_is_redir(temp);
+		sign = ft_treat_redir_after(&temp, block_content);
+		content = (t_type *)temp->content;
+		if (sign == 0 && content->pipe == 0)
+			ft_is_command(&temp, block_content);
+		if (content->pipe == 1)
+			ft_lstadd_back(&block, ft_lstnew(&(*block_content)));
+		if (content->pipe == 1)
+			block_content = ft_init_block();
+		if (sign > 0 || content->pipe == 1)
+			temp = temp->next;
 	}
-	return (inputs);
+	ft_lstadd_back(&block, ft_lstnew(&(*block_content)));
+	return (block);
 }
 
-ft_block(**t_list type)
+t_list	*ft_block(void)
 {
-	t_list *type_temp;
-	t_type *type_content;
-	t_list *block;
+	char	*prompt;
+	t_list	*inputs;
+	t_list	*block;
 
-	type_temp = *type;
-	type_content = (t_type *)temp->content;
-	while (type_content)
-	{
-		if (type_content->cg == 1)
-			
-	}
+	prompt = readline("minishell> ");
+	if (prompt == NULL)
+		exit(0);
+	add_history(prompt);
+	inputs = ft_parsing(prompt, "\'\"");
+	block = ft_block_build(&inputs);
+	ft_lstclear(&inputs, (void *) &ft_clean_inputs);
+	free(prompt);
+	return (block);
 }

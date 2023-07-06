@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/03 12:55:07 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/06 14:54:31 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,11 @@ t_data	g_data;
 typedef struct s_type
 {
 	char			*txt;
-	int				cmd;
-	int				infile;
-	int				outfile;
-	int				infile_d;
-	int				outfile_d;
 	int				pipe;
 	int				c_g;
 	int				c_d;
 	int				dc_g;
 	int				dc_d;
-	int				arg;
 }	t_type;
 
 typedef struct s_block
@@ -59,35 +53,49 @@ typedef struct s_block
 	char	**outfile;
 }	t_block;
 
-//type.c
-void	ft_find_type(t_list **list);
-char	*ft_find_comm_path(char *path, char *command);
-char	*ft_envp(char **envp, char *pwd);
+// block_utils.c
+char	**ft_nl_charchar(char **tab, char *txt);
+t_block	*ft_init_block(void);
+int		ft_is_redir(t_list *temp);
+void	ft_is_command(t_list **temp, t_block *b_c);
+int		ft_treat_redir_after(t_list **temp, t_block *b_c);
 
 // parsing.c
-int		ft_cp_line_long(char *prompt, int *i, char *b);
-char	*ft_cp_line(char *prompt, int *i, char *b);
 t_list	*ft_parsing(char *prompt, char *b);
-int		count_list(t_list **list);
 
-char	**ft_flags(char **envp, t_list **inputs);
+// block.c
+t_list	*ft_block_build(t_list **list);
+t_list	*ft_block(void);
+
+// free_clan.c
+void	*ft_clean_inputs(void *content);
+void	*ft_clean_block(void *content);
+
+// utils.c
+void	ft_exit_isa(char *s);
+
+// char	**ft_flags(char **envp, t_list **inputs);
 
 //builtin
-void	check_builtin(char *cmd, char **flags, char **env_copy);
-char	**env_copy1(char **env);
+void	check_builtin(char *cmd, char **flags);
+int		env_copy1(char **env);
 int		count_list(t_list **list);
-void	ft_env(char *cmd, char **flags, char **env_copy);
+void	ft_env(char *cmd, char **flags);
 void	ft_echo(char *cmd, char **flags);
 void	ft_exit(char *cmd, char **flags);
-void	ft_pwd(char *cmd, char **flags, char **env_copy);
-void	ft_cd(char *cmd, char **flags, char **env_copy);
-void	ft_export(char *cmd, char **flags, char **env_copy);
-char	**ft_unset(char *cmd, char **flags, char **env_copy);
+void	ft_pwd(char *cmd, char **flags);
+void	ft_cd(char **flags);
+void	ft_export(char *cmd, char **flags);
+void	ft_unset(char *cmd, char **flags);
 
 //signal
 int		rl_replace_line(const char *text, int i);
 void	init_termios(void);
 void	custom_handler(int signal);
 void	custom_handler1(int signal);
+char	*find_home(void);
+
+//TEST//
+char	*ft_getpath(char **envp, char *prog);
 
 #endif

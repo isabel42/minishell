@@ -1,4 +1,4 @@
-SRCS	= main.c utils.c parsing.c type.c signal.c builtin.c builtin_1.c unset.c export.c 
+SRCS	= main.c utils.c parsing.c block_build_utils.c block.c free_clean.c signal.c builtin.c builtin_1.c export.c unset.c 
 
 OBJS 	= ${SRCS:.c=.o}
 
@@ -10,7 +10,7 @@ CC		= gcc
 
 RM		= rm -f
 
-CFLAGS	= -Wextra -Wall -Werror -g3
+CFLAGS	= -Wextra -Wall -Werror
 
 INCLUDE = -I./libft/ -I.
 
