@@ -1,10 +1,5 @@
 2. Faire le gestionaire de code de sortie
-3. Quand la struct avec le env_copy sera fait, changer tout les env_copy dans check_builtins
 6. gerer le pipe vide : sytax error
-
-ATTENTION !!!
-- pour les builtin, il faudra surement faire une struct qui prends le env_copy, pour pouvoir le modifier partout, via l'adresse de la struct
-
 
 ----- func pour le teminal -----
 void	init_termios(void)
@@ -16,67 +11,4 @@ void	init_termios(void)
 	termios.c_lflag &= ~(ECHOCTL);
 	if ((tcsetattr(STDIN_FILENO, TCSANOW, &termios)) == -1)
 		exit(EXIT_FAILURE);
-}
-
-
-// les handler font des segfault avec tout les autres signaux, mais ctrl c marche bien
-void	custom_handler(int signal)
-{
-	(void)signal;
-	printf("\n");
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-}
-
-void	custom_handler1(int signal)
-{
-	(void)signal;
-	exit(0);
-}
-
-int	boucle(int argc, char **argv, char **envp)
-{
-	char	*prompt;
-	char	*command;
-	int		pid;
-	t_list	*inputs;
-	t_list	*temp;
-
-	(void) argc;
-	(void) argv;
-	(void) envp;
-	inputs = NULL;
-	signal(SIGINT, custom_handler);
-	signal(SIGQUIT, custom_handler1);
-	while (42)
-	{
-		pid = 0;
-		prompt = readline("minishell> ");
-		add_history(prompt);
-		inputs = ft_parsing(prompt, "\'\"");
-		ft_find_type(&inputs);
-		temp = inputs;
-		while (inputs)
-		{
-			printf("txt:%s:\n", inputs->txt);
-			inputs = inputs->next;
-		}
-		inputs = temp;
-		command = ft_find_comm_path(ft_envp(envp, "PATH="), inputs->txt);
-		pid = fork();
-		if (pid == 0)
-			execve(command, ft_flags(envp, &inputs), NULL);
-		waitpid(pid, NULL, 0);
-		free(prompt);
-		inputs = NULL;
-	}
-	return (0);
-}
-
-int	main (int argc, char **argv, char **envp)
-{
-	init_termios();
-	boucle(argc, argv, env_copy(envp));
-	return (0);
 }
