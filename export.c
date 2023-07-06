@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kimitomat <kimitomat@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:13:27 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/05 19:54:56 by kimitomat        ###   ########.fr       */
+/*   Updated: 2023/07/06 11:25:36 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,23 +47,17 @@ int	is_equal_sign(char *str)
 	return (0);
 }
 
-void	add_new_var(char *flags, char **env_copy)
+void	add_new_var(char *flags)
 {
 	int		i;
-	char	*temp;
 
 	i = 0;
-	while (ft_strncmp(env_copy[i], "_=", 2))
+	while (g_data.env_copy[i])
 		i++;
-	temp = ft_strdup(env_copy[i]);
-	free(env_copy[i]);
-	env_copy[i] = ft_strdup(flags);
-	i++;
-	env_copy[i] = ft_strdup(temp);
-	free(temp);
+	g_data.env_copy[i] = ft_strdup(flags);
 }
 
-void	ft_export(char *cmd, char **flags, char **env_copy)
+void	ft_export(char *cmd, char **flags)
 {
 	int	i;
 
@@ -71,9 +65,9 @@ void	ft_export(char *cmd, char **flags, char **env_copy)
 	i = 0;
 	if (!flags[0])
 	{
-		while (env_copy[i])
+		while (g_data.env_copy[i])
 		{
-			printf("declare -x %s\n", env_copy[i]);
+			printf("declare -x %s\n", g_data.env_copy[i]);
 			i++;
 		}
 	}
@@ -83,7 +77,7 @@ void	ft_export(char *cmd, char **flags, char **env_copy)
 		{
 			if (is_equal_sign(flags[i]) == 1)
 			{
-				add_new_var(flags[i], env_copy);
+				add_new_var(flags[i]);
 			}
 			i++;
 		}

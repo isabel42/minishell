@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/05 16:30:23 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/06 11:22:51 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,16 +77,16 @@ void	ft_exit_isa(char *s);
 // char	**ft_flags(char **envp, t_list **inputs);
 
 //builtin
-void	check_builtin(char *cmd, char **flags, char **env_copy);
-char	**env_copy1(char **env);
+void	check_builtin(char *cmd, char **flags);
+int		env_copy1(char **env);
 int		count_list(t_list **list);
-void	ft_env(char *cmd, char **flags, char **env_copy);
+void	ft_env(char *cmd, char **flags);
 void	ft_echo(char *cmd, char **flags);
 void	ft_exit(char *cmd, char **flags);
-void	ft_pwd(char *cmd, char **flags, char **env_copy);
-void	ft_cd(char *cmd, char **flags, char **env_copy);
-void	ft_export(char *cmd, char **flags, char **env_copy);
-char	**ft_unset(char *cmd, char **flags, char **env_copy);
+void	ft_pwd(char *cmd, char **flags);
+void	ft_cd(char *cmd, char **flags);
+void	ft_export(char *cmd, char **flags);
+void	ft_unset(char *cmd, char **flags);
 
 //signal
 int		rl_replace_line(const char *text, int i);

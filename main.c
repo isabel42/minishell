@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kimitomat <kimitomat@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/05 19:51:40 by kimitomat        ###   ########.fr       */
+/*   Updated: 2023/07/06 11:23:58 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	main (int argc, char **argv, char **env)
 	init_termios();
 	signal(SIGINT, custom_handler);
 	signal(SIGQUIT, custom_handler);
+	env_copy1(env);
 	while (42)
 	{
 		block = ft_block();
@@ -72,7 +73,7 @@ int	main (int argc, char **argv, char **env)
 		while (test)
 		{
 			block_content = (t_block *) test->content;
-			check_builtin(block_content->cmd, block_content->arg, env_copy1(env));
+			check_builtin(block_content->cmd, block_content->arg);
 			test = test->next;
 		}
 		ft_lstclear(&block, (void *) &ft_clean_block);
