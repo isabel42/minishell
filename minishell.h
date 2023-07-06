@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/05 16:30:23 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/06 10:32:56 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	*ft_clean_block(void *content);
 
 // utils.c
 void	ft_exit_isa(char *s);
+char	*ft_envp(char **envp, char *pwd);
 
 // char	**ft_flags(char **envp, t_list **inputs);
 
