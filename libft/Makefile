@@ -61,18 +61,15 @@ CFLAGS	= -Wextra -Wall -Werror
 .c.o:	
 			${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
-${NAME}:	${OBJS}
-				${AR} ${NAME} ${OBJS}
-				ranlib ${NAME}
 
-bonus:		${OBJS} ${OBJSB}
+${NAME}:		${OBJS} ${OBJSB}
 				${AR} ${NAME} ${OBJS} ${OBJSB}
 				ranlib ${NAME}
 
 all:		${NAME}
 
 clean:
-			${RM} ${OBJS}
+			${RM} ${OBJS} ${OBJSB}
 
 fclean: 	clean
 			${RM} ${NAME}

@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:01:58 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/06 16:50:05 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/06 18:00:28 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int	ft_cp_line_long(char *prompt, int i, char *b)
 		}
 		else if (quotes == ft_strrchr(b, prompt[i + j]) && open_quotes == 1)
 			open_quotes = 0;
-		else if (prompt[i] == '$' && (open_quotes == 0 || (quotes[0] == '"' && open_quotes == 1)))
-			k = k + ft_dolar_long(i, prompt, &j);
+		else if (prompt[i + j] == '$' && (open_quotes == 0 || (quotes[0] == '"' && open_quotes == 1)))
+			k = k + ft_dolar_long(i + j, prompt, &j);
 		else
 			k++;
 		j++;
@@ -63,10 +63,8 @@ int	ft_cp_line_core(char *prompt, int *i, char *b, char *res)
 		else
 		{
 			if (prompt[*i] == '$' && (open_quotes == 0 || (quotes[0] == '"' && open_quotes == 1)))
-			{
+
 				res = ft_dolar_char(i, prompt, &j, res);
-				// printf("resss: %s\n", res);
-			}
 			else
 				res[j] = prompt[*i];
 			j++;
