@@ -6,49 +6,31 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 13:16:16 by ktomat            #+#    #+#             */
-/*   Updated: 2023/06/30 12:00:02 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/06 11:43:51 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//ne pas oublier de changer toutes les foncitons pour travailler avec une struct
-//pour pouvoir faire des func en void et de pouvoir travailler avec l'adresse
-//de la struct
-
-/* Il faut que je regarde si je vais faire ce que j'ai ecris dans builtin1 ligne 31
-	le truc avec la ligne _=/User/.. car cette fonction l'imprime 4 fois .....*/
-
-char	**unset_var(char *flags, char **env_copy, int i)
+void	unset_var(int i)
 {
 	int		t;
-	char	*temp;
 
-	if (!ft_strncmp(env_copy[i], flags, ft_strlen(flags)))
+	free(g_data.env_copy[i]);
+	g_data.env_copy[i] = NULL;
+	t = i;
+	i++;
+	while (g_data.env_copy[i])
 	{
-		if (env_copy[i])
-			free(env_copy[i]);
-		t = i;
-		if (env_copy[++i])
-		{
-			while (env_copy[i])
-			{
-				temp = ft_strdup(env_copy[i]);
-				if (env_copy[i])
-					free(env_copy[i]);
-				env_copy[t] = ft_strdup(temp);
-				if (temp)
-					free(temp);
-				t++;
-				i++;
-			}
-		}
-		return (env_copy);
+		g_data.env_copy[t] = ft_strdup(g_data.env_copy[i]);
+		free(g_data.env_copy[i]);
+		g_data.env_copy[i] = NULL;
+		t++;
+		i++;
 	}
-	return (NULL);
 }
 
-char	**ft_unset(char *cmd, char **flags, char **env_copy)
+void	ft_unset(char *cmd, char **flags)
 {
 	int	i;
 	int	j;
@@ -58,16 +40,15 @@ char	**ft_unset(char *cmd, char **flags, char **env_copy)
 	while (flags[i])
 	{
 		j = 0;
-		while (env_copy[j])
+		while (g_data.env_copy[j])
 		{
-			if (!ft_strncmp(env_copy[j], flags[i], ft_strlen(flags[i])))
+			if (!ft_strncmp(g_data.env_copy[j], flags[i], ft_strlen(flags[i])))
 			{
-				env_copy = unset_var(flags[i], env_copy, j);
+				unset_var(j);
 				break ;
 			}
 			j++;
 		}
-	i++;
+		i++;
 	}
-	return (env_copy);
 }

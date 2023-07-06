@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 14:54:47 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/05 15:05:55 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/06 11:08:09 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,22 @@ char	*all_lower(char *str)
 	return (str);
 }
 
-void	check_builtin(char *cmd, char **flags, char **env_copy)
+void	check_builtin(char *cmd, char **flags)
 {
 	int		pid;
 
 	if (!ft_strncmp(all_lower(cmd), "echo", 4) && ft_strlen(cmd) == 4)
 		ft_echo(cmd, flags);
 	else if (!ft_strncmp(all_lower(cmd), "cd", 2) && ft_strlen(cmd) == 2)
-		ft_cd(cmd, flags, env_copy);
+		ft_cd(cmd, flags);
 	else if (!ft_strncmp(all_lower(cmd), "pwd", 3) && ft_strlen(cmd) == 3)
-		ft_pwd(cmd, flags, env_copy);
+		ft_pwd(cmd, flags);
 	else if (!ft_strncmp(cmd, "export", 6) && ft_strlen(cmd) == 6)
-		ft_export(cmd, flags, env_copy);
+		ft_export(cmd, flags);
 	else if (!ft_strncmp(cmd, "unset", 5) && ft_strlen(cmd) == 5)
-		ft_unset(cmd, flags, env_copy);
+		ft_unset(cmd, flags);
 	else if (!ft_strncmp(all_lower(cmd), "env", 3) && ft_strlen(cmd) == 3)
-		ft_env(cmd, flags, env_copy);
+		ft_env(cmd, flags);
 	else if (!ft_strncmp(cmd, "exit", 4) && ft_strlen(cmd) == 4)
 		ft_exit(cmd, flags);
 	else

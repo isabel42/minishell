@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   block_build_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: kimitomat <kimitomat@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 17:20:13 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/05 16:17:06 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/05 19:54:41 by kimitomat        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int	ft_treat_redir_after(t_list **temp, t_block *b_c)
 	{
 		*temp = (*temp)->next;
 		if (!(*temp))
-			ft_exit("Syntax error: Error text to be reviewd in file block_build_utils");
+			ft_exit_isa("Syntax error: Error text to be reviewd in file block_build_utils");
 		c_n = (t_type *)(*temp)->content;
 		res = 1;
 	}
