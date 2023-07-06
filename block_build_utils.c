@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   block_build_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kimitomat <kimitomat@student.42.fr>        +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 17:20:13 by itovar-n          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/07/06 10:32:56 by itovar-n         ###   ########.fr       */
-=======
-/*   Updated: 2023/07/05 19:54:41 by kimitomat        ###   ########.fr       */
->>>>>>> main
+/*   Updated: 2023/07/06 14:41:24 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +79,7 @@ int	ft_is_redir(t_list *temp)
 	return (1);
 }
 
-void	ft_is_command(t_list **temp, t_block *b_c, char **envp)
+void	ft_is_command(t_list **temp, t_block *b_c)
 {
 	t_type	*content;
 
@@ -102,7 +98,7 @@ void	ft_is_command(t_list **temp, t_block *b_c, char **envp)
 		else
 		{
 			if(b_c->arg[0] == NULL)
-				b_c->arg[0] = ft_envp(envp, "PWD=");
+				b_c->arg[0] = ft_envp(g_data.env_copy, "PWD=");
 			b_c->arg = ft_nl_charchar(b_c->arg, content->txt);
 		}
 		*temp = (*temp)->next;

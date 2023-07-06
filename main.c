@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/06 11:23:58 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/06 15:04:24 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,13 @@ int	main (int argc, char **argv, char **env)
 	t_list	*block;
 	t_list	*test;
 	t_block	*block_content;
+	int 	i = 0;
 
 	(void) argc;
 	(void) argv;
-	init_termios();
-	signal(SIGINT, custom_handler);
-	signal(SIGQUIT, custom_handler);
+	// init_termios();
+	// signal(SIGINT, custom_handler);
+	// signal(SIGQUIT, custom_handler);
 	env_copy1(env);
 	while (42)
 	{
@@ -73,8 +74,10 @@ int	main (int argc, char **argv, char **env)
 		while (test)
 		{
 			block_content = (t_block *) test->content;
-			check_builtin(block_content->cmd, block_content->arg);
+			printf("block %d \ncommand: %s\n\n",i, block_content->cmd);
+			// check_builtin(block_content->cmd, block_content->arg);
 			test = test->next;
+			i++;
 		}
 		ft_lstclear(&block, (void *) &ft_clean_block);
 		// command = ft_find_comm_path(ft_envp(envp, "PATH="), inputs->txt);

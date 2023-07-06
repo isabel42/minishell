@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/07/06 10:32:56 by itovar-n         ###   ########.fr       */
-=======
-/*   Updated: 2023/07/06 11:22:51 by ktomat           ###   ########.fr       */
->>>>>>> main
+/*   Updated: 2023/07/06 16:49:30 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +63,11 @@ int		ft_treat_redir_after(t_list **temp, t_block *b_c);
 // parsing.c
 t_list	*ft_parsing(char *prompt, char *b);
 
+//dolar.c
+int		ft_dolar_long(int i, char *prompt, int *j);
+char	*ft_dolar_char(int *i, char *prompt, int *j, char *res);
+
+
 // block.c
 t_list	*ft_block_build(t_list **list);
 t_list	*ft_block(void);
@@ -94,10 +95,9 @@ void	ft_export(char *cmd, char **flags);
 void	ft_unset(char *cmd, char **flags);
 
 //signal
-int		rl_replace_line(const char *text, int i);
-void	init_termios(void);
-void	custom_handler(int signal);
-void	custom_handler1(int signal);
+// int		rl_replace_line(const char *text, int i);
+// void	init_termios(void);
+// void	custom_handler(int signal);
 
 //TEST//
 char	*ft_getpath(char **envp, char *prog);
