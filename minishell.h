@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/06 11:22:51 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/06 14:54:31 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	ft_env(char *cmd, char **flags);
 void	ft_echo(char *cmd, char **flags);
 void	ft_exit(char *cmd, char **flags);
 void	ft_pwd(char *cmd, char **flags);
-void	ft_cd(char *cmd, char **flags);
+void	ft_cd(char **flags);
 void	ft_export(char *cmd, char **flags);
 void	ft_unset(char *cmd, char **flags);
 
@@ -93,6 +93,7 @@ int		rl_replace_line(const char *text, int i);
 void	init_termios(void);
 void	custom_handler(int signal);
 void	custom_handler1(int signal);
+char	*find_home(void);
 
 //TEST//
 char	*ft_getpath(char **envp, char *prog);

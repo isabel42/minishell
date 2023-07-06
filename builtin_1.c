@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:44:18 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/06 11:23:12 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/06 14:57:10 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,16 +74,32 @@ void	ft_pwd(char *cmd, char **flags)
 		printf("%s\n", cwd);
 	else
 		perror("salut");
-}	
+}
 
 //checker comment je vais verifier avec la gestion d'erreure finale et print si le file n'existe pas
-void	ft_cd(char *cmd, char **flags)
+void	ft_cd(char **flags)
 {
-	(void)cmd;
+	char	current_path[4096];
+	char	old_path[4096];
+	int		i;
+
+	i = 0;
+	getcwd(old_path, 4096);
 	if (!flags[0])
-		return ;
+		chdir(find_home());
 	else
-	{
 		chdir(flags[0]);
+	getcwd(current_path, 4096);
+	while (g_data.env_copy[i])
+	{
+		if (!ft_strncmp(g_data.env_copy[i], "OLDPWD=", 7))
+		{
+			free(g_data.env_copy[i]);
+			free(g_data.env_copy[i - 1]);
+			g_data.env_copy[i] = ft_strdup(ft_strjoin("OLDPWD=", old_path));
+			g_data.env_copy[i - 1] = ft_strdup
+				(ft_strjoin("PWD=", current_path));
+		}
+		i++;
 	}
 }

@@ -3,14 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:10:25 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/05 16:30:23 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/06 14:58:08 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	*find_home(void)
+{
+	int		i;
+	char	**result;
+
+	i = 0;
+	while (g_data.env_copy[i])
+	{
+		if (!ft_strncmp("HOME=", g_data.env_copy[i], 5))
+		{
+			result = ft_split(g_data.env_copy[i], '=');
+			if (result[1])
+				free(result[1]);
+			return (result[1]);
+		}
+		i++;
+	}
+	return (NULL);
+}
 
 int	count_list(t_list **list)
 {
