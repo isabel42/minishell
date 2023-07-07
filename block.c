@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   block.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 17:23:20 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/05 16:27:06 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/07 13:52:45 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ t_list	*ft_block(void)
 	prompt = readline("minishell> ");
 	if (prompt == NULL)
 		exit(0);
+	if (prompt[0] == '\r')
+		return (NULL);
 	add_history(prompt);
 	inputs = ft_parsing(prompt, "\'\"");
 	block = ft_block_build(&inputs);

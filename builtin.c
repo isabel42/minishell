@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 14:54:47 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/06 14:54:22 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/07 14:37:12 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*all_lower(char *str)
 
 void	check_builtin(char *cmd, char **flags)
 {
-	int		pid;
+	//int		pid;
 
 	if (!ft_strncmp(all_lower(cmd), "echo", 4) && ft_strlen(cmd) == 4)
 		ft_echo(cmd, flags);
@@ -41,16 +41,16 @@ void	check_builtin(char *cmd, char **flags)
 	else if (!ft_strncmp(cmd, "unset", 5) && ft_strlen(cmd) == 5)
 		ft_unset(cmd, flags);
 	else if (!ft_strncmp(all_lower(cmd), "env", 3) && ft_strlen(cmd) == 3)
-		ft_env(cmd, flags);
+		ft_env(flags);
 	else if (!ft_strncmp(cmd, "exit", 4) && ft_strlen(cmd) == 4)
 		ft_exit(cmd, flags);
-	else
-	{
-		pid = fork();
-		if (pid == 0)
-			execve("/bin/ls", NULL, NULL);
-		waitpid(pid, NULL, 0);
-	}
+	// else
+	// {
+	// 	pid = fork();
+	// 	if (pid == 0)
+	// 		execve("/bin/ls", NULL, NULL);
+	// 	waitpid(pid, NULL, 0);
+	// }
 }
 
 void	ft_echo(char *cmd, char **flags) //je penses qu'il faudra ajouter le $? pour afficher le dernier status

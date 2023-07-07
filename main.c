@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/07 13:56:56 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/07 15:02:07 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	main (int argc, char **argv, char **env)
 	t_list	*block;
 	t_list	*test;
 	t_block	*block_content;
+	int 	i = 0;
 
 	(void) argc;
 	(void) argv;
@@ -74,8 +75,10 @@ int	main (int argc, char **argv, char **env)
 		while (test)
 		{
 			block_content = (t_block *) test->content;
+			printf("block %d \ncommand: %s\n\n",i, block_content->cmd);
 			check_builtin(block_content->cmd, block_content->arg);
 			test = test->next;
+			i++;
 		}
 		ft_lstclear(&block, (void *) &ft_clean_block);
 		// command = ft_find_comm_path(ft_envp(envp, "PATH="), inputs->txt);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   block_build_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kimitomat <kimitomat@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 17:20:13 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/05 19:54:41 by kimitomat        ###   ########.fr       */
+/*   Updated: 2023/07/07 11:10:02 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,11 @@ void	ft_is_command(t_list **temp, t_block *b_c)
 			ft_strlcpy(b_c->cmd, content->txt, ft_strlen(content->txt) + 1);
 		}
 		else
+		{
+			if (b_c->arg[0] == NULL)
+				b_c->arg[0] = ft_envp(g_data.env_copy, "PWD=");
 			b_c->arg = ft_nl_charchar(b_c->arg, content->txt);
+		}
 		*temp = (*temp)->next;
 	}
 }

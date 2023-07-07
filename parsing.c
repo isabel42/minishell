@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:01:58 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/04 17:20:21 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/07 12:24:52 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_cp_line_long(char *prompt, int *i, char *b)
+int	ft_cp_line_long(char *prompt, int i, char *b)
 {
 	int		j;
 	int		open_quotes;
@@ -22,18 +22,18 @@ int	ft_cp_line_long(char *prompt, int *i, char *b)
 	j = 0;
 	k = 0;
 	open_quotes = 0;
-	while (prompt[*i + j] != '\0' && prompt[*i + j] == ' ' )
-		*i = *i + 1;
-	while (prompt[*i + j] != '\0'
-		&& (prompt[*i + j] != ' ' || open_quotes == 1))
+	while (prompt[i + j] != '\0'
+		&& (prompt[i + j] != ' ' || open_quotes == 1))
 	{
-		if (ft_strrchr(b, prompt[*i + j]) && open_quotes == 0)
+		if (ft_strrchr(b, prompt[i + j]) && open_quotes == 0)
 		{
 			open_quotes = 1;
-			quotes = ft_strrchr(b, prompt[*i + j]);
+			quotes = ft_strrchr(b, prompt[i + j]);
 		}
-		else if (quotes == ft_strrchr(b, prompt[*i + j]) && open_quotes == 1)
+		else if (quotes == ft_strrchr(b, prompt[i + j]) && open_quotes == 1)
 			open_quotes = 0;
+		else if (prompt[i + j] == '$' && (open_quotes == 0 || (quotes[0] == '"' && open_quotes == 1)))
+			k = k + ft_dolar_long(i + j, prompt, &j);
 		else
 			k++;
 		j++;
@@ -50,7 +50,7 @@ int	ft_cp_line_core(char *prompt, int *i, char *b, char *res)
 
 	j = 0;
 	open_quotes = 0;
-	k = ft_cp_line_long(prompt, i, b);
+	k = ft_cp_line_long(prompt, *i, b);
 	while (j < k && prompt[*i] != '\0')
 	{
 		if (ft_strrchr(b, prompt[*i]) && open_quotes == 0)
@@ -60,6 +60,8 @@ int	ft_cp_line_core(char *prompt, int *i, char *b, char *res)
 		}
 		else if (quotes == ft_strrchr(b, prompt[*i]) && open_quotes == 1)
 			open_quotes = 0;
+		else if (prompt[*i] == '$' && (open_quotes == 0 || (quotes[0] == '"' && open_quotes == 1)))
+			res = ft_dolar_char(i, prompt, &j, res);
 		else
 		{
 			res[j] = prompt[*i];
@@ -79,7 +81,9 @@ char	*ft_cp_line(char *prompt, int *i, char *b)
 
 	if (*i == (int)ft_strlen(prompt))
 		return (NULL);
-	k = ft_cp_line_long(prompt, i, b);
+	while (prompt[*i] != '\0' && prompt[*i] == ' ')
+		*i = *i + 1;
+	k = ft_cp_line_long(prompt, *i, b);
 	res = malloc(sizeof(char) * (k + 1));
 	if (!res)
 		return (NULL);
@@ -95,7 +99,7 @@ void	ft_init_type(char *txt, t_type *content)
 	int	i;
 
 	i = 0;
-	content->txt = malloc(sizeof(char) * (int) ft_strlen(txt) + 1);
+	content->txt = malloc(sizeof(char) * ((int) ft_strlen(txt) + 1));
 	if (!content->txt)
 		return ;
 	while (i < (int) ft_strlen(txt))
