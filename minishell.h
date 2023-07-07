@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/07 11:01:43 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/07 11:22:52 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,15 @@ void	init_termios(void);
 void	custom_handler(int signal);
 void	custom_handler1(int signal);
 char	*find_home(void);
-// int		rl_replace_line(const char *text, int i);
-// void	init_termios(void);
-// void	custom_handler(int signal);
+int		rl_replace_line(const char *text, int i);
+void	init_termios(void);
+void	custom_handler(int signal);
+
+void	ft_is_command(t_list **temp, t_block *b_c);
+int		ft_dolar_long(int i, char *prompt, int *j);
+char	*ft_dolar_char(int *i, char *prompt, int *j, char *res);
+char	*ft_envp(char **envp, char *pwd);
+
 
 //TEST//
 char	*ft_getpath(char **envp, char *prog);

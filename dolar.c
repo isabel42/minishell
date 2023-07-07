@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   dolar.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:26:33 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/06 18:14:45 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/07 11:10:55 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int ft_dolar_long(int i, char *prompt, int *j)
+int	ft_dolar_long(int i, char *prompt, int *j)
 {
 	int		z;
 	char	*cp;
@@ -33,7 +33,7 @@ int ft_dolar_long(int i, char *prompt, int *j)
 	return (z);
 }
 
-char * ft_dolar_char(int *i, char *prompt, int *j, char *res)
+char	*ft_dolar_char(int *i, char *prompt, int *j, char *res)
 {
 	int		z;
 	char	*cp;
@@ -55,5 +55,5 @@ char * ft_dolar_char(int *i, char *prompt, int *j, char *res)
 	*j = *j + (int)ft_strlen(dolar) + 1;
 	*i = *i + z; 
 	free(cp);
-	return(res);
+	return (res);
 }

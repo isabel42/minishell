@@ -2,13 +2,14 @@ SRCS	= main.c \
 			utils.c \
 			parsing.c \
 			block_build_utils.c \
-			block.c free_clean.c \
+			block.c \
+			free_clean.c \
 			builtin.c \
 			builtin_1.c \
 			export.c \
 			unset.c \
 			dolar.c \
-			# signal.c \
+			signal.c \
 
 OBJS 	= ${SRCS:.c=.o}
 

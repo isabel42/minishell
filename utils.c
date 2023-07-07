@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:10:25 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/07 11:01:01 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/07 11:23:26 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*find_home(void)
 	return (NULL);
 }
 
-int	count_list(t_list **list)
+char	*ft_envp(char **envp, char *pwd)
 {
 	int	i;
 
@@ -46,3 +46,8 @@ int	count_list(t_list **list)
 	return (NULL);
 }
 
+void	ft_exit_isa(char *s)
+{
+	printf("%s\n", s);
+	exit(0);
+}

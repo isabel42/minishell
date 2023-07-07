@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/06 15:04:24 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/07 11:12:15 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ int	main (int argc, char **argv, char **env)
 
 	(void) argc;
 	(void) argv;
-	// init_termios();
-	// signal(SIGINT, custom_handler);
-	// signal(SIGQUIT, custom_handler);
+	init_termios();
+	signal(SIGINT, custom_handler);
+	signal(SIGQUIT, custom_handler);
 	env_copy1(env);
 	while (42)
 	{
@@ -75,7 +75,7 @@ int	main (int argc, char **argv, char **env)
 		{
 			block_content = (t_block *) test->content;
 			printf("block %d \ncommand: %s\n\n",i, block_content->cmd);
-			// check_builtin(block_content->cmd, block_content->arg);
+			check_builtin(block_content->cmd, block_content->arg);
 			test = test->next;
 			i++;
 		}
