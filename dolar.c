@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:26:33 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/06 18:14:45 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/07 15:00:09 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,10 @@ int ft_dolar_long(int i, char *prompt, int *j)
 	ft_strlcpy(cp, prompt + i, z + 1);
 	cp[z] = '=';
 	cp[z + 1] = '\0';
-	*j = *j + z; 
-	z = (int) ft_strlen(ft_envp(g_data.env_copy, cp));
+	*j = *j + z;
+	z = 0; 
+	if	(ft_envp(g_data.env_copy, cp))
+		z = (int) ft_strlen(ft_envp(g_data.env_copy, cp));
 	free(cp);
 	return (z);
 }
@@ -43,7 +45,6 @@ char * ft_dolar_char(int *i, char *prompt, int *j, char *res)
 	*i = *i + 1;
 	while (prompt[*i + z] != '\0' && prompt[*i + z] != '"' && prompt[*i + z] != ' ')
 		z++;
-	printf("z: %d\n",z);
 	cp = malloc(sizeof(char) * (z + 2));
 	if (!cp)
 		return (NULL);
@@ -51,9 +52,15 @@ char * ft_dolar_char(int *i, char *prompt, int *j, char *res)
 	cp[z] = '=';
 	cp[z + 1] = '\0';
 	dolar = ft_envp(g_data.env_copy, cp);
+	if (dolar == NULL)
+	{
+		*i = *i + z - 1; 
+		free(cp);
+		return (res);
+	}
 	ft_strlcpy(res + *j, dolar, ft_strlen(dolar) + 1);
-	*j = *j + (int)ft_strlen(dolar) + 1;
-	*i = *i + z; 
+	*j = *j + (int)ft_strlen(dolar);
+	*i = *i + z - 1; 
 	free(cp);
 	return(res);
 }

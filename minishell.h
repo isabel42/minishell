@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/06 18:14:45 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/07 15:03:07 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ t_list	*ft_block(void);
 // free_clan.c
 void	*ft_clean_inputs(void *content);
 void	*ft_clean_block(void *content);
+void	ft_free_cc(char **tab);
 
 // utils.c
 void	ft_exit_isa(char *s);

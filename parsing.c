@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:01:58 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/06 18:14:45 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/07 14:48:15 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,12 @@ int	ft_cp_line_core(char *prompt, int *i, char *b, char *res)
 	int		j;
 	int		open_quotes;
 	char	*quotes;
+	int		k;
 
 	j = 0;
 	open_quotes = 0;
-	while (j < ft_cp_line_long(prompt, *i, b) && prompt[*i] != '\0')
+	k = ft_cp_line_long(prompt, *i, b);
+	while (j < k && prompt[*i] != '\0')
 	{
 		if (ft_strrchr(b, prompt[*i]) && open_quotes == 0)
 		{
@@ -97,6 +99,7 @@ void	ft_init_type(char *txt, t_type *content)
 	int	i;
 
 	i = 0;
+		printf("TXT: %s\n", txt);
 	content->txt = malloc(sizeof(char) * ((int) ft_strlen(txt) + 1));
 	if (!content->txt)
 		return ;
