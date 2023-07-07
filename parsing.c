@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:01:58 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/07 15:07:51 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/07 15:25:42 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ void	ft_init_type(char *txt, t_type *content)
 	int	i;
 
 	i = 0;
-		printf("TXT: %s\n", txt);
 	content->txt = malloc(sizeof(char) * ((int) ft_strlen(txt) + 1));
 	if (!content->txt)
 		return ;

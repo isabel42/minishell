@@ -6,11 +6,24 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:10:25 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/07 11:23:26 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/07 15:27:19 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	find_index_envp(char **envp)
+{
+	int		i;
+
+	i = -1;
+	while (envp[++i])
+	{
+		if (ft_strncmp("PATH=", envp[i], 5) == 0)
+			break ;
+	}
+	return (i);
+}
 
 char	*find_home(void)
 {
@@ -32,6 +45,35 @@ char	*find_home(void)
 	return (NULL);
 }
 
+char	*ft_getpath(char **envp, char *prog)
+{
+	char	**env;
+	char	*path;
+	char	*new_path;
+	char	*temp;
+	int		i;
+
+	path = NULL;
+	i = find_index_envp(envp);
+	env = ft_split(envp[i] + 5, ':');
+	i = -1;
+	while (env[++i])
+	{
+		temp = ft_strjoin(env[i], "/");
+		new_path = ft_strjoin(temp, prog);
+		free(temp);
+		if (access(new_path, X_OK | F_OK) == 0)
+		{
+			path = new_path;
+			break ;
+		}
+		else
+			free(new_path);
+	}
+	return (path);
+}
+
+// Pour trouver la variable dans l'env
 char	*ft_envp(char **envp, char *pwd)
 {
 	int	i;

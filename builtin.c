@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 14:54:47 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/07 14:37:12 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/07 15:16:15 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ char	*all_lower(char *str)
 
 void	check_builtin(char *cmd, char **flags)
 {
-	//int		pid;
-
+	if (cmd == NULL)
+		return ;
 	if (!ft_strncmp(all_lower(cmd), "echo", 4) && ft_strlen(cmd) == 4)
 		ft_echo(cmd, flags);
 	else if (!ft_strncmp(all_lower(cmd), "cd", 2) && ft_strlen(cmd) == 2)
@@ -44,13 +44,6 @@ void	check_builtin(char *cmd, char **flags)
 		ft_env(flags);
 	else if (!ft_strncmp(cmd, "exit", 4) && ft_strlen(cmd) == 4)
 		ft_exit(cmd, flags);
-	// else
-	// {
-	// 	pid = fork();
-	// 	if (pid == 0)
-	// 		execve("/bin/ls", NULL, NULL);
-	// 	waitpid(pid, NULL, 0);
-	// }
 }
 
 void	ft_echo(char *cmd, char **flags) //je penses qu'il faudra ajouter le $? pour afficher le dernier status

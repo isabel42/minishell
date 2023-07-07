@@ -6,54 +6,12 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/07 15:08:40 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/07 15:27:14 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "minishell.h"
-
-
-int	find_index_envp(char **envp)
-{
-	int		i;
-
-	i = -1;
-	while (envp[++i])
-	{
-		if (ft_strncmp("PATH=", envp[i], 5) == 0)
-			break ;
-	}
-	return (i);
-}
-
-char	*ft_getpath(char **envp, char *prog)
-{
-	char	**env;
-	char	*path;
-	char	*new_path;
-	char	*temp;
-	int		i;
-
-	path = NULL;
-	i = find_index_envp(envp);
-	env = ft_split(envp[i] + 5, ':');
-	i = -1;
-	while (env[++i])
-	{
-		temp = ft_strjoin(env[i], "/");
-		new_path = ft_strjoin(temp, prog);
-		free(temp);
-		if (access(new_path, X_OK | F_OK) == 0)
-		{
-			path = new_path;
-			break ;
-		}
-		else
-			free(new_path);
-	}
-	return (path);
-}
 
 int	main (int argc, char **argv, char **env)
 {
@@ -62,8 +20,12 @@ int	main (int argc, char **argv, char **env)
 	t_block	*block_content;
 	int 	i = 0;
 
-	(void) argc;
 	(void) argv;
+	if (argc != 1)
+	{
+		printf("Minishell don't take any argument\n");
+		exit(1);
+	}
 	init_termios();
 	signal(SIGINT, custom_handler);
 	signal(SIGQUIT, custom_handler);
@@ -77,7 +39,7 @@ int	main (int argc, char **argv, char **env)
 			block_content = (t_block *) test->content;
 			printf("block %d \ncommand: %s\n",i, block_content->cmd);
 			printf("ags: %s\n\n", block_content->arg[0]);
-			// check_builtin(block_content->cmd, block_content->arg);
+			check_builtin(block_content->cmd, block_content->arg);
 			test = test->next;
 			i++;
 		}
