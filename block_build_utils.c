@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 17:20:13 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/07 15:02:36 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/07 15:09:50 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,28 @@
 char	**ft_nl_charchar(char **tab, char *txt)
 {
 	char	**sol;
-	int		i;
 	int		j;
 
-	i = 0;
 	j = 0;
-	while (tab[i] != NULL)
-		i++;
-	sol = malloc(sizeof(char *) * (i + 2));
+	while (tab[j] != NULL)
+		j++;
+	sol = malloc(sizeof(char *) * (j + 2));
 	if (!sol)
 		return (NULL);
-	while (j < i)
+	sol[j] = malloc (sizeof(char) * (ft_strlen(txt) + 1));
+	if (!sol[j])
+		return (0);
+	ft_strlcpy(sol[j], txt, ft_strlen(txt) + 1);
+	sol[j + 1] = NULL;
+	j--;
+	while (j >= 0)
 	{
 		sol[j] = malloc (sizeof(char) * (ft_strlen(tab[j]) + 1));
 		if (!sol[j])
 			return (0);
 		ft_strlcpy(sol[j], tab[j], ft_strlen(tab[j]) + 1);
-		j++;
+		j--;
 	}
-	sol[j] = malloc (sizeof(char) * (ft_strlen(txt) + 1));
-	if (!sol[j])
-		return (0);
-	ft_strlcpy(sol[j], txt, ft_strlen(txt) + 1);
-	sol[i + 1] = NULL;
 	ft_free_cc(tab);
 	return (sol);
 }
@@ -119,7 +118,7 @@ int	ft_treat_redir_after(t_list **temp, t_block *b_c)
 	{
 		*temp = (*temp)->next;
 		if (!(*temp))
-			ft_exit_isa("Syntax error: Error text to be reviewd in file block_build_utils");
+			ft_exit_isa("Syntax error: Error text reviewd file block_build_utils");
 		c_n = (t_type *)(*temp)->content;
 		res = 1;
 	}
