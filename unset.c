@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 13:16:16 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/07 12:29:07 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/07 14:35:27 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_unset(char *cmd, char **flags)
 	int	j;
 
 	(void)cmd;
-	i = 1;
+	i = 0;
 	while (flags[i])
 	{
 		j = 0;

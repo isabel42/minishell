@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:44:18 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/07 13:39:08 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/07 14:37:34 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,8 @@ void	ft_env(char **flags)
 	int	i;
 
 	i = 0;
-	printf("test1\n");
-	if (flags[1])
-		printf("env: %s: No such file or directory", flags[1]);
+	if (flags[0])
+		printf("env: %s: No such file or directory", flags[0]);
 	else
 	{
 		while (g_data.env_copy[i])
@@ -62,7 +61,6 @@ void	ft_env(char **flags)
 			i++;
 		}
 	}
-	printf("test2\n");
 }
 
 void	ft_pwd(char *cmd, char **flags)
@@ -86,10 +84,10 @@ void	ft_cd(char **flags)
 
 	i = 0;
 	getcwd(old_path, 4096);
-	if (!flags[1])
+	if (!flags[0])
 		chdir(find_home());
 	else
-		chdir(flags[1]);
+		chdir(flags[0]);
 	getcwd(current_path, 4096);
 	while (g_data.env_copy[i])
 	{

@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 14:54:47 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/07 13:39:35 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/07 14:37:12 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,11 @@ void	ft_echo(char *cmd, char **flags) //je penses qu'il faudra ajouter le $? pou
 	int	i;
 
 	(void)cmd;
-	if (!flags[1])
+	if (!flags[0])
 		printf("\n");
-	else if (flags[1][0] == '-' && flags[1][1] == 'n' && flags[1][2] == '\0')
+	else if (flags[0][0] == '-' && flags[0][1] == 'n' && flags[0][2] == '\0')
 	{
-		i = 2;
+		i = 1;
 		while (flags[i])
 		{
 			printf("%s", flags[i]);
@@ -72,7 +72,7 @@ void	ft_echo(char *cmd, char **flags) //je penses qu'il faudra ajouter le $? pou
 	}
 	else
 	{
-		i = 1;
+		i = 0;
 		while (flags[i])
 		{
 			printf("%s", flags[i]);
@@ -100,17 +100,17 @@ void	ft_exit(char *cmd, char **flags)
 {
 	(void)flags;
 	(void)cmd;
-	if (flags[2])
+	if (flags[1])
 		printf("exit\nminishell: exit: too many arguments\n");
-	else if (flags[1])
+	else if (flags[0])
 	{
-		if (is_digit1(flags[1]) == -1)
+		if (is_digit1(flags[0]) == -1)
 		{
 			printf("exit\nminishell: exit:");
-			printf(" %s: numeric argument required\n", flags[1]);
+			printf(" %s: numeric argument required\n", flags[0]);
 			exit(255);
 		}
-		exit(ft_atoi(flags[1]));
+		exit(ft_atoi(flags[0]));
 	}
 	else
 		exit(0);

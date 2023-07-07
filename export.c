@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:13:27 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/07 12:30:22 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/07 14:36:18 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void	ft_export(char *cmd, char **flags)
 	int	i;
 
 	(void)cmd;
-	i = 1;
-	if (!flags[1])
+	i = 0;
+	if (!flags[0])
 	{
 		while (g_data.env_copy[i])
 		{
@@ -71,7 +71,7 @@ void	ft_export(char *cmd, char **flags)
 			i++;
 		}
 	}
-	else if (flags[1])
+	else if (flags[0])
 	{
 		while (flags[i])
 		{
