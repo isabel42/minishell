@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:10:25 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/06 14:58:08 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/07 11:01:01 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,15 @@ char	*find_home(void)
 
 int	count_list(t_list **list)
 {
-	t_list	*temp;
-	int		i;
+	int	i;
 
 	i = 0;
-	temp = *list;
-	while (*list)
+	while (envp[i])
 	{
+		if (ft_strncmp(envp[i], pwd, ft_strlen(pwd)) == 0)
+			return (envp[i] + ft_strlen(pwd));
 		i++;
-		*list = (*list)->next;
 	}
-	*list = temp;
-	return (i);
-}
-
-void	ft_exit_isa(char *s)
-{
-	printf("%s\n", s);
-	exit(0);
+	return (NULL);
 }
 
