@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/07 11:22:52 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/07 13:39:15 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ char	*ft_envp(char **envp, char *pwd);
 void	check_builtin(char *cmd, char **flags);
 int		env_copy1(char **env);
 int		count_list(t_list **list);
-void	ft_env(char *cmd, char **flags);
+void	ft_env(char **flags);
 void	ft_echo(char *cmd, char **flags);
 void	ft_exit(char *cmd, char **flags);
 void	ft_pwd(char *cmd, char **flags);

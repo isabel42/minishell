@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:01:58 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/06 18:14:45 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/07 12:24:52 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,12 @@ int	ft_cp_line_core(char *prompt, int *i, char *b, char *res)
 	int		j;
 	int		open_quotes;
 	char	*quotes;
+	int		k;
 
 	j = 0;
 	open_quotes = 0;
-	while (j < ft_cp_line_long(prompt, *i, b) && prompt[*i] != '\0')
+	k = ft_cp_line_long(prompt, *i, b);
+	while (j < k && prompt[*i] != '\0')
 	{
 		if (ft_strrchr(b, prompt[*i]) && open_quotes == 0)
 		{
