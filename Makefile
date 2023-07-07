@@ -9,7 +9,7 @@ SRCS	= main.c \
 			export.c \
 			unset.c \
 			dolar.c \
-			signal.c \
+			# signal.c \
 
 OBJS 	= ${SRCS:.c=.o}
 

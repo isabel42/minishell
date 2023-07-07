@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:10:25 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/07 15:27:19 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/07 18:16:55 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,33 @@ void	ft_exit_isa(char *s)
 {
 	printf("%s\n", s);
 	exit(0);
+}
+
+char	**ft_nl_charchar(char **tab, char *txt)
+{
+	char	**sol;
+	int		j;
+
+	j = 0;
+	while (tab[j] != NULL)
+		j++;
+	sol = malloc(sizeof(char *) * (j + 2));
+	if (!sol)
+		return (NULL);
+	sol[j] = malloc (sizeof(char) * (ft_strlen(txt) + 1));
+	if (!sol[j])
+		return (0);
+	ft_strlcpy(sol[j], txt, ft_strlen(txt) + 1);
+	sol[j + 1] = NULL;
+	j--;
+	while (j >= 0)
+	{
+		sol[j] = malloc (sizeof(char) * (ft_strlen(tab[j]) + 1));
+		if (!sol[j])
+			return (0);
+		ft_strlcpy(sol[j], tab[j], ft_strlen(tab[j]) + 1);
+		j--;
+	}
+	ft_free_cc(tab);
+	return (sol);
 }
