@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/07 16:07:58 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/10 14:27:00 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int	main (int argc, char **argv, char **env)
 		printf("Minishell don't take any argument\n");
 		exit(1);
 	}
-	// init_termios();
-	// signal(SIGINT, custom_handler);
-	// signal(SIGQUIT, custom_handler);
+	init_termios();
+	signal(SIGINT, custom_handler);
+	signal(SIGQUIT, custom_handler);
 	env_copy1(env);
 	while (42)
 	{
@@ -39,7 +39,11 @@ int	main (int argc, char **argv, char **env)
 			block_content = (t_block *) test->content;
 			printf("block %d \ncommand: %s\n",i, block_content->cmd);
 			printf("ags: %s\n\n", block_content->arg[0]);
-			check_builtin(block_content->cmd, block_content->arg);
+			if (block_content->infile[0])
+				printf("infile: %s\n\n", block_content->infile[0]);
+			//check_builtin(block_content->cmd, block_content->arg);
+			if (block_content->infile[0][0] == '2')
+				ft_heredoc(block_content);
 			test = test->next;
 			i++;
 		}

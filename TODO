@@ -2,6 +2,7 @@
 2. gerer le pipe vide : sytax error
 3. Checker les signaux, et si la facon que j ai fait est bonne
 4. gerer le enter dans l historique
+5. Mettre un message d erreur si le env est NULL
 
 ----- func pour le teminal -----
 void	init_termios(void)
