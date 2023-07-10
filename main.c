@@ -6,7 +6,7 @@
 /*   By: kimitomat <kimitomat@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/10 17:34:54 by kimitomat        ###   ########.fr       */
+/*   Updated: 2023/07/10 17:48:22 by kimitomat        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ int	main (int argc, char **argv, char **env)
 	int 	i = 0;
 
 	(void) argv;
+	if (env == NULL)
+	{
+		printf("Error : env is NULL\n");
+		exit(-1);
+	}
 	if (argc != 1)
 	{
 		printf("Minishell don't take any argument\n");
