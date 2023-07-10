@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/07 15:37:49 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/10 10:49:03 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int	main (int argc, char **argv, char **env)
 		printf("Minishell don't take any argument\n");
 		exit(1);
 	}
-	init_termios();
-	signal(SIGINT, custom_handler);
-	signal(SIGQUIT, custom_handler);
+	// init_termios();
+	// signal(SIGINT, custom_handler);
+	// signal(SIGQUIT, custom_handler);
 	env_copy1(env);
 	while (42)
 	{

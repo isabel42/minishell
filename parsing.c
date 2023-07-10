@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:01:58 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/07 15:25:42 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/07 17:49:04 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int	ft_cp_line_long(char *prompt, int i, char *b)
 	int		k;
 
 	j = 0;
-	k = 0;
+	k = 1;
 	open_quotes = 0;
 	while (prompt[i + j] != '\0'
-		&& (prompt[i + j] != ' ' || open_quotes == 1))
+		&& ((prompt[i + j] != ' ' && prompt[i + j] != '|') || open_quotes == 1))
 	{
 		if (ft_strrchr(b, prompt[i + j]) && open_quotes == 0)
 		{
@@ -38,7 +38,9 @@ int	ft_cp_line_long(char *prompt, int i, char *b)
 			k++;
 		j++;
 	}
-	return (k + 1);
+	if (prompt[i + j] == '|' && k > 1)
+		k--;
+	return (k);
 }
 
 int	ft_cp_line_core(char *prompt, int *i, char *b, char *res)
@@ -122,17 +124,20 @@ t_list	*ft_parsing(char *prompt, char *b)
 	t_type	*content;
 	char	*txt;
 	int		i;
+	int		count = 0;
 
 	i = 0;
 	inputs = NULL;
 	while (prompt[i] != '\0')
 	{
 		txt = ft_cp_line(prompt, &i, b);
+		printf("Txt: %s\n", txt);
 		content = malloc(sizeof(t_type));
 		if (!content)
 			return (NULL);
 		ft_init_type(txt, content);
 		ft_lstadd_back(&inputs, ft_lstnew(&(*content)));
+		count ++;
 	}
 	return (inputs);
 }

@@ -3,42 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   block_build_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 17:20:13 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/07 15:11:36 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/07 18:17:37 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**ft_nl_charchar(char **tab, char *txt)
+int ft_inout(t_list **temp, t_block *b_c)
 {
-	char	**sol;
-	int		j;
+	t_type	*c;
 
-	j = 0;
-	while (tab[j] != NULL)
-		j++;
-	sol = malloc(sizeof(char *) * (j + 2));
-	if (!sol)
-		return (NULL);
-	sol[j] = malloc (sizeof(char) * (ft_strlen(txt) + 1));
-	if (!sol[j])
-		return (0);
-	ft_strlcpy(sol[j], txt, ft_strlen(txt) + 1);
-	sol[j + 1] = NULL;
-	j--;
-	while (j >= 0)
+	c = (t_type *)(*temp)->content;
+	if (c->txt[0] == '>')
 	{
-		sol[j] = malloc (sizeof(char) * (ft_strlen(tab[j]) + 1));
-		if (!sol[j])
-			return (0);
-		ft_strlcpy(sol[j], tab[j], ft_strlen(tab[j]) + 1);
-		j--;
+		if (c->txt[1] == '>')
+			b_c->outfile = ft_nl_charchar(b_c->outfile, ft_strjoin("2", c->txt));
+		else
+			b_c->outfile = ft_nl_charchar(b_c->outfile, ft_strjoin("1", c->txt));
+		*temp = (*temp)->next;
+		return (1);
 	}
-	ft_free_cc(tab);
-	return (sol);
+	else if (c->txt[0] == '<')
+	{
+		if (c->txt[1] == '<')
+			b_c->infile = ft_nl_charchar(b_c->infile, ft_strjoin("2", c->txt));
+		else
+			b_c->infile = ft_nl_charchar(b_c->infile, ft_strjoin("1", c->txt));
+		*temp = (*temp)->next;
+		return (1);
+	}
+	return (0);
 }
 
 t_block	*ft_init_block(void)
@@ -93,6 +90,8 @@ void	ft_is_command(t_list **temp, t_block *b_c)
 	while (*temp && ft_is_redir(*temp) == 0)
 	{
 		content = (t_type *)(*temp)->content;
+		if (ft_inout(temp, b_c) == 1)
+			continue;
 		if (b_c->cmd == NULL)
 		{
 			b_c->cmd = malloc(sizeof(char) * ft_strlen(content->txt));

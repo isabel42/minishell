@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/07 15:08:33 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/07 18:16:55 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_block
 }	t_block;
 
 // block_utils.c
-char	**ft_nl_charchar(char **tab, char *txt);
+int 	ft_inout(t_list **temp, t_block *b_c);
 t_block	*ft_init_block(void);
 int		ft_is_redir(t_list *temp);
 void	ft_is_command(t_list **temp, t_block *b_c);
@@ -80,6 +80,7 @@ void	ft_free_cc(char **tab);
 // utils.c
 void	ft_exit_isa(char *s);
 char	*ft_envp(char **envp, char *pwd);
+char	**ft_nl_charchar(char **tab, char *txt);
 
 // char	**ft_flags(char **envp, t_list **inputs);
 
@@ -101,14 +102,10 @@ void	init_termios(void);
 void	custom_handler(int signal);
 void	custom_handler1(int signal);
 char	*find_home(void);
-int		rl_replace_line(const char *text, int i);
+// int		rl_replace_line(const char *text, int i);
 void	init_termios(void);
 void	custom_handler(int signal);
 
-void	ft_is_command(t_list **temp, t_block *b_c);
-int		ft_dolar_long(int i, char *prompt, int *j);
-char	*ft_dolar_char(int *i, char *prompt, int *j, char *res);
-char	*ft_envp(char **envp, char *pwd);
 
 
 //TEST//
