@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kimitomat <kimitomat@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/10 13:06:15 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/10 21:12:34 by kimitomat        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -112,5 +113,23 @@ void	ft_heredoc(t_block *block);
 
 //TEST//
 char	*ft_getpath(char **envp, char *prog);
+
+
+//pipex
+char	*ft_envp(char **envp, char *pwd);
+char	*ft_find_pwd(char *pwd, char *infile);
+char	*ft_find_path(char *path, char *command, char *infile);
+
+void	ft_free_cc(char **split);
+void	ft_free_ii(int **split, int i);
+void	ft_free_param(char **param);
+void	ft_free_cc_c(char **cc, char *c);
+
+int		**ft_pipe(int lst_size);
+void	ft_closepipe(int **p1, int lst_size);
+void	ft_waitpid(int *pid);
+void	ft_fork(char **param, int **p1, char **flags, int i);
+
+char	**ft_param(int lst_size, t_block *b_c);
 
 #endif
