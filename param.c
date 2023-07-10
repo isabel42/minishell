@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 18:29:21 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/10 18:29:22 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/10 21:32:50 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	**ft_param(int lst_size, t_block *b_c)
 	char	*pathinfile;
 	char	*pathoutfile;
 
-	param = malloc(sizeof(param) * 5);
+	param = malloc(sizeof(param) * 4);
 	if (!param)
 		exit(0);
 	pathinfile = NULL;
@@ -31,7 +31,6 @@ char	**ft_param(int lst_size, t_block *b_c)
 	param[0] = ft_find_path(ft_envp(g_data.env_copy, "PATH="), b_c->cmd, pathinfile);
 	param[1] = pathinfile;
 	param[2] = pathoutfile;
-	param[3] = NULL;
-	param[4] = ft_itoa(lst_size);
+	param[3] = ft_itoa(lst_size);
 	return (param);
 }
