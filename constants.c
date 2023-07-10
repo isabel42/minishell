@@ -6,26 +6,12 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 13:19:45 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/10 18:29:36 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/10 21:38:18 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-// char	*ft_envp(char **envp, char *pwd)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (envp[i])
-// 	{
-// 		if (ft_strncmp(envp[i], pwd, ft_strlen(pwd)) == 0)
-// 			return (envp[i] + ft_strlen(pwd));
-// 		i++;
-// 	}
-// 	return (NULL);
-// }
 
 char	*ft_find_pwd(char *pwd, char *infile)
 {

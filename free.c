@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 13:45:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/10 14:42:58 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/10 21:33:32 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_free_param(char **param)
 	free(param[0]);
 	free(param[1]);
 	free(param[2]);
-	free(param[4]);
+	free(param[3]);
 	free(param);
 }
 

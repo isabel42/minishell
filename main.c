@@ -6,9 +6,10 @@
 /*   By: kimitomat <kimitomat@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/10 21:12:44 by kimitomat        ###   ########.fr       */
+/*   Updated: 2023/07/10 23:49:36 by kimitomat        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 
 #include "minishell.h"
@@ -100,10 +101,10 @@ int	main (int argc, char **argv, char **env)
 			if (pid[i] == 0)
 				ft_fork(param, p1, flags, i);
 			ft_free_loop(param, flags);
-			ft_lstclear(&block, (void *) &ft_clean_block);
 			test = test->next;
 			i++;
 		}
+		ft_lstclear(&block, (void *) &ft_clean_block);
 		ft_closepipe(p1, lst_size);
 		ft_waitpid(pid);
 	}
