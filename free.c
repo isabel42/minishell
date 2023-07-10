@@ -1,32 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/25 16:38:54 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/10 12:11:24 by itovar-n         ###   ########.fr       */
+/*   Created: 2023/03/15 13:45:03 by itovar-n          #+#    #+#             */
+/*   Updated: 2023/07/10 14:42:58 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+
+void	ft_free_ii(int **split, int j)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	if (dstsize > 0)
+	while (i < j)
 	{
-		while (i < (dstsize -1) && src[i] != '\0')
-		{
-			dst[i] = src [i];
-			i++;
-		}
-		dst[i] = '\0';
-	}
-	while (src[i] != '\0')
+		free(split[i]);
 		i++;
-	return (i);
+	}
+	free(split);
+}
+
+void	ft_free_param(char **param)
+{
+	free(param[0]);
+	free(param[1]);
+	free(param[2]);
+	free(param[4]);
+	free(param);
+}
+
+void	ft_free_cc_c(char **cc, char *c)
+{
+	ft_free_cc(cc);
+	free(c);
 }

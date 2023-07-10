@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:01:58 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/07 17:49:04 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/10 11:21:35 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,6 @@ t_list	*ft_parsing(char *prompt, char *b)
 	while (prompt[i] != '\0')
 	{
 		txt = ft_cp_line(prompt, &i, b);
-		printf("Txt: %s\n", txt);
 		content = malloc(sizeof(t_type));
 		if (!content)
 			return (NULL);

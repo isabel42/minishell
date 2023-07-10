@@ -9,6 +9,10 @@ SRCS	= main.c \
 			export.c \
 			unset.c \
 			dolar.c \
+			constants.c \
+			free.c \
+			param.c \
+			pipe_fork.c \
 			# signal.c \
 
 OBJS 	= ${SRCS:.c=.o}
