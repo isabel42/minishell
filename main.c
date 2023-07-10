@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/07 15:27:14 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/07 15:37:49 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ int	main (int argc, char **argv, char **env)
 			block_content = (t_block *) test->content;
 			printf("block %d \ncommand: %s\n",i, block_content->cmd);
 			printf("ags: %s\n\n", block_content->arg[0]);
-			check_builtin(block_content->cmd, block_content->arg);
+			check_builtin(block_content->cmd, block_content->arg);\
+			
 			test = test->next;
 			i++;
 		}
