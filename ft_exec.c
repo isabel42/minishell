@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 11:09:56 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/10 14:19:09 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/10 14:45:43 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_heredoc(t_block *block)
 		i++;
 	}
 	res = ft_strjoin(res, "\n");
-	ft_putstr_fd(res, STDIN_FILENO);
+// il faut ajouter le changement de fd
 	if (res)
 		free(res);
 }
