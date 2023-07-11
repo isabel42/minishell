@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 14:54:47 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/10 11:32:19 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/11 14:34:48 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,9 @@ void	check_builtin(char *cmd, char **flags)
 		ft_env(flags);
 	else if (!ft_strncmp(cmd, "exit", 4) && ft_strlen(cmd) == 4)
 		ft_exit(cmd, flags);
-	// else
-	// 	ft_exec();
 }
 
-void	ft_echo(char *cmd, char **flags) //je penses qu'il faudra ajouter le $? pour afficher le dernier status
+void	ft_echo(char *cmd, char **flags)
 {
 	int	i;
 

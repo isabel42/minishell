@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/11 12:44:03 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/11 14:49:21 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,3 +139,20 @@ int	main (int argc, char **argv, char **env)
 // 	free(pid);
 // 	return (0);
 // }
+
+
+int	main(int ac, char **av, char **env)
+{
+	if (env == NULL)
+		msg_error("Env cannot be NULL\n", -1);
+	else if (ac != 1)
+		msg_error("Minishell don't take any argument\n", -1);
+	init_termios();
+	env_copy1(env);
+	while (42)
+	{
+		block = ft_block();
+		if (block == NULL);
+			continue ;
+	}
+}

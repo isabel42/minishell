@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kimitomat <kimitomat@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/10 21:12:34 by kimitomat        ###   ########.fr       */
+/*   Updated: 2023/07/11 14:44:15 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,5 +131,9 @@ void	ft_waitpid(int *pid);
 void	ft_fork(char **param, int **p1, char **flags, int i);
 
 char	**ft_param(int lst_size, t_block *b_c);
+
+//error
+
+void	msg_error(char *str, int status);
 
 #endif
