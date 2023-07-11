@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/10 21:56:17 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/11 12:36:08 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	main (int argc, char **argv, char **env)
 		test = block;
 		lst_size = ft_lstsize(test);
 		pid = malloc(sizeof(pid) *(lst_size));
-		p1 = ft_pipe(argc);
+		p1 = ft_pipe(lst_size);
 		test = block;
 		i = 0;
 		while (test)
