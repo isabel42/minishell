@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 17:20:13 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/07 18:17:37 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/10 21:34:27 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,18 @@ int ft_inout(t_list **temp, t_block *b_c)
 	if (c->txt[0] == '>')
 	{
 		if (c->txt[1] == '>')
-			b_c->outfile = ft_nl_charchar(b_c->outfile, ft_strjoin("2", c->txt));
+			b_c->outfile = ft_nl_charchar(b_c->outfile, ft_strjoin("2", c->txt + 2));
 		else
-			b_c->outfile = ft_nl_charchar(b_c->outfile, ft_strjoin("1", c->txt));
+			b_c->outfile = ft_nl_charchar(b_c->outfile, ft_strjoin("1", c->txt + 1));
 		*temp = (*temp)->next;
 		return (1);
 	}
 	else if (c->txt[0] == '<')
 	{
 		if (c->txt[1] == '<')
-			b_c->infile = ft_nl_charchar(b_c->infile, ft_strjoin("2", c->txt));
+			b_c->infile = ft_nl_charchar(b_c->infile, ft_strjoin("2", c->txt + 2));
 		else
-			b_c->infile = ft_nl_charchar(b_c->infile, ft_strjoin("1", c->txt));
+			b_c->infile = ft_nl_charchar(b_c->infile, ft_strjoin("1", c->txt + 1));
 		*temp = (*temp)->next;
 		return (1);
 	}
