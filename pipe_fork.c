@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:30:21 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/11 12:44:12 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/11 15:47:14 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,11 @@ void	ft_waitpid(int *pid)
 	}
 }
 
-void	ft_fork(char **param, int **p1, char **flags, int i)
+int	ft_pipe_in(char **param, int **p1, int i)
 {
-	int		a;
-	int		b;
+	int	a;
+
+	printf("para")
 
 	if (param[1] != NULL && param[0] != NULL)
 	{
@@ -80,16 +81,38 @@ void	ft_fork(char **param, int **p1, char **flags, int i)
 			a = p1[i - 1][0];
 		}
 	}
+	else if (param[4] != NULL)
+	{
+		a = 0;
+		// ft_putstr_fd(param[4],1);
+	}
 	else if (i > 0)
 		a = p1[i - 1][0];
 	else
 		a = 0;
+	return (a);
+}
+
+int	ft_pipe_out(char **param, int **p1, int i)
+{
+	int	b;
+
 	if (param[2] != NULL)
 		b = open (param[2], O_TRUNC | O_CREAT | O_WRONLY | O_CLOEXEC, 00644);
 	else if (i < ft_atoi(param[3]) - 1)
 		b = p1[i][1];
 	else
 		b = 1;
+	return (b);
+}
+
+void	ft_fork(char **param, int **p1, char **flags, int i)
+{
+	int		a;
+	int		b;
+
+	a = ft_pipe_in(param, p1, i);
+	b = ft_pipe_out(param, p1, i);
 	dup2(a, STDIN_FILENO);
 	dup2(b, STDOUT_FILENO);
 	close (a);

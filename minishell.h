@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kimitomat <kimitomat@student.42.fr>        +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/10 21:12:34 by kimitomat        ###   ########.fr       */
+/*   Updated: 2023/07/11 15:06:38 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	custom_handler(int signal);
 
 //ft_exec
 void	ft_exec(char *cmd, char **args);
-void	ft_heredoc(t_block *block);
+char	*ft_heredoc(t_block *block);
 
 //TEST//
 char	*ft_getpath(char **envp, char *prog);

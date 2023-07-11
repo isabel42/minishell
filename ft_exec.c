@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 11:09:56 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/11 12:01:20 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/11 15:06:38 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_exec(char *cmd, char **args)
 	(void)args;
 }
 
-void	ft_heredoc(t_block *block)
+char	*ft_heredoc(t_block *block)
 {
 	char	*prompt;
 	char	*res;
@@ -37,8 +37,5 @@ void	ft_heredoc(t_block *block)
 		i++;
 	}
 	res = ft_strjoin(res, "\n");
-	// a regarder pour la redirection
-	ft_putstr_fd(res, STDIN_FILENO);
-	if (res)
-		free(res);
+	return (res);
 }
