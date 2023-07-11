@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kimitomat <kimitomat@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/10 23:49:36 by kimitomat        ###   ########.fr       */
+/*   Updated: 2023/07/11 12:44:03 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,11 @@ int	main (int argc, char **argv, char **env)
 	t_list	*block;
 	t_list	*test;
 	t_block	*block_content;
-	char	**flags;
+	//char	**flags;
 	int 	*pid;
 	int		**p1;
 	int		i = 0;
-	char	**param;
+	//char	**param;
 	int		lst_size;
 
 	(void) argv;
@@ -71,9 +71,9 @@ int	main (int argc, char **argv, char **env)
 		printf("Minishell don't take any argument\n");
 		exit(1);
 	}
-	//init_termios();
-	//signal(SIGINT, custom_handler);
-	//signal(SIGQUIT, custom_handler);
+	init_termios();
+	signal(SIGINT, custom_handler);
+	signal(SIGQUIT, custom_handler);
 	env_copy1(env);
 	while (42)
 	{
@@ -89,18 +89,18 @@ int	main (int argc, char **argv, char **env)
 			block_content = (t_block *) test->content;
 			printf("block %d \ncommand: %s\n",i, block_content->cmd);
 			printf("ags: %s\n\n", block_content->arg[0]);
-			//if (block_content->infile[0])
-				//printf("infile: %s\n\n", block_content->infile[0]);
-			//check_builtin(block_content->cmd, block_content->arg);
-			//if (block_content->infile[0][0] == '2')
-				//ft_heredoc(block_content);
-			check_builtin(block_content->cmd, block_content->arg);
-			param = ft_param(lst_size, block_content);
-			flags = ft_flags_execve(block_content);
-			pid[i] = fork();
-			if (pid[i] == 0)
-				ft_fork(param, p1, flags, i);
-			ft_free_loop(param, flags);
+			// if (block_content->infile[0])
+			// 	printf("infile: %s\n\n", block_content->infile[0]);
+			// // check_builtin(block_content->cmd, block_content->arg);
+			// if (block_content->infile[0][0] == '2')
+			// 	ft_heredoc(block_content);
+			// check_builtin(block_content->cmd, block_content->arg);
+			// param = ft_param(lst_size, block_content);
+			// flags = ft_flags_execve(block_content);
+			// pid[i] = fork();
+			// if (pid[i] == 0)
+			// 	ft_fork(param, p1, flags, i);
+			// ft_free_loop(param, flags);
 			test = test->next;
 			i++;
 		}
