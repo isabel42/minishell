@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 14:54:47 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/11 13:10:40 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/13 17:07:54 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ char	*all_lower(char *str)
 	return (str);
 }
 
-void	check_builtin(char *cmd, char **flags)
+int	check_builtin(char *cmd, char **flags)
 {
 	if (cmd == NULL)
-		return ;
+		return (1);
 	if (!ft_strncmp(all_lower(cmd), "echo", 4) && ft_strlen(cmd) == 4)
 		ft_echo(cmd, flags);
 	else if (!ft_strncmp(all_lower(cmd), "cd", 2) && ft_strlen(cmd) == 2)
@@ -44,11 +44,12 @@ void	check_builtin(char *cmd, char **flags)
 		ft_env(flags);
 	else if (!ft_strncmp(cmd, "exit", 4) && ft_strlen(cmd) == 4)
 		ft_exit(cmd, flags);
-	// else
-	// 	ft_exec();
+	else
+		return (-1);
+	return (0);
 }
 
-void	ft_echo(char *cmd, char **flags) //je penses qu'il faudra ajouter le $? pour afficher le dernier status
+void	ft_echo(char *cmd, char **flags)
 {
 	int	i;
 

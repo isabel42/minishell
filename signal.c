@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 15:38:36 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/10 11:05:58 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/11 14:49:18 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	init_termios(void)
 {
 	struct termios	termios;
 
+	signal(SIGINT, custom_handler);
+	signal(SIGQUIT, custom_handler);
 	if ((tcgetattr(STDIN_FILENO, &termios)) == -1)
 		exit(EXIT_FAILURE);
 	termios.c_lflag &= ~(ECHOCTL);

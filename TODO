@@ -12,3 +12,21 @@ void	init_termios(void)
 	if ((tcsetattr(STDIN_FILENO, TCSANOW, &termios)) == -1)
 		exit(EXIT_FAILURE);
 }
+
+int	main(int ac, char **av, char **env)
+{
+	char 	str[] = "salut test\n";
+	int		fd;
+	char	*join;
+
+	(void)ac;
+	(void)av;
+	env_copy1(env);
+	join = ft_strjoin(ft_envp(g_data.env_copy, "PWD="), "/tmp");
+	fd = open(join, O_CREAT | O_RDWR, 0777);
+	free(join);
+	ft_putstr_fd(ft_heredoc()), fd);
+	sleep(10);
+	close(fd);
+	unlink("tmp");
+}
