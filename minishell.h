@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/12 17:02:13 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/13 17:02:13 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	custom_handler(int signal);
 
 //ft_exec
 void	ft_exec(char *cmd, char **args);
-char	*ft_heredoc(t_block *block);
+char	*ft_heredoc(char *b_c_infile);
 
 //TEST//
 char	*ft_getpath(char **envp, char *prog);

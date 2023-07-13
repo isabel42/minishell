@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 11:09:56 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/12 17:09:21 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/13 17:01:43 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_exec(char *cmd, char **args)
 	(void)args;
 }
 
-char	*ft_heredoc(t_block *block)
+char	*ft_heredoc(char *b_c_infile)
 {
 	char	*prompt;
 	char	*res;
@@ -29,7 +29,7 @@ char	*ft_heredoc(t_block *block)
 	while (42)
 	{
 		prompt = readline("> ");
-		if (!ft_strncmp(prompt, block->infile[0] + 1,
+		if (!ft_strncmp(prompt, b_c_infile + 1,
 				ft_strlen(prompt)))
 			break ;
 		res = ft_strjoin(res, prompt);
