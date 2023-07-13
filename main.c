@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/13 13:00:33 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/13 13:17:27 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	main(int argc, char **argv, char **env)
 				if (block_content->infile[0][0] == '2')
 					ft_heredoc(block_content);
 			}
-			if (check_builtin(block_content->cmd, block_content->arg) == -1)
+			else if (check_builtin(block_content->cmd, block_content->arg) == -1)
 			{
 				param = ft_param(lst_size, block_content);
 				flags = ft_flags_execve(block_content);
