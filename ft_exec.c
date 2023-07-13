@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 11:09:56 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/11 15:06:38 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/12 17:09:21 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,16 @@ char	*ft_heredoc(t_block *block)
 	int		i;
 
 	i = 0;
+	res = "\0";
 	while (42)
 	{
 		prompt = readline("> ");
 		if (!ft_strncmp(prompt, block->infile[0] + 1,
 				ft_strlen(prompt)))
 			break ;
-		if (i > 0)
-			res = ft_strjoin(res, "\n");
 		res = ft_strjoin(res, prompt);
+		res = ft_strjoin(res, "\n");
 		i++;
 	}
-	res = ft_strjoin(res, "\n");
 	return (res);
 }

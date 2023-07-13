@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 18:29:21 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/11 15:28:25 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/12 15:55:29 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,18 @@ void	ft_infile(char **param, t_block *b_c)
 	done = 0;
 	i = 0;
 	param[1] = NULL;
-	param[4] = NULL;
+	param[3] = NULL;
 	while (b_c->infile[i] != NULL)
 	{
 		if (b_c->infile[i][0] == '2')
-			param[4] = ft_heredoc(b_c);
+			param[3] = ft_heredoc(b_c);
 		pathinfile = ft_find_pwd(ft_envp(g_data.env_copy, "PWD="), b_c->infile[i] + 1);
 		if (done == 0 && access(pathinfile, F_OK) == -1 && b_c->infile[i][0] == '1')
 		{
 			param[1] = pathinfile;
-			if(param[4])
-				free(param[4]);
-			param[4] = NULL;
+			if(param[3])
+				free(param[3]);
+			param[3] = NULL;
 			done = 1;
 		}
 		else
@@ -42,7 +42,7 @@ void	ft_infile(char **param, t_block *b_c)
 	if (i > 0 && done == 0 && b_c->infile[i - 1][0] == '1')
 		param[1] = ft_find_pwd(ft_envp(g_data.env_copy, "PWD="), b_c->infile[i - 1] + 1);
 	if (i > 0 && done == 0 && b_c->infile[i - 1][0] == '1')
-		param[4] = NULL;
+		param[3] = NULL;
 }
 
 char	**ft_param(int lst_size, t_block *b_c)
@@ -61,6 +61,6 @@ char	**ft_param(int lst_size, t_block *b_c)
 	param[0] = ft_find_path(ft_envp(g_data.env_copy, "PATH="), b_c->cmd, param[1]);
 	// param[1] = pathinfile;
 	param[2] = pathoutfile;
-	param[3] = ft_itoa(lst_size);
+	param[4] = ft_itoa(lst_size);
 	return (param);
 }

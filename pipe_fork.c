@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:30:21 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/11 15:47:14 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/13 12:55:43 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ int	ft_pipe_in(char **param, int **p1, int i)
 {
 	int	a;
 
-	printf("para")
-
 	if (param[1] != NULL && param[0] != NULL)
 	{
 		a = open (param[1], O_RDONLY | O_CLOEXEC);
@@ -80,11 +78,12 @@ int	ft_pipe_in(char **param, int **p1, int i)
 			perror(NULL);
 			a = p1[i - 1][0];
 		}
+		// close (a);
 	}
-	else if (param[4] != NULL)
+	else if (param[3] != NULL)
 	{
 		a = 0;
-		// ft_putstr_fd(param[4],1);
+		// ft_putstr_fd(param[3],2);
 	}
 	else if (i > 0)
 		a = p1[i - 1][0];
@@ -98,24 +97,52 @@ int	ft_pipe_out(char **param, int **p1, int i)
 	int	b;
 
 	if (param[2] != NULL)
+	{
 		b = open (param[2], O_TRUNC | O_CREAT | O_WRONLY | O_CLOEXEC, 00644);
-	else if (i < ft_atoi(param[3]) - 1)
+	}
+	else if (i < ft_atoi(param[4]) - 1)
 		b = p1[i][1];
 	else
 		b = 1;
 	return (b);
 }
 
+// void	ft_exec_fork(int lst_size, t_block *block_content, int i)
+// {
+// 	char	**param;
+// 	char	**flags;
+// 	int 	*pid;
+// 	int		**p1;
+
+// 	param = ft_param(lst_size, block_content);
+// 	flags = ft_flags_execve(block_content);
+// 	pid = malloc(sizeof(int) *(lst_size));
+// 	p1 = ft_pipe(lst_size);
+// 	pid[i] = fork();
+// 	if (pid[i] == 0)
+// 		ft_fork(param, p1, flags, i);
+// 	ft_free_loop(param, flags);
+// }
+
 void	ft_fork(char **param, int **p1, char **flags, int i)
 {
 	int		a;
 	int		b;
 
+
 	a = ft_pipe_in(param, p1, i);
 	b = ft_pipe_out(param, p1, i);
+	printf("a: %d", a);
 	dup2(a, STDIN_FILENO);
 	dup2(b, STDOUT_FILENO);
+	// if((param[3] != NULL))
+	// {
+	// 	ft_putstr_fd(param[3], a);
+	// 	// close(a);
+	// }
+	// if (a != 0)
 	close (a);
-	ft_closepipe(p1, ft_atoi(param[3]));
+	ft_closepipe(p1, ft_atoi(param[4]));
 	execve(param[0], flags, NULL);
+	exit(0);
 }

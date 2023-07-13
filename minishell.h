@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/11 15:06:38 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/12 17:02:13 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ void	ft_free_cc_c(char **cc, char *c);
 int		**ft_pipe(int lst_size);
 void	ft_closepipe(int **p1, int lst_size);
 void	ft_waitpid(int *pid);
+// void	ft_exec_fork(int lst_size, t_block *block_content, int i);
 void	ft_fork(char **param, int **p1, char **flags, int i);
 
 char	**ft_param(int lst_size, t_block *b_c);
