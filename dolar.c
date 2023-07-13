@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:26:33 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/07 17:49:04 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/13 18:18:56 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	ft_dolar_long(int i, char *prompt, int *j)
 
 	i++;
 	z = 0;
-	while (prompt[i + z] != '\0' && prompt[i + z] != '"' && prompt[i + z] != ' ' && prompt[i + z] != '$' && prompt[i + z] != '|')
+	while (ft_strchr("\0\" $|", prompt[i + z]))
+	// while (prompt[i + z] != '\0' && prompt[i + z] != '"' && prompt[i + z] != ' ' && prompt[i + z] != '$' && prompt[i + z] != '|')
 		z++;
 	cp = malloc(sizeof(char) * (z + 2));
 	if (!cp)

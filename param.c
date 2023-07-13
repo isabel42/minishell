@@ -6,33 +6,33 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 18:29:21 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/13 17:01:43 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/13 18:09:54 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_infile_cp(int *done, char *infile, char **param, char *pathinfile)
+void	ft_infile_cp(int *done, char *infile, char **param)
 {
-		if (*done == 0 && access(pathinfile, F_OK) == -1 && infile[0] == '1')
-		{
-			param[1] = malloc(sizeof(char) * ft_strlen(pathinfile) + 1);
-			if (!param[1])
-				return ;
-			ft_strlcpy(param[1], pathinfile, ft_strlen(pathinfile) + 1);
-			if (param[3])
-				free(param[3]);
-			param[3] = NULL;
-			*done = 1;
-			free (pathinfile);
-		}
-		else
-			free(pathinfile);
+	char	*pathinfile;
+
+	pathinfile = ft_find_pwd(ft_envp(g_data.env_copy, "PWD="), infile);
+	if (*done == 0 && access(pathinfile, F_OK) == -1)
+	{
+		param[1] = malloc(sizeof(char) * (ft_strlen(pathinfile) + 1));
+		if (!param[1])
+			return ;
+		ft_strlcpy(param[1], pathinfile, ft_strlen(pathinfile) + 1);
+		if (param[3])
+			free(param[3]);
+		param[3] = NULL;
+		*done = 1;
+	}
+	free (pathinfile);
 }
 
 void	ft_infile(char **param, t_block *b_c)
 {
-	char	*pathinfile;
 	int		i;
 	int		done;
 
@@ -43,17 +43,17 @@ void	ft_infile(char **param, t_block *b_c)
 	while (b_c->infile[i] != NULL)
 	{
 		if (b_c->infile[i][0] == '2')
-			param[3] = ft_heredoc(b_c->infile[i]);
+			ft_heredoc(b_c->infile[i] + 1, param, done);
 		else
-		{
-			pathinfile = ft_find_pwd(ft_envp(g_data.env_copy, "PWD="), b_c->infile[i] + 1);
-			ft_infile_cp(&done,  b_c->infile[i], param, pathinfile);
-		}
+			ft_infile_cp(&done, b_c->infile[i] + 1, param);
 		i++;
 	}
 	if (i > 0 && done == 0 && b_c->infile[i - 1][0] == '1')
 	{
-		param[1] = ft_find_pwd(ft_envp(g_data.env_copy, "PWD="), b_c->infile[i - 1] + 1);
+		param[1] = ft_find_pwd(ft_envp(g_data.env_copy, "PWD="),
+				b_c->infile[i - 1] + 1);
+		if (param[3] != NULL)
+			free(param[3]);
 		param[3] = NULL;
 	}
 }
@@ -64,10 +64,10 @@ void	ft_outfile_cp(char **param, char *b_c_inf_prev, char *pathoutfile)
 	param[5] = NULL;
 	if (pathoutfile)
 	{
-		param[2] = malloc(sizeof(char) * strlen(pathoutfile) + 1);
+		param[2] = malloc(sizeof(char) * (strlen(pathoutfile) + 1));
 		if (!param[2])
 			return ;
-		param[5] = malloc(sizeof(char) * strlen(b_c_inf_prev) + 1);
+		param[5] = malloc(sizeof(char) * (strlen(b_c_inf_prev) + 1));
 		if (!param[5])
 			return ;
 		ft_strlcpy(param[2], pathoutfile, ft_strlen(pathoutfile) + 1);
