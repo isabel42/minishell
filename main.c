@@ -6,11 +6,9 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/11 14:49:21 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/13 13:00:33 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #include "minishell.h"
 
@@ -48,16 +46,16 @@ char	**ft_flags_execve(t_block *b_c)
 	return (flags);
 }
 
-int	main (int argc, char **argv, char **env)
+int	main(int argc, char **argv, char **env)
 {
 	t_list	*block;
 	t_list	*test;
 	t_block	*block_content;
-	//char	**flags;
-	int 	*pid;
+	char	**flags;
+	int		*pid;
 	int		**p1;
 	int		i = 0;
-	//char	**param;
+	char	**param;
 	int		lst_size;
 
 	(void) argv;
@@ -87,20 +85,20 @@ int	main (int argc, char **argv, char **env)
 		while (test)
 		{
 			block_content = (t_block *) test->content;
-			printf("block %d \ncommand: %s\n",i, block_content->cmd);
-			printf("ags: %s\n\n", block_content->arg[0]);
-			// if (block_content->infile[0])
-			// 	printf("infile: %s\n\n", block_content->infile[0]);
-			// // check_builtin(block_content->cmd, block_content->arg);
-			// if (block_content->infile[0][0] == '2')
-			// 	ft_heredoc(block_content);
-			// check_builtin(block_content->cmd, block_content->arg);
-			// param = ft_param(lst_size, block_content);
-			// flags = ft_flags_execve(block_content);
-			// pid[i] = fork();
-			// if (pid[i] == 0)
-			// 	ft_fork(param, p1, flags, i);
-			// ft_free_loop(param, flags);
+			if (block_content->infile[0] != NULL)
+			{
+				if (block_content->infile[0][0] == '2')
+					ft_heredoc(block_content);
+			}
+			if (check_builtin(block_content->cmd, block_content->arg) == -1)
+			{
+				param = ft_param(lst_size, block_content);
+				flags = ft_flags_execve(block_content);
+				pid[i] = fork();
+				if (pid[i] == 0)
+					ft_fork(param, p1, flags, i);
+				ft_free_loop(param, flags);
+			}
 			test = test->next;
 			i++;
 		}
@@ -140,19 +138,18 @@ int	main (int argc, char **argv, char **env)
 // 	return (0);
 // }
 
-
-int	main(int ac, char **av, char **env)
-{
-	if (env == NULL)
-		msg_error("Env cannot be NULL\n", -1);
-	else if (ac != 1)
-		msg_error("Minishell don't take any argument\n", -1);
-	init_termios();
-	env_copy1(env);
-	while (42)
-	{
-		block = ft_block();
-		if (block == NULL);
-			continue ;
-	}
-}
+// int	main(int ac, char **av, char **env)
+// {
+// 	if (env == NULL)
+// 		msg_error("Env cannot be NULL\n", -1);
+// 	else if (ac != 1)
+// 		msg_error("Minishell don't take any argument\n", -1);
+// 	init_termios();
+// 	env_copy1(env);
+// 	while (42)
+// 	{
+// 		block = ft_block();
+// 		if (block == NULL)
+// 			continue ;
+// 	}
+// }

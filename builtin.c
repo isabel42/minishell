@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 14:54:47 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/11 14:34:48 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/13 13:02:13 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ char	*all_lower(char *str)
 	return (str);
 }
 
-void	check_builtin(char *cmd, char **flags)
+int	check_builtin(char *cmd, char **flags)
 {
 	if (cmd == NULL)
-		return ;
+		return (1);
 	if (!ft_strncmp(all_lower(cmd), "echo", 4) && ft_strlen(cmd) == 4)
 		ft_echo(cmd, flags);
 	else if (!ft_strncmp(all_lower(cmd), "cd", 2) && ft_strlen(cmd) == 2)
@@ -44,6 +44,9 @@ void	check_builtin(char *cmd, char **flags)
 		ft_env(flags);
 	else if (!ft_strncmp(cmd, "exit", 4) && ft_strlen(cmd) == 4)
 		ft_exit(cmd, flags);
+	else
+		return (-1);
+	return (0);
 }
 
 void	ft_echo(char *cmd, char **flags)
