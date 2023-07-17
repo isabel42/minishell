@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 14:53:37 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/17 14:58:25 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/17 16:11:21 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ char	**ft_nl_charchar(char **tab, char *txt)
 		ft_strlcpy(sol[j], tab[j], ft_strlen(tab[j]) + 1);
 		j--;
 	}
-	ft_free_cc(tab);
+	ft_free_cc_c(tab, txt);
 	return (sol);
 }

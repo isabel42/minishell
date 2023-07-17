@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 17:20:13 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/17 15:58:43 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/17 16:11:37 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,8 @@ void	ft_is_command(t_list **temp, t_block *b_c)
 			ft_strlcpy(b_c->cmd, content->txt, ft_strlen(content->txt) + 1);
 		}
 		else
-			b_c->arg = ft_nl_charchar(b_c->arg, content->txt);
+			b_c->arg = ft_nl_charchar(b_c->arg,
+					ft_strjoin("\0",content->txt));
 		*temp = (*temp)->next;
 	}
 }
