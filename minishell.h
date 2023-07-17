@@ -6,10 +6,9 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/17 14:56:30 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/17 15:05:55 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -27,6 +26,7 @@
 # include <signal.h>
 
 # define BUFFER_SIZE 1000 //pour la fonction getcwd
+# define ERROR1 "Syntax error: Error text reviewd file block_build_utils" //
 
 typedef struct s_data//ajouter t_data	g_data; in all files
 {

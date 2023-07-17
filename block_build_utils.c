@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   block_build_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 17:20:13 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/10 21:34:27 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/17 15:05:40 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	ft_is_command(t_list **temp, t_block *b_c)
 	{
 		content = (t_type *)(*temp)->content;
 		if (ft_inout(temp, b_c) == 1)
-			continue;
+			continue ;
 		if (b_c->cmd == NULL)
 		{
 			b_c->cmd = malloc(sizeof(char) * ft_strlen(content->txt));
@@ -117,7 +117,7 @@ int	ft_treat_redir_after(t_list **temp, t_block *b_c)
 	{
 		*temp = (*temp)->next;
 		if (!(*temp))
-			ft_exit_isa("Syntax error: Error text reviewd file block_build_utils");
+			ft_exit_isa(ERROR1);
 		c_n = (t_type *)(*temp)->content;
 		res = 1;
 	}
