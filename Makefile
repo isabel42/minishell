@@ -15,7 +15,7 @@ SRCS	= main.c \
 			param.c \
 			pipe_fork.c \
 			error.c \
-			# signal.c \
+			signal.c \
 
 OBJS 	= ${SRCS:.c=.o}
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_fork.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:30:21 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/13 18:17:30 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/17 13:12:05 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,16 +127,16 @@ int	ft_pipe_out(char **param, int **p1, int i)
 
 void	ft_fork(char **param, int **p1, char **flags, int i)
 {
-	int		a;
-	int		b;
-
+	int	a;
+	int	b;
 
 	a = ft_pipe_in(param, p1, i);
 	b = ft_pipe_out(param, p1, i);
 	dup2(a, STDIN_FILENO);
 	dup2(b, STDOUT_FILENO);
-	close (a);
+	// close (a);
 	ft_closepipe(p1, ft_atoi(param[4]));
-	execve(param[0], flags, NULL);
+	printf("%s\n", param[0]);
+	execve(param[0], flags, g_data.env_copy);
 	exit(0);
 }

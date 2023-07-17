@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kimitomat <kimitomat@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 11:09:56 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/13 21:12:42 by kimitomat        ###   ########.fr       */
+/*   Updated: 2023/07/17 13:05:18 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	ft_heredoc(char *b_c_infile, char **param, int done)
 		if (!ft_strncmp(prompt, b_c_infile,
 				ft_strlen(prompt)))
 			break ;
+		if (prompt == NULL)
+			return ;
 		res = ft_strjoin(res, prompt);
 		res = ft_strjoin(res, "\n");
 		i++;
