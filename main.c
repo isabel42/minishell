@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/13 16:22:22 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/13 16:24:57 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,68 +46,68 @@ char	**ft_flags_execve(t_block *b_c)
 	return (flags);
 }
 
-// int	main(int argc, char **argv, char **env)
-// {
-// 	t_list	*block;
-// 	t_list	*test;
-// 	t_block	*block_content;
-// 	char	**flags;
-// 	int		*pid;
-// 	int		**p1;
-// 	int		i = 0;
-// 	char	**param;
-// 	int		lst_size;
+int	main(int argc, char **argv, char **env)
+{
+	t_list	*block;
+	t_list	*test;
+	t_block	*block_content;
+	char	**flags;
+	int		*pid;
+	int		**p1;
+	int		i = 0;
+	char	**param;
+	int		lst_size;
 
-// 	(void) argv;
-// 	if (env == NULL)
-// 	{
-// 		printf("Error : env is NULL\n");
-// 		exit(-1);
-// 	}
-// 	if (argc != 1)
-// 	{
-// 		printf("Minishell don't take any argument\n");
-// 		exit(1);
-// 	}
-// 	init_termios();
-// 	signal(SIGINT, custom_handler);
-// 	signal(SIGQUIT, custom_handler);
-// 	env_copy1(env);
-// 	while (42)
-// 	{
-// 		block = ft_block();
-// 		test = block;
-// 		lst_size = ft_lstsize(test);
-// 		pid = malloc(sizeof(pid) *(lst_size));
-// 		p1 = ft_pipe(argc);
-// 		test = block;
-// 		i = 0;
-// 		while (test)
-// 		{
-// 			block_content = (t_block *) test->content;
-// 			if (block_content->infile[0] != NULL)
-// 			{
-// 				if (block_content->infile[0][0] == '2')
-// 					ft_heredoc(block_content);
-// 			}
-// 			else if (check_builtin(block_content->cmd, block_content->arg) == -1)
-// 			{
-// 				param = ft_param(lst_size, block_content);
-// 				flags = ft_flags_execve(block_content);
-// 				pid[i] = fork();
-// 				if (pid[i] == 0)
-// 					ft_fork(param, p1, flags, i);
-// 				ft_free_loop(param, flags);
-// 			}
-// 			test = test->next;
-// 			i++;
-// 		}
-// 		ft_lstclear(&block, (void *) &ft_clean_block);
-// 		ft_closepipe(p1, lst_size);
-// 		ft_waitpid(pid);
-// 	}
-// 	return (0);
-// }
+	(void) argv;
+	if (env == NULL)
+	{
+		printf("Error : env is NULL\n");
+		exit(-1);
+	}
+	if (argc != 1)
+	{
+		printf("Minishell don't take any argument\n");
+		exit(1);
+	}
+	init_termios();
+	signal(SIGINT, custom_handler);
+	signal(SIGQUIT, custom_handler);
+	env_copy1(env);
+	while (42)
+	{
+		block = ft_block();
+		test = block;
+		lst_size = ft_lstsize(test);
+		pid = malloc(sizeof(pid) *(lst_size));
+		p1 = ft_pipe(argc);
+		test = block;
+		i = 0;
+		while (test)
+		{
+			block_content = (t_block *) test->content;
+			if (block_content->infile[0] != NULL)
+			{
+				if (block_content->infile[0][0] == '2')
+					ft_heredoc(block_content);
+			}
+			else if (check_builtin(block_content->cmd, block_content->arg) == -1)
+			{
+				param = ft_param(lst_size, block_content);
+				flags = ft_flags_execve(block_content);
+				pid[i] = fork();
+				if (pid[i] == 0)
+					ft_fork(param, p1, flags, i);
+				ft_free_loop(param, flags);
+			}
+			test = test->next;
+			i++;
+		}
+		ft_lstclear(&block, (void *) &ft_clean_block);
+		ft_closepipe(p1, lst_size);
+		ft_waitpid(pid);
+	}
+	return (0);
+}
 
 // int	main(int argc, char **argv, char **envp)
 // {
@@ -153,20 +153,20 @@ char	**ft_flags_execve(t_block *b_c)
 // 			continue ;
 // 	}
 // }
-int	main(int ac, char **av, char **env)
-{
-	char 	str[] = "salut test\n";
-	int		fd;
-	char	*join;
+// int	main(int ac, char **av, char **env)
+// {
+// 	char 	str[] = "salut test\n";
+// 	int		fd;
+// 	char	*join;
 
-	(void)ac;
-	(void)av;
-	env_copy1(env);
-	join = ft_strjoin(ft_envp(g_data.env_copy, "PWD="), "/tmp");
-	fd = open(join, O_CREAT | O_RDWR, 0777);
-	free(join);
-	ft_putstr_fd(ft_heredoc()), fd);
-	sleep(10);
-	close(fd);
-	unlink("tmp");
-}
+// 	(void)ac;
+// 	(void)av;
+// 	env_copy1(env);
+// 	join = ft_strjoin(ft_envp(g_data.env_copy, "PWD="), "/tmp");
+// 	fd = open(join, O_CREAT | O_RDWR, 0777);
+// 	free(join);
+// 	ft_putstr_fd(ft_heredoc()), fd);
+// 	sleep(10);
+// 	close(fd);
+// 	unlink("tmp");
+// }
