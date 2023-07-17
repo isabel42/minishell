@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/13 17:42:05 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/17 14:56:30 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_block
 	char	**outfile;
 }	t_block;
 
-// block_utils.c
+// block_build_utils.c
 int		ft_inout(t_list **temp, t_block *b_c);
 t_block	*ft_init_block(void);
 int		ft_is_redir(t_list *temp);
@@ -62,6 +62,10 @@ void	ft_is_command(t_list **temp, t_block *b_c);
 int		ft_treat_redir_after(t_list **temp, t_block *b_c);
 
 // parsing.c
+int		ft_cp_line_long(char *prompt, int i, char *b);
+int		ft_cp_line_core(char *prompt, int *i, char *b, char *res);
+char	*ft_cp_line(char *prompt, int *i, char *b);
+void	ft_init_type(char *txt, t_type *content);
 t_list	*ft_parsing(char *prompt, char *b);
 
 //dolar.c
@@ -72,14 +76,19 @@ char	*ft_dolar_char(int *i, char *prompt, int *j, char *res);
 t_list	*ft_block_build(t_list **list);
 t_list	*ft_block(void);
 
-// free_clan.c
+// free_clean.c
+void	ft_free_cc(char **tab);
 void	*ft_clean_inputs(void *content);
 void	*ft_clean_block(void *content);
-void	ft_free_cc(char **tab);
 
 // utils.c
-void	ft_exit_isa(char *s);
+int		find_index_envp(char **envp);
+char	*find_home(void);
+char	*ft_getpath(char **envp, char *prog);
 char	*ft_envp(char **envp, char *pwd);
+void	ft_exit_isa(char *s);
+
+// utils_1.c
 char	**ft_nl_charchar(char **tab, char *txt);
 
 // char	**ft_flags(char **envp, t_list **inputs);
@@ -102,7 +111,6 @@ void	init_termios(void);
 void	custom_handler(int signal);
 void	custom_handler1(int signal);
 char	*find_home(void);
-// int		rl_replace_line(const char *text, int i);
 void	init_termios(void);
 void	custom_handler(int signal);
 
@@ -110,9 +118,6 @@ void	custom_handler(int signal);
 void	ft_exec(char *cmd, char **args);
 void	ft_heredoc(char *b_c_infile, char **param, int done);
 int		ft_fd_heredoc(char *heredoc);
-
-//TEST//
-char	*ft_getpath(char **envp, char *prog);
 
 //pipex
 char	*ft_envp(char **envp, char *pwd);
@@ -129,11 +134,12 @@ void	ft_closepipe(int **p1, int lst_size);
 void	ft_waitpid(int *pid);
 // void	ft_exec_fork(int lst_size, t_block *block_content, int i);
 void	ft_fork(char **param, int **p1, char **flags, int i);
-
 char	**ft_param(int lst_size, t_block *b_c);
 
 //error
-
 void	msg_error(char *str, int status);
+
+//TEST//
+char	*ft_getpath(char **envp, char *prog);
 
 #endif

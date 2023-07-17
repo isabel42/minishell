@@ -1,5 +1,6 @@
 SRCS	= main.c \
 			utils.c \
+			utils_1.c \
 			parsing.c \
 			block_build_utils.c \
 			block.c \
