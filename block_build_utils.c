@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 17:20:13 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/10 21:34:27 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/17 15:23:20 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	ft_is_command(t_list **temp, t_block *b_c)
 			ft_strlcpy(b_c->cmd, content->txt, ft_strlen(content->txt) + 1);
 		}
 		else
-			b_c->arg = ft_nl_charchar(b_c->arg, content->txt);
+			b_c->arg = ft_nl_charchar(b_c->arg, ft_strjoin("\0",content->txt));
 		*temp = (*temp)->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/13 17:42:05 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/17 16:01:08 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ t_list	*ft_block(void);
 void	*ft_clean_inputs(void *content);
 void	*ft_clean_block(void *content);
 void	ft_free_cc(char **tab);
+void 	ft_free_pipe(int **p1, int lst_size);
 
 // utils.c
 void	ft_exit_isa(char *s);

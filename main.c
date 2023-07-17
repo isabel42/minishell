@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/13 17:08:56 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/17 16:01:45 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,15 @@
 
 void	ft_free_loop(char **param, char **flags)
 {
+	int	i;
+
+	i = 1;
 	ft_free_param(param);
+	while (flags[i] != NULL)
+	{
+		free(flags[i]);
+		i++;
+	}
 	free(flags);
 }
 
@@ -40,7 +48,10 @@ char	**ft_flags_execve(t_block *b_c)
 	flags[j + 1] = NULL;
 	while (j > 0)
 	{
-		flags[j] = b_c->arg[j - 1];
+		flags[j] = malloc(sizeof(char) * ( 1 + ft_strlen(b_c->arg[j - 1])));
+		if(!flags[j])
+			return NULL;
+		ft_strlcpy(flags[j], b_c->arg[j - 1], ft_strlen(b_c->arg[j - 1]) + 1);
 		j--;
 	}
 	return (flags);
@@ -73,8 +84,8 @@ int	main (int argc, char **argv, char **env)
 	// signal(SIGINT, custom_handler);
 	// signal(SIGQUIT, custom_handler);
 	env_copy1(env);
-	while (42)
-	{
+	// while (42)
+	// {
 		block = ft_block();
 		test = block;
 		lst_size = ft_lstsize(test);
@@ -85,26 +96,21 @@ int	main (int argc, char **argv, char **env)
 		while (test)
 		{
 			block_content = (t_block *) test->content;
-			// printf("block %d \ncommand: %s\n",i, block_content->cmd);
-			// printf("ags: %s\n\n", block_content->arg[0]);
-			// if (block_content->infile[0])
-			// 	printf("infile: %s\n\n", block_content->infile[0]);
-			// // check_builtin(block_content->cmd, block_content->arg);
-			// if (block_content->infile[0][0] == '2')
-			// 	ft_heredoc(block_content);
 			// check_builtin(block_content->cmd, block_content->arg);
 			param = ft_param(lst_size, block_content);
 			flags = ft_flags_execve(block_content);
 			pid[i] = fork();
 			if (pid[i] == 0)
 				ft_fork(param, p1, flags, i);
-			// ft_free_loop(param, flags);
+			ft_free_loop(param, flags);
 			test = test->next;
 			i++;
 		}
 		ft_lstclear(&block, (void *) &ft_clean_block);
 		ft_closepipe(p1, lst_size);
 		ft_waitpid(pid);
-	}
+		free(pid);
+		ft_free_pipe(p1, lst_size);
+	// }
 	return (0);
 }
