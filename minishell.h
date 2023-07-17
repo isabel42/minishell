@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/13 12:59:19 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/13 17:42:05 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,8 @@ void	custom_handler(int signal);
 
 //ft_exec
 void	ft_exec(char *cmd, char **args);
-void	ft_heredoc(t_block *block);
+void	ft_heredoc(char *b_c_infile, char **param, int done);
+int		ft_fd_heredoc(char *heredoc);
 
 //TEST//
 char	*ft_getpath(char **envp, char *prog);
@@ -126,6 +127,7 @@ void	ft_free_cc_c(char **cc, char *c);
 int		**ft_pipe(int lst_size);
 void	ft_closepipe(int **p1, int lst_size);
 void	ft_waitpid(int *pid);
+// void	ft_exec_fork(int lst_size, t_block *block_content, int i);
 void	ft_fork(char **param, int **p1, char **flags, int i);
 
 char	**ft_param(int lst_size, t_block *b_c);
