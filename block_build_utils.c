@@ -6,13 +6,13 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 17:20:13 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/17 15:05:40 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/17 15:58:43 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int ft_inout(t_list **temp, t_block *b_c)
+int	ft_inout(t_list **temp, t_block *b_c)
 {
 	t_type	*c;
 

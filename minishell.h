@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/17 15:05:55 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/17 15:56:52 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define BUFFER_SIZE 1000 //pour la fonction getcwd
 # define ERROR1 "Syntax error: Error text reviewd file block_build_utils" //
 
-typedef struct s_data//ajouter t_data	g_data; in all files
+typedef struct s_data
 {
 	char					**env_copy;
 	volatile sig_atomic_t	status;
