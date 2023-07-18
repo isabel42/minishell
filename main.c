@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/17 16:01:45 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/18 11:58:40 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ int	main (int argc, char **argv, char **env)
 	// signal(SIGINT, custom_handler);
 	// signal(SIGQUIT, custom_handler);
 	env_copy1(env);
-	// while (42)
-	// {
+	while (42)
+	{
 		block = ft_block();
 		test = block;
 		lst_size = ft_lstsize(test);
@@ -111,6 +111,6 @@ int	main (int argc, char **argv, char **env)
 		ft_waitpid(pid);
 		free(pid);
 		ft_free_pipe(p1, lst_size);
-	// }
+	}
 	return (0);
 }

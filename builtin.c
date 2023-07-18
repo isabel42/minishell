@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 14:54:47 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/13 17:07:54 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/18 14:18:25 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,18 @@ char	*all_lower(char *str)
 	return (str);
 }
 
-int	check_builtin(char *cmd, char **flags)
+int	check_builtin(char *param0, char **flags)
 {
-	if (cmd == NULL)
+	int	i;
+	char	*cmd;
+
+	if (param0 == NULL)
 		return (1);
+	i = ft_strlen(param0);
+	while(i >= 0 && param0[i] != '/')
+		i--;
+	cmd = param0 + i + 1;
+	printf("[%s] TEST\n", cmd);
 	if (!ft_strncmp(all_lower(cmd), "echo", 4) && ft_strlen(cmd) == 4)
 		ft_echo(cmd, flags);
 	else if (!ft_strncmp(all_lower(cmd), "cd", 2) && ft_strlen(cmd) == 2)
@@ -46,6 +54,7 @@ int	check_builtin(char *cmd, char **flags)
 		ft_exit(cmd, flags);
 	else
 		return (-1);
+	printf("builtin\n");
 	return (0);
 }
 
