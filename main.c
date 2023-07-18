@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/18 14:32:16 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/18 14:43:59 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,31 @@ char	**ft_flags_execve(t_block *b_c)
 	flags[j + 1] = NULL;
 	while (j > 0)
 	{
-		flags[j] = malloc(sizeof(char) * ( 1 + ft_strlen(b_c->arg[j - 1])));
-		if(!flags[j])
-			return NULL;
+		flags[j] = malloc(sizeof(char) * (1 + ft_strlen(b_c->arg[j - 1])));
+		if (!flags[j])
+			return (NULL);
 		ft_strlcpy(flags[j], b_c->arg[j - 1], ft_strlen(b_c->arg[j - 1]) + 1);
 		j--;
 	}
 	return (flags);
+}
+
+void	check_args(int ac, char **av, char **env)
+{
+	if (env == NULL)
+	{
+		printf("Error : env is NULL\n");
+		exit(-1);
+	}
+	if (argc != 1)
+	{
+		printf("Minishell don't take any argument\n");
+		exit(1);
+	}
+	init_termios();
+	signal(SIGINT, custom_handler);
+	signal(SIGQUIT, custom_handler);
+	env_copy1(env);
 }
 
 int	main(int argc, char **argv, char **env)
@@ -79,21 +97,7 @@ int	main(int argc, char **argv, char **env)
 	char	**param;
 	int		lst_size;
 
-	(void) argv;
-	if (env == NULL)
-	{
-		printf("Error : env is NULL\n");
-		exit(-1);
-	}
-	if (argc != 1)
-	{
-		printf("Minishell don't take any argument\n");
-		exit(1);
-	}
-	// init_termios();
-	// signal(SIGINT, custom_handler);
-	// signal(SIGQUIT, custom_handler);
-	env_copy1(env);
+	check_args(argc, argv, env);
 	while (42)
 	{
 		block = ft_block();
@@ -103,10 +107,9 @@ int	main(int argc, char **argv, char **env)
 		p1 = ft_pipe(lst_size);
 		test = block;
 		i = 0;
-		while(test)
+		while (test)
 		{
 			block_content = (t_block *) test->content;
-			// check_builtin(block_content->cmd, block_content->arg);
 			param = ft_param(lst_size, block_content);
 			flags = ft_flags_execve(block_content);
 			pid[i] = fork();
