@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/17 16:10:37 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/18 12:11:24 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int	main(int argc, char **argv, char **env)
 		p1 = ft_pipe(lst_size);
 		test = block;
 		i = 0;
-		while (test)
+		while(test)
 		{
 			block_content = (t_block *) test->content;
 			// check_builtin(block_content->cmd, block_content->arg);
