@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:44:18 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/07 14:37:34 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/18 15:45:31 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ void	ft_pwd(char *cmd, char **flags)
 		perror("salut");
 }
 
-//checker comment je vais verifier avec la gestion d'erreure finale et print si le file n'existe pas
 void	ft_cd(char **flags)
 {
 	char	current_path[4096];

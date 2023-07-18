@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dolar.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:26:33 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/13 18:18:56 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/18 15:50:33 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	ft_dolar_long(int i, char *prompt, int *j)
 	i++;
 	z = 0;
 	while (ft_strchr("\0\" $|", prompt[i + z]))
-	// while (prompt[i + z] != '\0' && prompt[i + z] != '"' && prompt[i + z] != ' ' && prompt[i + z] != '$' && prompt[i + z] != '|')
 		z++;
 	cp = malloc(sizeof(char) * (z + 2));
 	if (!cp)
@@ -29,8 +28,8 @@ int	ft_dolar_long(int i, char *prompt, int *j)
 	cp[z] = '=';
 	cp[z + 1] = '\0';
 	*j = *j + z;
-	z = 0; 
-	if	(ft_envp(g_data.env_copy, cp))
+	z = 0;
+	if (ft_envp(g_data.env_copy, cp))
 		z = (int) ft_strlen(ft_envp(g_data.env_copy, cp));
 	free(cp);
 	return (z);
@@ -44,7 +43,7 @@ char	*ft_dolar_char(int *i, char *prompt, int *j, char *res)
 
 	z = 0;
 	*i = *i + 1;
-	while (prompt[*i + z] != '\0' && prompt[*i + z] != '"' && prompt[*i + z] != ' ' && prompt[*i + z] != '$' && prompt[*i + z] != '|')
+	while (ft_strchr("\0\" $|", prompt[*i + z]))
 		z++;
 	cp = malloc(sizeof(char) * (z + 2));
 	if (!cp)
@@ -54,14 +53,13 @@ char	*ft_dolar_char(int *i, char *prompt, int *j, char *res)
 	cp[z + 1] = '\0';
 	dolar = ft_envp(g_data.env_copy, cp);
 	if (dolar == NULL)
+		*i = *i + z - 1;
+	else
 	{
-		*i = *i + z - 1; 
-		free(cp);
-		return (res);
+		ft_strlcpy(res + *j, dolar, ft_strlen(dolar) + 1);
+		*j = *j + (int)ft_strlen(dolar);
+		*i = *i + z - 1;
 	}
-	ft_strlcpy(res + *j, dolar, ft_strlen(dolar) + 1);
-	*j = *j + (int)ft_strlen(dolar);
-	*i = *i + z - 1; 
 	free(cp);
 	return (res);
 }

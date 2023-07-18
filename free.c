@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 13:45:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/18 15:29:08 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/18 15:44:32 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_free_cc_c(char **cc, char *c)
 	free(c);
 }
 
-void ft_free_pipe(int **p1, int lst_size)
+void	ft_free_pipe(int **p1, int lst_size)
 {
 	int	i;
 
@@ -58,4 +58,3 @@ void ft_free_pipe(int **p1, int lst_size)
 	}
 	free(p1);
 }
-

@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/18 15:31:58 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/18 15:49:23 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,12 +143,15 @@ void	ft_free_ii(int **split, int i);
 void	ft_free_param(t_param *param);
 void	ft_free_cc_c(char **cc, char *c);
 
+//pipe.c
 int		**ft_pipe(int lst_size);
 void	ft_closepipe(int **p1, int lst_size);
 void	ft_waitpid(int *pid);
-// void	ft_exec_fork(int lst_size, t_block *block_content, int i);
-void	ft_fork(t_param *param, int **p1, char **flags, int i);
+int		ft_pipe_out(t_param *param, int **p1, int i);
+int		ft_pipe_in(t_param *param, int **p1, int i);
+
 t_param	*ft_param(int lst_size, t_block *b_c);
+void	ft_fork(t_param *param, int **p1, char **flags, int i);
 
 //error
 void	msg_error(char *str, int status);
