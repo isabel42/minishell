@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/17 16:10:50 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/18 15:31:58 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,18 @@
 # define BUFFER_SIZE 1000 //pour la fonction getcwd
 # define ERROR1 "Syntax error: Error text reviewd file block_build_utils" //
 
+typedef struct s_param
+{
+	char		*cmd;
+	char		*infile;
+	char		*outfile;
+	char		*heredoc;
+	int			lst_size;
+	char		*chev_out;
+	int			fd_in;
+	int			fd_out;
+	char		**flags;
+}				t_param;
 typedef struct s_data
 {
 	char					**env_copy;
@@ -93,7 +105,7 @@ void	ft_exit_isa(char *s);
 // utils_1.c
 char	**ft_nl_charchar(char **tab, char *txt);
 
-// char	**ft_flags(char **envp, t_list **inputs);
+char	**ft_flags_execve(t_block *b_c);
 
 //builtin
 int		check_builtin(char *cmd, char **flags);
@@ -118,7 +130,7 @@ void	custom_handler(int signal);
 
 //ft_exec
 void	ft_exec(char *cmd, char **args);
-void	ft_heredoc(char *b_c_infile, char **param, int done);
+void	ft_heredoc(char *b_c_infile, t_param *param, int done);
 int		ft_fd_heredoc(char *heredoc);
 
 //pipex
@@ -128,15 +140,15 @@ char	*ft_find_path(char *path, char *command, char *infile);
 
 void	ft_free_cc(char **split);
 void	ft_free_ii(int **split, int i);
-void	ft_free_param(char **param);
+void	ft_free_param(t_param *param);
 void	ft_free_cc_c(char **cc, char *c);
 
 int		**ft_pipe(int lst_size);
 void	ft_closepipe(int **p1, int lst_size);
 void	ft_waitpid(int *pid);
 // void	ft_exec_fork(int lst_size, t_block *block_content, int i);
-void	ft_fork(char **param, int **p1, char **flags, int i);
-char	**ft_param(int lst_size, t_block *b_c);
+void	ft_fork(t_param *param, int **p1, char **flags, int i);
+t_param	*ft_param(int lst_size, t_block *b_c);
 
 //error
 void	msg_error(char *str, int status);

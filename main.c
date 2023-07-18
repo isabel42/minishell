@@ -6,13 +6,13 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/18 14:43:59 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/18 15:31:09 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_free_loop(char **param, char **flags)
+void	ft_free_loop(t_param *param, char **flags)
 {
 	int	i;
 
@@ -69,12 +69,13 @@ char	**ft_flags_execve(t_block *b_c)
 
 void	check_args(int ac, char **av, char **env)
 {
+	(void)av;
 	if (env == NULL)
 	{
 		printf("Error : env is NULL\n");
 		exit(-1);
 	}
-	if (argc != 1)
+	if (ac != 1)
 	{
 		printf("Minishell don't take any argument\n");
 		exit(1);
@@ -90,11 +91,10 @@ int	main(int argc, char **argv, char **env)
 	t_list	*block;
 	t_list	*test;
 	t_block	*block_content;
-	char	**flags;
 	int		*pid;
 	int		**p1;
 	int		i = 0;
-	char	**param;
+	t_param	*param;
 	int		lst_size;
 
 	check_args(argc, argv, env);
@@ -111,11 +111,11 @@ int	main(int argc, char **argv, char **env)
 		{
 			block_content = (t_block *) test->content;
 			param = ft_param(lst_size, block_content);
-			flags = ft_flags_execve(block_content);
+			check_builtin(param->cmd, param->flags + 1);
 			pid[i] = fork();
 			if (pid[i] == 0)
-				ft_fork(param, p1, flags, i);
-			ft_free_loop(param, flags);
+				ft_fork(param, p1, param->flags, i);
+			ft_free_loop(param, param->flags);
 			test = test->next;
 			i++;
 		}

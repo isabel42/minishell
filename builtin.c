@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 14:54:47 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/18 14:18:25 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/18 14:57:43 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,15 @@ char	*all_lower(char *str)
 
 int	check_builtin(char *param0, char **flags)
 {
-	int	i;
+	int		i;
 	char	*cmd;
 
 	if (param0 == NULL)
 		return (1);
 	i = ft_strlen(param0);
-	while(i >= 0 && param0[i] != '/')
+	while (i >= 0 && param0[i] != '/')
 		i--;
 	cmd = param0 + i + 1;
-	printf("[%s] TEST\n", cmd);
 	if (!ft_strncmp(all_lower(cmd), "echo", 4) && ft_strlen(cmd) == 4)
 		ft_echo(cmd, flags);
 	else if (!ft_strncmp(all_lower(cmd), "cd", 2) && ft_strlen(cmd) == 2)
@@ -54,7 +53,6 @@ int	check_builtin(char *param0, char **flags)
 		ft_exit(cmd, flags);
 	else
 		return (-1);
-	printf("builtin\n");
 	return (0);
 }
 

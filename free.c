@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 13:45:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/17 16:00:44 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/18 15:29:08 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 void	ft_free_ii(int **split, int j)
 {
@@ -26,14 +25,13 @@ void	ft_free_ii(int **split, int j)
 	free(split);
 }
 
-void	ft_free_param(char **param)
+void	ft_free_param(t_param *param)
 {
-	free(param[0]);
-	free(param[1]);
-	free(param[2]);
-	free(param[3]);
-	free(param[4]);
-	free(param[5]);
+	free(param->cmd);
+	free(param->infile);
+	free(param->outfile);
+	free(param->heredoc);
+	free(param->chev_out);
 	free(param);
 }
 

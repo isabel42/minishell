@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 11:09:56 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/18 14:32:39 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/18 15:12:56 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_exec(char *cmd, char **args)
 	(void)args;
 }
 
-void	ft_heredoc(char *b_c_infile, char **param, int done)
+void	ft_heredoc(char *b_c_infile, t_param *param, int done)
 {
 	char	*prompt;
 	char	*res;
@@ -40,17 +40,17 @@ void	ft_heredoc(char *b_c_infile, char **param, int done)
 		res = ft_strjoin(res, "\n");
 		i++;
 	}
-	if (param[3] != NULL)
-		free(param[3]);
-	if (param[1] != NULL && done == 0)
+	if (param->heredoc != NULL)
+		free(param->heredoc);
+	if (param->infile != NULL && done == 0)
 	{
-		free(param[1]);
-		param[1] = NULL;
+		free(param->infile);
+		param->infile = NULL;
 	}
-	param[3] = malloc(sizeof(char) * (ft_strlen(res) + 1));
-	if (!param[3])
+	param->heredoc = malloc(sizeof(char) * (ft_strlen(res) + 1));
+	if (!param->heredoc)
 		return ;
-	ft_strlcpy(param[3], res, ft_strlen(res) + 1);
+	ft_strlcpy(param->heredoc, res, ft_strlen(res) + 1);
 }
 
 int	ft_fd_heredoc(char *heredoc)
