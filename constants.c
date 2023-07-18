@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 13:19:45 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/13 18:12:11 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/18 14:13:34 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,6 @@ char	*ft_find_path(char *path, char *command, char *infile)
 		ft_free_cc_c(path_split, slash_command);
 	}
 	ft_perror_comm(command, infile);
-	return (NULL);
+	command = ft_strjoin(command, "\0");
+	return (command);
 }

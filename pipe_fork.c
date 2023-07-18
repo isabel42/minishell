@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:30:21 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/17 13:12:05 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/18 14:32:56 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	ft_waitpid(int *pid)
 
 int	ft_pipe_in(char **param, int **p1, int i)
 {
-	int	a;
+	int a;
 
 	if (param[1] != NULL && param[0] != NULL)
 	{
@@ -80,9 +80,7 @@ int	ft_pipe_in(char **param, int **p1, int i)
 		}
 	}
 	else if (param[3] != NULL)
-	{
 		a = ft_fd_heredoc(param[3]);
-	}
 	else if (i > 0)
 		a = p1[i - 1][0];
 	else 
@@ -134,9 +132,8 @@ void	ft_fork(char **param, int **p1, char **flags, int i)
 	b = ft_pipe_out(param, p1, i);
 	dup2(a, STDIN_FILENO);
 	dup2(b, STDOUT_FILENO);
-	// close (a);
 	ft_closepipe(p1, ft_atoi(param[4]));
-	printf("%s\n", param[0]);
-	execve(param[0], flags, g_data.env_copy);
+	if (check_builtin(param[0], flags + 1) != 0)
+		execve(param[0], flags, NULL);
 	exit(0);
 }

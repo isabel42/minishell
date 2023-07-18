@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/18 12:11:24 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/18 14:32:16 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ int	main(int argc, char **argv, char **env)
 	// signal(SIGINT, custom_handler);
 	// signal(SIGQUIT, custom_handler);
 	env_copy1(env);
-	// while (42)
-	// {
+	while (42)
+	{
 		block = ft_block();
 		test = block;
 		lst_size = ft_lstsize(test);
@@ -121,6 +121,6 @@ int	main(int argc, char **argv, char **env)
 		ft_waitpid(pid);
 		free(pid);
 		ft_free_pipe(p1, lst_size);
-	// }
+	}
 	return (0);
 }

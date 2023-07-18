@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 11:09:56 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/17 13:05:18 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/18 14:32:39 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_heredoc(char *b_c_infile, char **param, int done)
 	}
 	if (param[3] != NULL)
 		free(param[3]);
-	if(param[1] != NULL && done == 0)
+	if (param[1] != NULL && done == 0)
 	{
 		free(param[1]);
 		param[1] = NULL;
@@ -55,14 +55,16 @@ void	ft_heredoc(char *b_c_infile, char **param, int done)
 
 int	ft_fd_heredoc(char *heredoc)
 {
-	int		fd;
+	int		a;
 	char	*join;
 
 	join = "\0";
 	join = ft_strjoin(ft_envp(g_data.env_copy, "PWD="), "/tmp");
-	fd = open(join, O_CREAT | O_RDWR, 0777);
+	a = open(join, O_TRUNC | O_CREAT | O_RDWR | O_CLOEXEC, 00644);
+	ft_putstr_fd(heredoc, a);
+	close(a);
+	a = open(join, O_RDWR, 00644);
 	free(join);
-	ft_putstr_fd(heredoc, fd);
 	unlink("tmp");
-	return (fd);
+	return (a);
 }
