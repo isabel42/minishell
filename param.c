@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 18:29:21 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/19 15:36:37 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/19 16:06:37 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ t_param	*ft_param(int lst_size, t_block *b_c, int i, int **p1)
 	(void) i;
 	param = malloc(sizeof(t_param));
 	if (!param)
-		exit(0);
+		return (NULL);//exit(0);
 	param->flags = ft_flags_execve(b_c);
 	ft_infile(param, b_c);
 	ft_outfile(param, b_c);

@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/19 15:00:55 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/19 16:16:37 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,10 @@ int	main(int argc, char **argv, char **env)
 				if (pid[i] == 0)
 					ft_fork(param, p1);
 			}
+			if(param->fd_in > 2)
+				close (param->fd_in);
+			// if(param->fd_out > 1)
+			// 	close (param->fd_out);
 			ft_free_param(param);
 			test = test->next;
 			i++;

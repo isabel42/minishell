@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:13:27 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/19 15:35:50 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/19 16:01:10 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	ft_export(t_param *param)
 	int	i;
 
 	i = 0;
-	if (!param->flags[0])
+	if (!param->flags[1])
 	{
 		while (g_data.env_copy[i])
 		{
@@ -88,7 +88,9 @@ void	ft_export(t_param *param)
 		{
 			if (is_equal_sign(param->flags[i]) == 1)
 			{
+				// dup2(param->fd_in, STDIN_FILENO);
 				add_new_var(param->flags[i]);
+				// dup2(2, STDIN_FILENO);
 			}
 			i++;
 		}
