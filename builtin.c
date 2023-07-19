@@ -6,7 +6,11 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 14:54:47 by ktomat            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/07/19 13:04:05 by itovar-n         ###   ########.fr       */
+=======
+/*   Updated: 2023/07/19 13:35:12 by ktomat           ###   ########.fr       */
+>>>>>>> kimi
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +30,7 @@ char	*all_lower(char *str)
 	return (str);
 }
 
+<<<<<<< HEAD
 
 int	ft_check_ifbuiltin(char *cmd)
 {
@@ -82,18 +87,21 @@ int	check_builtin(char *param0, char **flags)
 }
 
 void	ft_echo(char *cmd, char **flags)
+=======
+void	ft_echo(t_param *param)
+>>>>>>> kimi
 {
 	int	i;
 
-	(void)cmd;
-	if (!flags[0])
+	if (!param->flags[0])
 		printf("\n");
-	else if (flags[0][0] == '-' && flags[0][1] == 'n' && flags[0][2] == '\0')
+	else if (param->flags[0][0] == '-' && param->flags[0][1] == 'n'
+		&& param->flags[0][2] == '\0')
 	{
 		i = 1;
-		while (flags[i])
+		while (param->flags[i])
 		{
-			printf("%s", flags[i]);
+			printf("%s", param->flags[i]);
 			i++;
 		}
 		return ;
@@ -101,9 +109,9 @@ void	ft_echo(char *cmd, char **flags)
 	else
 	{
 		i = 0;
-		while (flags[i])
+		while (param->flags[i])
 		{
-			printf("%s", flags[i]);
+			printf("%s", param->flags[i]);
 			i++;
 		}
 		printf("\n");
@@ -124,21 +132,19 @@ int	is_digit1(char *str)
 	return (0);
 }
 
-void	ft_exit(char *cmd, char **flags)
+void	ft_exit(t_param *param)
 {
-	(void)flags;
-	(void)cmd;
-	if (flags[1])
+	if (param->flags[1])
 		printf("exit\nminishell: exit: too many arguments\n");
-	else if (flags[0])
+	else if (param->flags[0])
 	{
-		if (is_digit1(flags[0]) == -1)
+		if (is_digit1(param->flags[0]) == -1)
 		{
 			printf("exit\nminishell: exit:");
-			printf(" %s: numeric argument required\n", flags[0]);
+			printf(" %s: numeric argument required\n", param->flags[0]);
 			exit(255);
 		}
-		exit(ft_atoi(flags[0]));
+		exit(ft_atoi(param->flags[0]));
 	}
 	else
 		exit(0);

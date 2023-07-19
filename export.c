@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:13:27 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/07 14:36:18 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/19 12:42:28 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,12 @@ void	add_new_var(char *flags)
 	g_data.env_copy[i] = ft_strdup(flags);
 }
 
-void	ft_export(char *cmd, char **flags)
+void	ft_export(t_param *param)
 {
 	int	i;
 
-	(void)cmd;
 	i = 0;
-	if (!flags[0])
+	if (!param->flags[0])
 	{
 		while (g_data.env_copy[i])
 		{
@@ -71,13 +70,13 @@ void	ft_export(char *cmd, char **flags)
 			i++;
 		}
 	}
-	else if (flags[0])
+	else if (param->flags[0])
 	{
-		while (flags[i])
+		while (param->flags[i])
 		{
-			if (is_equal_sign(flags[i]) == 1)
+			if (is_equal_sign(param->flags[i]) == 1)
 			{
-				add_new_var(flags[i]);
+				add_new_var(param->flags[i]);
 			}
 			i++;
 		}

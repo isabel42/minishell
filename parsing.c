@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kimitomat <kimitomat@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:01:58 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/10 21:12:55 by kimitomat        ###   ########.fr       */
+/*   Updated: 2023/07/19 12:23:00 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,9 +124,10 @@ t_list	*ft_parsing(char *prompt, char *b)
 	t_type	*content;
 	char	*txt;
 	int		i;
-	int		count = 0;
+	int		count;
 
 	i = 0;
+	count = 0;
 	inputs = NULL;
 	while (prompt[i] != '\0')
 	{
