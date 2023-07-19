@@ -3,26 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:28:34 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/19 13:36:27 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/19 15:26:41 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	check_builtin(t_param *param)
+char	*all_lower(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] >= 65 && str[i] <= 90)
+			str[i] += 32;
+		i++;
+	}
+	return (str);
+}
+
+int	check_builtin(char *cmd_long)
 {
 	int		i;
 	char	*cmd;
 
-	if (param->cmd == NULL)
+	if (cmd_long == NULL)
 		return (-1);
-	i = ft_strlen(param->cmd);
-	while (i >= 0 && param->cmd[i] != '/')
+	i = ft_strlen(cmd_long);
+	while (i > 0 && cmd_long[i] != '/')
 		i--;
-	cmd = param->cmd + i + 1;
+	if (i == 0)
+		cmd = cmd_long;
+	else
+		cmd = cmd_long + i + 1;
 	if (!ft_strncmp(all_lower(cmd), "echo", 4) && ft_strlen(cmd) == 4)
 		return (0);
 	else if (!ft_strncmp(all_lower(cmd), "cd", 2) && ft_strlen(cmd) == 2)
@@ -43,10 +60,10 @@ int	check_builtin(t_param *param)
 int	ft_built_exec(t_param *param)
 {
 	int	nb;
-	int	result;
-	int	(*ptr_ft[7])(t_param);
+	// int	result;
+	void	(*ptr_ft[7])(t_param *);
 
-	nb = check_builtin(param);
+	nb = check_builtin(param->cmd);
 	if (nb == -1)
 		return (-1);
 	ptr_ft[0] = &ft_echo;
@@ -56,6 +73,6 @@ int	ft_built_exec(t_param *param)
 	ptr_ft[4] = &ft_unset;
 	ptr_ft[5] = &ft_env;
 	ptr_ft[6] = &ft_exit;
-	result = ptr_ft[nb](param);
-	return (result);
+	ptr_ft[nb](param);
+	return (1);
 }

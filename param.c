@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 18:29:21 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/18 16:59:35 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/19 15:36:37 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ t_param	*ft_param(int lst_size, t_block *b_c, int i, int **p1)
 {
 	t_param	*param;
 
+	(void) p1;
+	(void) i;
 	param = malloc(sizeof(t_param));
 	if (!param)
 		exit(0);

@@ -6,11 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/07/19 12:36:19 by itovar-n         ###   ########.fr       */
-=======
-/*   Updated: 2023/07/19 13:36:20 by ktomat           ###   ########.fr       */
->>>>>>> kimi
+/*   Updated: 2023/07/19 15:26:41 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,11 +111,6 @@ char	**ft_nl_charchar(char **tab, char *txt);
 char	**ft_flags_execve(t_block *b_c);
 
 //builtin
-<<<<<<< HEAD
-int	ft_check_ifbuiltin(char *cmd);
-int		check_builtin(char *cmd, char **flags);
-=======
->>>>>>> kimi
 int		env_copy1(char **env);
 int		count_list(t_list **list);
 void	ft_env(t_param *param);
@@ -161,16 +152,12 @@ void	ft_waitpid(int *pid);
 int		ft_pipe_out(t_param *param, int **p1, int i);
 int		ft_pipe_in(t_param *param, int **p1, int i);
 
-<<<<<<< HEAD
-t_param	*ft_param(int lst_size, t_block *b_c, int i, int **p1);
-=======
 //builtins-exec.c
-int		check_builtin(t_param *param);
+int		check_builtin(char *cmd_long);
 int		ft_built_exec(t_param *param);
 
-t_param	*ft_param(int lst_size, t_block *b_c);
->>>>>>> kimi
-void	ft_fork(t_param *param, int **p1, char **flags, int i);
+t_param	*ft_param(int lst_size, t_block *b_c, int i, int **p1);
+void	ft_fork(t_param *param, int **p1);
 
 //error
 void	msg_error(char *str, int status);
