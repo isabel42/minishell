@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:44:18 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/18 15:45:31 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/19 12:43:31 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ int	env_copy1(char **env)
 	return (0);
 }
 
-void	ft_env(char **flags)
+void	ft_env(t_param *param)
 {
 	int	i;
 
 	i = 0;
-	if (flags[0])
-		printf("env: %s: No such file or directory", flags[0]);
+	if (param->flags[0])
+		printf("env: %s: No such file or directory", param->flags[0]);
 	else
 	{
 		while (g_data.env_copy[i])
@@ -63,19 +63,17 @@ void	ft_env(char **flags)
 	}
 }
 
-void	ft_pwd(char *cmd, char **flags)
+void	ft_pwd(t_param *param)
 {
 	char	cwd[4096];
 
-	(void)cmd;
-	(void)flags;
 	if (getcwd(cwd, sizeof(cwd)) != NULL)
 		printf("%s\n", cwd);
 	else
-		perror("salut");
+		perror("getcwd error\n");
 }
 
-void	ft_cd(char **flags)
+void	ft_cd(t_param *param)
 {
 	char	current_path[4096];
 	char	old_path[4096];
@@ -83,10 +81,10 @@ void	ft_cd(char **flags)
 
 	i = 0;
 	getcwd(old_path, 4096);
-	if (!flags[0])
+	if (!param->flags[0])
 		chdir(find_home());
 	else
-		chdir(flags[0]);
+		chdir(param->flags[0]);
 	getcwd(current_path, 4096);
 	while (g_data.env_copy[i])
 	{

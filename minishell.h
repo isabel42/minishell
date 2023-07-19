@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/18 15:49:23 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/19 12:44:56 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,13 +111,13 @@ char	**ft_flags_execve(t_block *b_c);
 int		check_builtin(char *cmd, char **flags);
 int		env_copy1(char **env);
 int		count_list(t_list **list);
-void	ft_env(char **flags);
-void	ft_echo(char *cmd, char **flags);
-void	ft_exit(char *cmd, char **flags);
-void	ft_pwd(char *cmd, char **flags);
-void	ft_cd(char **flags);
-void	ft_export(char *cmd, char **flags);
-void	ft_unset(char *cmd, char **flags);
+void	ft_env(t_param *param);
+void	ft_echo(t_param *param);
+void	ft_exit(t_param *param);
+void	ft_pwd(t_param *param);
+void	ft_cd(t_param *param);
+void	ft_export(t_param *param);
+void	ft_unset(t_param *param);
 
 //signal
 int		rl_replace_line(const char *text, int i);
