@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   param.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 18:29:21 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/18 15:32:14 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/19 15:36:37 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,12 @@ void	ft_outfile(t_param *param, t_block *b_c)
 	ft_outfile_cp(param, b_c->outfile[i - 1], pathoutfile);
 }
 
-t_param	*ft_param(int lst_size, t_block *b_c)
+t_param	*ft_param(int lst_size, t_block *b_c, int i, int **p1)
 {
 	t_param	*param;
 
+	(void) p1;
+	(void) i;
 	param = malloc(sizeof(t_param));
 	if (!param)
 		exit(0);
@@ -114,6 +116,8 @@ t_param	*ft_param(int lst_size, t_block *b_c)
 	param->cmd = ft_find_path(ft_envp(g_data.env_copy, "PATH="),
 			b_c->cmd, param->infile);
 	param->lst_size = lst_size;
+	param->fd_in = ft_pipe_in(param, p1, i);
+	param->fd_out = ft_pipe_out(param, p1, i);
 	printf("param0: %s\n", param->cmd);
 	printf("param1: %s\n", param->infile);
 	printf("param2: %s\n", param->outfile);

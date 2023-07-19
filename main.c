@@ -6,25 +6,11 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/19 15:03:57 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/19 15:55:56 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	ft_free_loop(t_param *param, char **flags)
-{
-	int	i;
-
-	i = 1;
-	ft_free_param(param);
-	while (flags[i] != NULL)
-	{
-		free(flags[i]);
-		i++;
-	}
-	free(flags);
-}
 
 void	ft_checkarg(int ac, char **av, char **env)
 {
@@ -110,12 +96,14 @@ int	main(int argc, char **argv, char **env)
 		while (test)
 		{
 			block_content = (t_block *) test->content;
-			param = ft_param(lst_size, block_content);
-			check_builtin(param);
-			pid[i] = fork();
-			if (pid[i] == 0)
-				ft_fork(param, p1, param->flags, i);
-			ft_free_loop(param, param->flags);
+			param = ft_param(lst_size, block_content, i, p1);
+			if (ft_built_exec(param) == -1)
+			{
+				pid[i] = fork();
+				if (pid[i] == 0)
+					ft_fork(param, p1);
+			}
+			ft_free_param(param);
 			test = test->next;
 			i++;
 		}

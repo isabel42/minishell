@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:13:27 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/19 12:42:28 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/19 15:35:50 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,25 @@ int	is_equal_sign(char *str)
 void	add_new_var(char *flags)
 {
 	int		i;
+	int		j;
 
 	i = 0;
+	j = 0;
+	while (flags[j] != '=' && flags[j])
+		j++;
 	while (g_data.env_copy[i])
+	{
+		if (!ft_strncmp(flags, g_data.env_copy[i], j))
+		{
+			if (g_data.env_copy[i])
+				free(g_data.env_copy[i]);
+			break ;
+		}
 		i++;
+	}
 	g_data.env_copy[i] = ft_strdup(flags);
 }
-
+ 
 void	ft_export(t_param *param)
 {
 	int	i;
