@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 14:54:47 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/18 14:57:43 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/19 13:04:05 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,31 @@ char	*all_lower(char *str)
 		i++;
 	}
 	return (str);
+}
+
+
+int	ft_check_ifbuiltin(char *cmd)
+{
+	char	*builtin[7] = {"echo", "cd", "pwd", "export", "unset", "env", "exit"};
+	int		i;
+	// char	*cmd;
+	size_t	len;
+
+	// if (param->cmd == NULL)
+	// 	return (-1);
+	// i = ft_strlen(param->cmd);
+	// while (i >= 0 && param->cmd[i] != '/')
+	// 	i--;
+	// cmd = param->cmd + i + 1;
+	i = 0;
+	while (i < 7)
+	{
+		len = ft_strlen(builtin[i]);
+		if (!ft_strncmp(all_lower(cmd), builtin[i], len) && ft_strlen(cmd) == len)
+			return (i);
+		i++;
+	}
+	return (-1);
 }
 
 int	check_builtin(char *param0, char **flags)

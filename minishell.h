@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/18 15:49:23 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/19 12:36:19 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,6 @@
 # define BUFFER_SIZE 1000 //pour la fonction getcwd
 # define ERROR1 "Syntax error: Error text reviewd file block_build_utils" //
 
-typedef struct s_param
-{
-	char		*cmd;
-	char		*infile;
-	char		*outfile;
-	char		*heredoc;
-	int			lst_size;
-	char		*chev_out;
-	int			fd_in;
-	int			fd_out;
-	char		**flags;
-}				t_param;
 typedef struct s_data
 {
 	char					**env_copy;
@@ -65,6 +53,21 @@ typedef struct s_block
 	char	**infile;
 	char	**outfile;
 }	t_block;
+
+typedef struct s_param
+{
+	char		*cmd;
+	char		*infile;
+	char		*outfile;
+	char		*heredoc;
+	int			lst_size;
+	char		*chev_out;
+	int			fd_in;
+	int			fd_out;
+	char		**flags;
+}				t_param;
+
+enum builtin{echo, cd, pwd, export, unset, env, exits};
 
 // block_build_utils.c
 int		ft_inout(t_list **temp, t_block *b_c);
@@ -108,6 +111,7 @@ char	**ft_nl_charchar(char **tab, char *txt);
 char	**ft_flags_execve(t_block *b_c);
 
 //builtin
+int	ft_check_ifbuiltin(char *cmd);
 int		check_builtin(char *cmd, char **flags);
 int		env_copy1(char **env);
 int		count_list(t_list **list);
@@ -150,7 +154,7 @@ void	ft_waitpid(int *pid);
 int		ft_pipe_out(t_param *param, int **p1, int i);
 int		ft_pipe_in(t_param *param, int **p1, int i);
 
-t_param	*ft_param(int lst_size, t_block *b_c);
+t_param	*ft_param(int lst_size, t_block *b_c, int i, int **p1);
 void	ft_fork(t_param *param, int **p1, char **flags, int i);
 
 //error

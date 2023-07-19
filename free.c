@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 13:45:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/18 15:44:32 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/18 17:16:45 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,20 @@ void	ft_free_ii(int **split, int j)
 
 void	ft_free_param(t_param *param)
 {
+	int i;
+
+	i = 1;
 	free(param->cmd);
 	free(param->infile);
 	free(param->outfile);
 	free(param->heredoc);
 	free(param->chev_out);
+	while (param->flags[i] != NULL)
+	{
+		free(param->flags[i]);
+		i++;
+	}
+	free(param->flags);
 	free(param);
 }
 

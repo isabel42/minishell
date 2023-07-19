@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/18 15:31:09 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/19 12:36:19 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,44 +86,62 @@ void	check_args(int ac, char **av, char **env)
 	env_copy1(env);
 }
 
-int	main(int argc, char **argv, char **env)
-{
-	t_list	*block;
-	t_list	*test;
-	t_block	*block_content;
-	int		*pid;
-	int		**p1;
-	int		i = 0;
-	t_param	*param;
-	int		lst_size;
+// int	main(int argc, char **argv, char **env)
+// {
+// 	t_list	*block;
+// 	t_list	*test;
+// 	t_block	*block_content;
+// 	int		*pid;
+// 	int		**p1;
+// 	int		i = 0;
+// 	t_param	*param;
+// 	int		lst_size;
 
-	check_args(argc, argv, env);
-	while (42)
-	{
-		block = ft_block();
-		test = block;
-		lst_size = ft_lstsize(test);
-		pid = malloc(sizeof(pid) *(lst_size));
-		p1 = ft_pipe(lst_size);
-		test = block;
-		i = 0;
-		while (test)
-		{
-			block_content = (t_block *) test->content;
-			param = ft_param(lst_size, block_content);
-			check_builtin(param->cmd, param->flags + 1);
-			pid[i] = fork();
-			if (pid[i] == 0)
-				ft_fork(param, p1, param->flags, i);
-			ft_free_loop(param, param->flags);
-			test = test->next;
-			i++;
-		}
-		ft_lstclear(&block, (void *) &ft_clean_block);
-		ft_closepipe(p1, lst_size);
-		ft_waitpid(pid);
-		free(pid);
-		ft_free_pipe(p1, lst_size);
-	}
-	return (0);
+// 	check_args(argc, argv, env);
+// 	while (42)
+// 	{
+// 		block = ft_block();
+// 		test = block;
+// 		lst_size = ft_lstsize(test);
+// 		pid = malloc(sizeof(pid) *(lst_size));
+// 		p1 = ft_pipe(lst_size);
+// 		test = block;
+// 		i = 0;
+// 		while (test)
+// 		{
+// 			block_content = (t_block *) test->content;
+// 			param = ft_param(lst_size, block_content, i, p1);
+// 			// dup2(param->fd_in, STDIN_FILENO);
+// 			// dup2(param->fd_out, STDOUT_FILENO);
+// 			// if(check_builtin(param->cmd, param->flags + 1) == 0)
+// 			// {
+// 			// 	// printf("A");
+// 			// 	ft_free_param(param);
+// 			// 	test = test->next;
+// 			// 	i++;
+// 			// 	continue;
+// 			// }
+// 			pid[i] = fork();
+// 			if (pid[i] == 0)
+// 				ft_fork(param, p1, param->flags, i);
+// 			ft_free_param(param);
+// 			test = test->next;
+// 			i++;
+// 		}
+// 		ft_lstclear(&block, (void *) &ft_clean_block);
+// 		ft_closepipe(p1, lst_size);
+// 		ft_waitpid(pid);
+// 		free(pid);
+// 		ft_free_pipe(p1, lst_size);
+// 	}
+// 	return (0);
+// }
+
+int main()
+{
+	int i;
+
+    i = ft_check_ifbuiltin("echo");
+    printf("%d",i);
+    return 0;
 }
