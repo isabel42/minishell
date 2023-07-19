@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:28:34 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/19 13:36:27 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/19 15:04:59 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,20 @@ int	check_builtin(t_param *param)
 
 int	ft_built_exec(t_param *param)
 {
-	int	nb;
-	int	result;
-	int	(*ptr_ft[7])(t_param);
+	// int	nb;
+	// int	result;
+	// int	(*ptr_ft[7])(t_param);
 
-	nb = check_builtin(param);
-	if (nb == -1)
-		return (-1);
-	ptr_ft[0] = &ft_echo;
-	ptr_ft[1] = &ft_cd;
-	ptr_ft[2] = &ft_pwd;
-	ptr_ft[3] = &ft_export;
-	ptr_ft[4] = &ft_unset;
-	ptr_ft[5] = &ft_env;
-	ptr_ft[6] = &ft_exit;
-	result = ptr_ft[nb](param);
-	return (result);
+	// nb = check_builtin(param);
+	// if (nb == -1)
+	// 	return (-1);
+	// ptr_ft[0] = &ft_echo;
+	// ptr_ft[1] = &ft_cd;
+	// ptr_ft[2] = &ft_pwd;
+	// ptr_ft[3] = &ft_export;
+	// ptr_ft[4] = &ft_unset;
+	// ptr_ft[5] = &ft_env;
+	// ptr_ft[6] = &ft_exit;
+	// result = ptr_ft[nb](param);
+	// return (result);
 }

@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/18 15:31:09 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/19 15:03:57 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	main(int argc, char **argv, char **env)
 		{
 			block_content = (t_block *) test->content;
 			param = ft_param(lst_size, block_content);
-			check_builtin(param->cmd, param->flags + 1);
+			check_builtin(param);
 			pid[i] = fork();
 			if (pid[i] == 0)
 				ft_fork(param, p1, param->flags, i);
