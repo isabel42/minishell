@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 14:54:47 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/19 13:00:13 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/19 13:35:12 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,36 +24,6 @@ char	*all_lower(char *str)
 		i++;
 	}
 	return (str);
-}
-
-int	check_builtin(char *param0, char **flags)
-{
-	int		i;
-	char	*cmd;
-
-	if (param0 == NULL)
-		return (-1);
-	i = ft_strlen(param0);
-	while (i >= 0 && param0[i] != '/')
-		i--;
-	cmd = param0 + i + 1;
-	if (!ft_strncmp(all_lower(cmd), "echo", 4) && ft_strlen(cmd) == 4)
-		return (1);
-	else if (!ft_strncmp(all_lower(cmd), "cd", 2) && ft_strlen(cmd) == 2)
-		return (2);
-	else if (!ft_strncmp(all_lower(cmd), "pwd", 3) && ft_strlen(cmd) == 3)
-		return (3);
-	else if (!ft_strncmp(cmd, "export", 6) && ft_strlen(cmd) == 6)
-		return (4);
-	else if (!ft_strncmp(cmd, "unset", 5) && ft_strlen(cmd) == 5)
-		return (5);
-	else if (!ft_strncmp(all_lower(cmd), "env", 3) && ft_strlen(cmd) == 3)
-		return (6);
-	else if (!ft_strncmp(cmd, "exit", 4) && ft_strlen(cmd) == 4)
-		return (7);
-	else
-		return (-1);
-	return (0);
 }
 
 void	ft_echo(t_param *param)

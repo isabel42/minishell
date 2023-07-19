@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/19 12:44:56 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/19 13:36:20 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,6 @@ char	**ft_nl_charchar(char **tab, char *txt);
 char	**ft_flags_execve(t_block *b_c);
 
 //builtin
-int		check_builtin(char *cmd, char **flags);
 int		env_copy1(char **env);
 int		count_list(t_list **list);
 void	ft_env(t_param *param);
@@ -149,6 +148,10 @@ void	ft_closepipe(int **p1, int lst_size);
 void	ft_waitpid(int *pid);
 int		ft_pipe_out(t_param *param, int **p1, int i);
 int		ft_pipe_in(t_param *param, int **p1, int i);
+
+//builtins-exec.c
+int		check_builtin(t_param *param);
+int		ft_built_exec(t_param *param);
 
 t_param	*ft_param(int lst_size, t_block *b_c);
 void	ft_fork(t_param *param, int **p1, char **flags, int i);
