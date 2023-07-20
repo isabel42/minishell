@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/19 17:27:14 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/19 18:32:38 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	ft_checkarg(int ac, char **av, char **env)
 		printf("Minishell don't take any argument\n");
 		exit(1);
 	}
-	init_termios();
-	signal(SIGINT, custom_handler);
-	signal(SIGQUIT, custom_handler);
+	// init_termios();
+	// signal(SIGINT, custom_handler);
+	// signal(SIGQUIT, custom_handler);
 	env_copy1(env);
 }
 
@@ -66,9 +66,9 @@ void	check_args(int ac, char **av, char **env)
 		printf("Minishell don't take any argument\n");
 		exit(1);
 	}
-	init_termios();
-	signal(SIGINT, custom_handler);
-	signal(SIGQUIT, custom_handler);
+	// init_termios();
+	// signal(SIGINT, custom_handler);
+	// signal(SIGQUIT, custom_handler);
 	env_copy1(env);
 }
 
@@ -89,7 +89,9 @@ int	main(int argc, char **argv, char **env)
 		block = ft_block();
 		test = block;
 		lst_size = ft_lstsize(test);
-		pid = NULL;
+		pid = malloc(sizeof(int));
+		if (!pid)
+			return (0);
 		p1 = ft_pipe(lst_size);
 		test = block;
 		i = 0;
@@ -100,16 +102,8 @@ int	main(int argc, char **argv, char **env)
 			if (ft_built_exec(param) == -1)
 			{
 				pid = ft_new_pid(pid);
-				printf("hello: %d\n", ft_built_exec(param));
 				ft_fork(param, p1, pid);
-				// pid[i] = fork();
-				// if (pid[i] == 0)
-				// 	ft_fork(param, p1);
 			}
-			if(param->infile != NULL)
-				close (param->fd_in);
-			if (param->outfile != NULL)
-				close (param->fd_out);
 			ft_free_param(param);
 			test = test->next;
 			i++;
