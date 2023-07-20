@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kimitomat <kimitomat@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/19 16:22:02 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/20 10:11:12 by kimitomat        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	main(int argc, char **argv, char **env)
 		block = ft_block();
 		test = block;
 		lst_size = ft_lstsize(test);
-		pid = malloc(sizeof(pid) *(lst_size));
+		pid = NULL;
 		p1 = ft_pipe(lst_size);
 		test = block;
 		i = 0;
@@ -99,14 +99,17 @@ int	main(int argc, char **argv, char **env)
 			param = ft_param(lst_size, block_content, i, p1);
 			if (ft_built_exec(param) == -1)
 			{
-				pid[i] = fork();
-				if (pid[i] == 0)
-					ft_fork(param, p1);
+				pid = ft_new_pid(pid);
+				printf("hello: %d\n", ft_built_exec(param));
+				ft_fork(param, p1, pid);
+				// pid[i] = fork();
+				// if (pid[i] == 0)
+				// 	ft_fork(param, p1);
 			}
-			if(param->fd_in > 2)
+			if(param->infile != NULL)
 				close (param->fd_in);
-			// if(param->fd_out > 1)
-			// 	close (param->fd_out);
+			if (param->outfile != NULL)
+				close (param->fd_out);
 			ft_free_param(param);
 			test = test->next;
 			i++;
