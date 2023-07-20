@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/19 15:26:41 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/19 17:27:58 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,8 @@ int		check_builtin(char *cmd_long);
 int		ft_built_exec(t_param *param);
 
 t_param	*ft_param(int lst_size, t_block *b_c, int i, int **p1);
-void	ft_fork(t_param *param, int **p1);
+void	ft_fork(t_param *param, int **p1, int *pid);
+int		*ft_new_pid(int *pid);
 
 //error
 void	msg_error(char *str, int status);
