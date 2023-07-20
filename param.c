@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 18:29:21 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/19 18:50:59 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/20 16:51:10 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,9 @@ t_param	*ft_param(int lst_size, t_block *b_c, int i, int **p1)
 	param->fd_in = ft_pipe_in(param, p1, i);
 	param->fd_out = ft_pipe_out(param, p1, i);
 	// printf("param0: %s\n", param->cmd);
-	// printf("args: %s\n", param->flags[1]);
+	// printf("flag0: %s\n", param->flags[0]);
+	// printf("flag1: %s\n", param->flags[1]);
+	// // printf("flag2: %s\n", param->flags[2]);
 	// printf("param1: %s\n", param->infile);
 	// printf("param2: %s\n", param->outfile);
 	// printf("param3: %s\n", param->heredoc);

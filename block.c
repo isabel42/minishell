@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   block.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 17:23:20 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/11 12:05:49 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/20 14:06:33 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_list	*ft_block_build(t_list **l)
 	return (block);
 }
 
-t_list	*ft_block(void)
+t_list	*ft_block()
 {
 	char	*prompt;
 	t_list	*inputs;

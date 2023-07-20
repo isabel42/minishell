@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dolar.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:26:33 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/18 15:50:33 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/20 16:52:55 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_dolar_long(int i, char *prompt, int *j)
 
 	i++;
 	z = 0;
-	while (ft_strchr("\0\" $|", prompt[i + z]))
+	while (!ft_strrchr("\0$|\"", prompt[i + z]) && prompt[i + z] != ' ')
 		z++;
 	cp = malloc(sizeof(char) * (z + 2));
 	if (!cp)
@@ -43,7 +43,7 @@ char	*ft_dolar_char(int *i, char *prompt, int *j, char *res)
 
 	z = 0;
 	*i = *i + 1;
-	while (ft_strchr("\0\" $|", prompt[*i + z]))
+	while (!ft_strrchr("\0\"$|", prompt[*i + z]) && prompt[*i + z] != ' ')
 		z++;
 	cp = malloc(sizeof(char) * (z + 2));
 	if (!cp)
