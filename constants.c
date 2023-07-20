@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 13:19:45 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/19 15:26:41 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/19 18:45:29 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_perror_comm(char *command, char *infile)
 			ft_putstr_fd("No such file or directory\n", 1);
 		close (a);
 	}
-	else if (check_builtin(command) == -1)
+	else if (check_builtin(command) == -1 && command != NULL)
 	{
 		ft_putstr_fd("Command not found: ", 1);
 		if (command)
