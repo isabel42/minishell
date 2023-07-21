@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_clean.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 11:50:48 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/10 11:21:35 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/21 14:39:09 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	*ft_clean_block(void *content)
 	content_cast = (t_block *)content;
 	free(content_cast->cmd);
 	ft_free_cc(content_cast->arg);
-	ft_free_cc(content_cast->infile);
-	ft_free_cc(content_cast->outfile);
+	ft_free_cc(content_cast->in);
+	ft_free_cc(content_cast->out);
 	free(content_cast);
 	return (NULL);
 }

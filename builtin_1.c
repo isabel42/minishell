@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:44:18 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/21 12:54:53 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/21 13:07:59 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ void	ft_env(t_param *param)
 	{
 		while (g_data.env_copy[i])
 		{
-			ft_putstr_fd(g_data.env_copy[i],param->fd_out);
-			ft_putstr_fd("\n",param->fd_out);
+			ft_putstr_fd(g_data.env_copy[i], param->fd_out);
+			ft_putstr_fd("\n", param->fd_out);
 			i++;
 		}
 	}

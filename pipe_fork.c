@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:30:21 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/20 12:08:15 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/21 13:09:14 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	*ft_new_pid(int *pid)
 	free(pid);
 	return (new_pid);
 }
-
 
 void	ft_fork(t_param *param, int **p1, int *pid)
 {

@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/21 12:57:39 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/21 14:37:48 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include <signal.h>
 
 # define BUFFER_SIZE 1000 //pour la fonction getcwd
-# define ERROR1 "Syntax error: Error text reviewd file block_build_utils" //
+# define ERROR1 "Syntax error: Error text reviewd file block_build_utils"
 
 typedef struct s_data
 {
@@ -50,8 +50,8 @@ typedef struct s_block
 {
 	char	*cmd;
 	char	**arg;
-	char	**infile;
-	char	**outfile;
+	char	**in;
+	char	**out;
 }	t_block;
 
 typedef struct s_param

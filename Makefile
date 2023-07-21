@@ -18,6 +18,7 @@ SRCS	= main.c \
 			error.c \
 			pipe.c \
 			builtin_exec.c \
+			ft_exit.c \
 			signal.c \
 
 OBJS 	= ${SRCS:.c=.o}
