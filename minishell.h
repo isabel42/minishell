@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/20 14:06:27 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/21 12:57:39 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ typedef struct s_param
 	int			fd_out;
 	char		**flags;
 }				t_param;
-
-enum builtin{echo, cd, pwd, export, unset, env, exits};
 
 // block_build_utils.c
 int		ft_inout(t_list **temp, t_block *b_c);
@@ -131,7 +129,6 @@ void	init_termios(void);
 void	custom_handler(int signal);
 
 //ft_exec
-void	ft_exec(char *cmd, char **args);
 void	ft_heredoc(char *b_c_infile, t_param *param, int done);
 int		ft_fd_heredoc(char *heredoc);
 

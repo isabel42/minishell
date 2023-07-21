@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 14:54:47 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/21 12:31:09 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/21 12:33:27 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,9 @@
 void	ft_echo(t_param *param)
 {
 	int	i;
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> isa
 	if (!param->flags[1])
-		ft_putstr_fd("\n",param->fd_out);
+		ft_putstr_fd("\n", param->fd_out);
 	else if (param->flags[1][0] == '-' && param->flags[1][1] == 'n'
 		&& param->flags[1][2] == '\0')
 	{
@@ -43,11 +39,7 @@ void	ft_echo(t_param *param)
 			ft_putstr_fd(param->flags[i++], param->fd_out);
 		}
 		if (param->flags[1])
-<<<<<<< HEAD
 			ft_putstr_fd("\n", param->fd_out);
-=======
-			ft_putstr_fd("\n",param->fd_out);
->>>>>>> isa
 	}
 }
 
@@ -83,7 +75,7 @@ void	ft_exit(t_param *param)
 	else if (param->flags[1])
 	{
 		if (param->lst_size == 1)
-				printf("exit\n");
+			printf("exit\n");
 		if (is_digit1(param->flags[1]) == -1)
 			printf("minishell: exit: %s: numeric argument required\n", param->flags[1]);
 		if (param->lst_size == 1)

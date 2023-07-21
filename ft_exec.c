@@ -6,19 +6,14 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 11:09:56 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/18 15:12:56 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/21 13:03:18 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_exec(char *cmd, char **args)
-{
-	(void)cmd;
-	(void)args;
-}
-
-void	ft_heredoc(char *b_c_infile, t_param *param, int done)
+// kimi 21.07 : j'ai creer cette fonction pour normer ft_heredoc
+char	*ft_read(char *b_c_infile)
 {
 	char	*prompt;
 	char	*res;
@@ -35,11 +30,21 @@ void	ft_heredoc(char *b_c_infile, t_param *param, int done)
 				ft_strlen(prompt)))
 			break ;
 		if (prompt == NULL)
-			return ;
+			return (NULL);
 		res = ft_strjoin(res, prompt);
 		res = ft_strjoin(res, "\n");
 		i++;
 	}
+	return (res);
+}
+
+void	ft_heredoc(char *b_c_infile, t_param *param, int done)
+{
+	char	*res;
+
+	res = ft_read(b_c_infile);
+	if (res == NULL)
+		return ;
 	if (param->heredoc != NULL)
 		free(param->heredoc);
 	if (param->infile != NULL && done == 0)

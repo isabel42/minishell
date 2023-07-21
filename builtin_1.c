@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:44:18 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/19 15:55:58 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/21 12:54:53 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ void	ft_pwd(t_param *param)
 	(void) param;
 	if (getcwd(cwd, sizeof(cwd)) != NULL)
 	{
-		ft_putstr_fd(cwd,param->fd_out);
-		ft_putstr_fd("\n",param->fd_out);
+		ft_putstr_fd(cwd, param->fd_out);
+		ft_putstr_fd("\n", param->fd_out);
 	}
 	else
 		perror("getcwd error\n");
