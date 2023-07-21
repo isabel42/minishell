@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:30:21 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/20 12:07:32 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/20 12:08:15 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	*ft_new_pid(int *pid)
 {
 	int	i;
 	int	size;
-	int *new_pid;
+	int	*new_pid;
 
 	size = 0;
 	if (pid == NULL)
@@ -24,7 +24,7 @@ int	*ft_new_pid(int *pid)
 		new_pid = malloc(sizeof(int));
 		if (!new_pid)
 			return (0);
-		return(new_pid);
+		return (new_pid);
 	}
 	while (pid[size])
 		size++;
@@ -38,16 +38,16 @@ int	*ft_new_pid(int *pid)
 		i++;
 	}
 	free(pid);
-	return(new_pid);
+	return (new_pid);
 }
 
 
 void	ft_fork(t_param *param, int **p1, int *pid)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(pid[i + 1])
+	while (pid[i + 1])
 		i++;
 	pid[i] = fork();
 	if (pid[i] == 0)
