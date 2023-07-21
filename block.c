@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 17:23:20 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/20 13:07:41 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/21 12:31:03 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_list	*ft_block_build(t_list **l)
 	return (block);
 }
 
-t_list	*ft_block(void)
+t_list	*ft_block()
 {
 	char	*prompt;
 	t_list	*inputs;

@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 13:19:45 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/19 18:45:29 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/20 15:33:36 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_perror_comm(char *command, char *infile)
 			ft_putstr_fd("No such file or directory\n", 1);
 		close (a);
 	}
-	else if (check_builtin(command) == -1 && command != NULL)
+	else if (check_builtin(command) == -1 && command != NULL && access(command, X_OK) != 0)
 	{
 		ft_putstr_fd("Command not found: ", 1);
 		if (command)
@@ -60,19 +60,25 @@ char	*ft_find_path(char *path, char *command, char *infile)
 	if (command)
 	{
 		slash_command = ft_strjoin("/", command);
-		path_split = ft_split(path, ':');
-		while (path_split[i])
+		if(path == NULL)
+			path_split = NULL;
+		else
 		{
-			path_command = ft_strjoin(path_split[i], slash_command);
-			if (access(path_command, X_OK) == 0)
+			path_split = ft_split(path, ':');
+			while (path_split != NULL && path_split[i])
 			{
-				ft_free_cc_c(path_split, slash_command);
-				return (path_command);
+				path_command = ft_strjoin(path_split[i], slash_command);
+				if (access(path_command, X_OK) == 0)
+				{
+					ft_free_cc_c(path_split, slash_command);
+					return (path_command);
+				}
+				free(path_command);
+				i++;
 			}
-			free(path_command);
-			i++;
+			ft_free_cc(path_split);
 		}
-		ft_free_cc_c(path_split, slash_command);
+		free(slash_command);
 	}
 	ft_perror_comm(command, infile);
 	if (command != NULL)

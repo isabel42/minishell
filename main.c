@@ -6,30 +6,12 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/20 12:09:42 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/21 12:31:28 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_checkargs(int ac, char **av, char **env)
-{
-	(void)av;
-	if (env == NULL)
-	{
-		printf("Error : env is NULL\n");
-		exit(-1);
-	}
-	if (ac != 1)
-	{
-		printf("Minishell don't take any argument\n");
-		exit(1);
-	}
-	init_termios();
-	signal(SIGINT, custom_handler);
-	signal(SIGQUIT, custom_handler);
-	env_copy1(env);
-}
 
 char	**ft_flags_execve(t_block *b_c)
 {
@@ -51,6 +33,25 @@ char	**ft_flags_execve(t_block *b_c)
 		j--;
 	}
 	return (flags);
+}
+
+void	check_args(int ac, char **av, char **env)
+{
+	(void)av;
+	if (env == NULL)
+	{
+		printf("Error : env is NULL\n");
+		exit(-1);
+	}
+	if (ac != 1)
+	{
+		printf("Minishell don't take any argument\n");
+		exit(1);
+	}
+	init_termios();
+	signal(SIGINT, custom_handler);
+	signal(SIGQUIT, custom_handler);
+	env_copy1(env);
 }
 
 int	main(int argc, char **argv, char **env)

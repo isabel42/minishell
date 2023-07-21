@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:28:34 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/19 15:55:57 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/21 12:31:05 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ int	ft_built_exec(t_param *param)
 	ptr_ft[5] = &ft_env;
 	ptr_ft[6] = &ft_exit;
 	ptr_ft[nb](param);
+
 	return (1);
 }
