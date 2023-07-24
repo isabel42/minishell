@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:44:18 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/24 16:35:34 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/24 16:37:23 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ void	ft_env(t_param *param)
 
 	i = 1;
 	if (param->flags[1])
+	{
 		printf("env: %s: No such file or directory", param->flags[0]);
+		g_data.status = 127;
+	}
 	else
 	{
 		while (g_data.env_copy[i])

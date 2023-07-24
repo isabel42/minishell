@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:30:21 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/24 14:50:12 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/24 16:37:36 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	ft_fork(t_param *param, int **p1, int *pid)
 			close (param->fd_out);
 		ft_closepipe(p1, param->lst_size);
 		execve(param->cmd, param->flags, NULL);
-		printf("command = %s \n\n", param->cmd);
 		kill(pid_parent, SIGUSR1);
 		exit(0);
 	}
