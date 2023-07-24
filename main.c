@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/20 14:06:41 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/20 17:28:04 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ void	check_args(int ac, char **av, char **env)
 		printf("Minishell don't take any argument\n");
 		exit(1);
 	}
-	init_termios();
-	signal(SIGINT, custom_handler);
-	signal(SIGQUIT, custom_handler);
+	// init_termios();
+	// signal(SIGINT, custom_handler);
+	// signal(SIGQUIT, custom_handler);
 	env_copy1(env);
 }
 
