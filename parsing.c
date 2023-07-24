@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:01:58 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/24 12:55:20 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/24 16:18:44 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ char	*ft_cp_line(char *prompt, int *i, char *b)
 {
 	char	*res;
 	int		k;
-	// char	*final;
 	int		j;
 
 	if (*i == (int)ft_strlen(prompt))
@@ -91,8 +90,6 @@ char	*ft_cp_line(char *prompt, int *i, char *b)
 		return (NULL);
 	j = ft_cp_line_core(prompt, i, b, res);
 	res[j] = '\0';
-	// final = ft_strtrim(res, " ");
-	// free(res);
 	return (res);
 }
 
@@ -124,10 +121,8 @@ t_list	*ft_parsing(char *prompt, char *b)
 	t_type	*content;
 	char	*txt;
 	int		i;
-	int		count;
 
 	i = 0;
-	count = 0;
 	inputs = NULL;
 	while (prompt[i] != '\0')
 	{
@@ -137,7 +132,6 @@ t_list	*ft_parsing(char *prompt, char *b)
 			return (NULL);
 		ft_init_type(txt, content);
 		ft_lstadd_back(&inputs, ft_lstnew(&(*content)));
-		count ++;
 	}
 	return (inputs);
 }

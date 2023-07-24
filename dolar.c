@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dolar.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:26:33 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/24 12:55:05 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/24 16:20:55 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,18 @@ int	ft_dolar_long(int i, char *prompt, int *j)
 {
 	int		z;
 	char	*cp;
+	char	*itoa;
 
 	i++;
 	z = 0;
+	if(prompt[i + z] == '?')
+	{
+		itoa = ft_itoa(g_data.status);
+		*j = *j + 1;
+		z = (int) ft_strlen(itoa);
+		free(itoa);
+		return (z);
+	}
 	while (prompt[i + z] != '\0' && prompt[i + z] != '$' && prompt[i + z] != '|' && prompt[i + z] != ' ' &&
 	prompt[i + z] != '"')
 		z++;
@@ -41,9 +50,19 @@ char	*ft_dolar_char(int *i, char *prompt, int *j, char *res)
 	int		z;
 	char	*cp;
 	char	*dolar;
+	char	*itoa;
 
 	z = 0;
 	*i = *i + 1;
+	if (prompt[*i + z] == '?')
+	{
+		itoa = ft_itoa(g_data.status);
+		ft_strlcpy(res + *j, itoa, ft_strlen(itoa) + 1);
+		*j = *j + (int)ft_strlen(itoa);
+		*i = *i + 1;
+		free(itoa);
+		return (res);
+	}
 	while (prompt[*i + z] != '\0' && prompt[*i + z] != '$' && prompt[*i + z] != '|' && prompt[*i + z] != ' ' &&
 	prompt[*i + z] != '"')
 		z++;
