@@ -6,12 +6,11 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/21 14:01:05 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/24 12:41:44 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 char	**ft_flags_execve(t_block *b_c)
 {

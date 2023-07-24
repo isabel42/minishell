@@ -6,13 +6,12 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 11:09:56 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/21 13:03:18 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/24 12:46:21 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// kimi 21.07 : j'ai creer cette fonction pour normer ft_heredoc
 char	*ft_read(char *b_c_infile)
 {
 	char	*prompt;
