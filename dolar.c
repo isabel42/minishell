@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:26:33 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/24 12:45:13 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/24 12:55:05 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	ft_dolar_long(int i, char *prompt, int *j)
 
 	i++;
 	z = 0;
-	while (!ft_strrchr("\0$|\"", prompt[i + z]) && prompt[i + z] != ' ')
+	while (prompt[i + z] != '\0' && prompt[i + z] != '$' && prompt[i + z] != '|' && prompt[i + z] != ' ' &&
+	prompt[i + z] != '"')
 		z++;
 	cp = malloc(sizeof(char) * (z + 2));
 	if (!cp)
@@ -43,7 +44,8 @@ char	*ft_dolar_char(int *i, char *prompt, int *j, char *res)
 
 	z = 0;
 	*i = *i + 1;
-	while (!ft_strrchr("\0\"$|", prompt[*i + z]) && prompt[*i + z] != ' ')
+	while (prompt[*i + z] != '\0' && prompt[*i + z] != '$' && prompt[*i + z] != '|' && prompt[*i + z] != ' ' &&
+	prompt[*i + z] != '"')
 		z++;
 	cp = malloc(sizeof(char) * (z + 2));
 	if (!cp)

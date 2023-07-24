@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:01:58 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/24 12:47:26 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/24 12:55:20 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_cp_line_long(char *prompt, int i, char *b)
 			k++;
 		j++;
 	}
-	if (prompt[i + j] == '|' && k > 1)
+	if ((prompt[i + j] == '|' || prompt[i + j] == ' ') && k > 1)
 		k--;
 	return (k);
 }
@@ -78,7 +78,7 @@ char	*ft_cp_line(char *prompt, int *i, char *b)
 {
 	char	*res;
 	int		k;
-	char	*final;
+	// char	*final;
 	int		j;
 
 	if (*i == (int)ft_strlen(prompt))
@@ -91,9 +91,9 @@ char	*ft_cp_line(char *prompt, int *i, char *b)
 		return (NULL);
 	j = ft_cp_line_core(prompt, i, b, res);
 	res[j] = '\0';
-	final = ft_strtrim(res, " ");
-	free(res);
-	return (final);
+	// final = ft_strtrim(res, " ");
+	// free(res);
+	return (res);
 }
 
 void	ft_init_type(char *txt, t_type *content)
