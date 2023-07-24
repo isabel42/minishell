@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/24 14:06:53 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/24 14:47:09 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,7 @@ char	**ft_flags_execve(t_block *b_c)
 void	ft_user(int signal)
 {
 	if (signal == SIGUSR1)
-	{
-		g_data.status = 127;
-	}
-	if (signal == SIGUSR2)
-	{
 		g_data.status = 126;
-	}
-	printf("Error status %d\n", g_data.status);
 }
 
 void	check_args(int ac, char **av, char **env)
@@ -60,11 +53,10 @@ void	check_args(int ac, char **av, char **env)
 		printf("Minishell don't take any argument\n");
 		exit(1);
 	}
-	// init_termios();
-	// signal(SIGINT, custom_handler);
-	// signal(SIGQUIT, custom_handler);
+	init_termios();
+	signal(SIGINT, custom_handler);
+	signal(SIGQUIT, custom_handler);
 	signal(SIGUSR1, ft_user);
-	signal(SIGUSR2, ft_user);
 	env_copy1(env);
 }
 

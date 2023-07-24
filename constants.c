@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   constants.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 13:19:45 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/24 13:52:51 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/24 14:45:21 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,15 @@ char	*ft_find_pwd(char *pwd, char *infile)
 	return (pwd_infile);
 }
 
+void	ft_cmd_nf(char *command)
+{
+	ft_putstr_fd("Command not found: ", 1);
+	if (command)
+		ft_putstr_fd(command, 1);
+	ft_putstr_fd("\n", 1);
+	g_data->status = 127;
+}
+
 void	ft_perror_comm(char *command, char *infile)
 {
 	int	a;
@@ -30,24 +39,17 @@ void	ft_perror_comm(char *command, char *infile)
 	{
 		a = open (infile, O_RDONLY | O_CLOEXEC);
 		if (a >= 0)
-		{
-			ft_putstr_fd("Command not found: ", 1);
-			if (command)
-				ft_putstr_fd(command, 1);
-			ft_putstr_fd("\n", 1);
-		}
+			ft_cmd_nf(command);
 		else
+		{
 			ft_putstr_fd("No such file or directory\n", 1);
+			g_data->status = 1;
+		}
 		close (a);
 	}
 	else if (check_builtin(command) == -1
 		&& command != NULL && access(command, X_OK) != 0)
-	{
-		ft_putstr_fd("Command not found: ", 1);
-		if (command)
-			ft_putstr_fd(command, 1);
-		ft_putstr_fd("\n", 1);
-	}
+		ft_cmd_nf(command);
 }
 
 char	*ft_find_path(char *path, char *command, char *infile)
