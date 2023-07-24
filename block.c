@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   block.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 17:23:20 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/21 13:07:38 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/24 18:18:59 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,12 @@ t_list	*ft_block(void)
 	if (ft_strlen(prompt) != 0)
 		add_history(prompt);
 	inputs = ft_parsing(prompt, "\'\"");
+	if (!inputs && ft_strlen(prompt) > 0)
+	{
+		printf("Syntax error\n");
+		g_data.status = 258;
+		return NULL;
+	}
 	block = ft_block_build(&inputs);
 	ft_lstclear(&inputs, (void *) &ft_clean_inputs);
 	free(prompt);

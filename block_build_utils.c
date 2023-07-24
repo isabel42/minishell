@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   block_build_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 17:20:13 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/21 14:38:39 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/24 18:15:50 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ int	ft_treat_redir_after(t_list **temp, t_block *b_c)
 	{
 		*temp = (*temp)->next;
 		if (!(*temp))
-			ft_exit_isa(ERROR1);
+			return (-1);	
 		c_n = (t_type *)(*temp)->content;
 		res = 1;
 	}

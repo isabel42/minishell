@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   param.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 18:29:21 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/24 12:55:15 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/24 18:25:46 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,10 +118,10 @@ t_param	*ft_param(int lst_size, t_block *b_c, int i, int **p1)
 	param->lst_size = lst_size;
 	param->fd_in = ft_pipe_in(param, p1, i);
 	param->fd_out = ft_pipe_out(param, p1, i);
+printf("param0: %s\n", param->cmd);
 	return (param);
 }
 
-// printf("param0: %s\n", param->cmd);
 // printf("flag0: %s\n", param->flags[0]);
 // printf("flag1: %s\n", param->flags[1]);
 // // printf("flag2: %s\n", param->flags[2]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:10:25 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/17 16:11:15 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/24 17:54:34 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ char	*ft_envp(char **envp, char *pwd)
 
 void	ft_exit_isa(char *s)
 {
-	printf("%s\n", s);
-	exit(0);
+	int	pid;
+	pid = getpid();
+	printf("%s", s);
+	kill(pid, SIGUSR2);
 }

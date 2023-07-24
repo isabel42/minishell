@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:01:58 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/24 16:18:44 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/24 18:22:45 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,48 @@ void	ft_init_type(char *txt, t_type *content)
 	free (txt);
 }
 
+int	ft_txt_redir(char *txt)
+{
+	if (!ft_strncmp(txt, "<<", 2) && ft_strlen(txt) == 2)
+		return (5);
+	if (!ft_strncmp(txt, ">>", 2) && ft_strlen(txt) == 2)
+		return (4);
+	if (!ft_strncmp(txt, "<", 1) && ft_strlen(txt) == 1)
+		return (3);
+	if (!ft_strncmp(txt, ">", 1) && ft_strlen(txt) == 1)
+		return (2);
+	if (!ft_strncmp(txt, "|", 1) && ft_strlen(txt) == 1)
+		return (1);
+	return (0);
+}
+
+int	ft_check_inputs(t_list **inputs)
+{
+	t_list *list;
+	t_list *list_next;
+	t_type *content;
+	t_type *content_next;
+
+	list = *inputs;
+	while (list)
+	{
+		content = (t_type *)list->content;
+		if (ft_txt_redir(content->txt) > 1 && !list->next)
+			return (0);
+		list_next = list->next;
+		if (list_next)
+		{
+			content_next = (t_type *)list_next->content;
+			if (ft_txt_redir(content->txt) == 1 && ft_txt_redir(content_next->txt) == 1)
+				return (0);
+			if (ft_txt_redir(content->txt) > 1 && ft_txt_redir(content_next->txt) > 1)
+				return (0);
+		}
+		list = list->next;
+	} 
+	return (1);
+}
+
 t_list	*ft_parsing(char *prompt, char *b)
 {
 	t_list	*inputs;
@@ -133,5 +175,7 @@ t_list	*ft_parsing(char *prompt, char *b)
 		ft_init_type(txt, content);
 		ft_lstadd_back(&inputs, ft_lstnew(&(*content)));
 	}
+	if (ft_check_inputs(&inputs) == 0)
+		return (NULL);
 	return (inputs);
 }
