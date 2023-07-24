@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   constants.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 13:19:45 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/24 14:45:21 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/24 16:35:56 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_cmd_nf(char *command)
 	if (command)
 		ft_putstr_fd(command, 1);
 	ft_putstr_fd("\n", 1);
-	g_data->status = 127;
+	g_data.status = 127;
 }
 
 void	ft_perror_comm(char *command, char *infile)
@@ -43,7 +43,7 @@ void	ft_perror_comm(char *command, char *infile)
 		else
 		{
 			ft_putstr_fd("No such file or directory\n", 1);
-			g_data->status = 1;
+			g_data.status = 1;
 		}
 		close (a);
 	}
