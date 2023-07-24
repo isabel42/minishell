@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:44:18 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/21 13:07:59 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/24 14:42:01 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,33 +74,30 @@ void	ft_pwd(t_param *param)
 		ft_putstr_fd(cwd, param->fd_out);
 		ft_putstr_fd("\n", param->fd_out);
 	}
-	else
-		perror("getcwd error\n");
 }
 
 void	ft_cd(t_param *param)
 {
 	char	current_path[4096];
 	char	old_path[4096];
-	int		i;
 
-	i = 0;
 	getcwd(old_path, 4096);
 	if (!param->flags[1])
-		chdir(find_home());
-	else
-		chdir(param->flags[1]);
-	getcwd(current_path, 4096);
-	while (g_data.env_copy[i])
 	{
-		if (!ft_strncmp(g_data.env_copy[i], "OLDPWD=", 7))
+		if (chdir(find_home()) != 0)
 		{
-			free(g_data.env_copy[i]);
-			free(g_data.env_copy[i - 1]);
-			g_data.env_copy[i] = ft_strdup(ft_strjoin("OLDPWD=", old_path));
-			g_data.env_copy[i - 1] = ft_strdup
-				(ft_strjoin("PWD=", current_path));
+			printf("Minishell: cd: HOME not set\n");
+			g_data.status = 1;
 		}
-		i++;
 	}
+	else
+	{
+		if (chdir(param->flags[1]) != 0)
+		{
+			printf("bash: cd: %s: Not a directory\n", param->flags[1]);
+			g_data.status = 1;
+		}
+	}	
+	getcwd(current_path, 4096);
+	ft_cd_util(current_path, old_path);
 }
