@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/21 14:37:48 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/24 14:42:28 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	ft_exit_isa(char *s);
 
 // utils_1.c
 char	**ft_nl_charchar(char **tab, char *txt);
-
+void	ft_cd_util(char *current_path, char *old_path);
 char	**ft_flags_execve(t_block *b_c);
 
 //builtin
