@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:44:18 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/24 16:37:23 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/24 16:49:23 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,7 @@ void	ft_env(t_param *param)
 
 	i = 1;
 	if (param->flags[1])
-	{
 		printf("env: %s: No such file or directory", param->flags[0]);
-		g_data.status = 127;
-	}
 	else
 	{
 		while (g_data.env_copy[i])
@@ -89,7 +86,7 @@ void	ft_cd(t_param *param)
 	{
 		if (chdir(find_home()) != 0)
 		{
-			ft_putstr_fd("Minishell: cd: HOME not set\n", param->fd_out);
+			printf("Minishell: cd: HOME not set\n");
 			g_data.status = 1;
 		}
 	}
@@ -97,9 +94,7 @@ void	ft_cd(t_param *param)
 	{
 		if (chdir(param->flags[1]) != 0)
 		{
-			ft_putstr_fd("bash: cd: ", param->fd_out);
-			ft_putstr_fd(param->flags[1], param->fd_out);
-			ft_putstr_fd(": Not a directory\n", param->fd_out);
+			printf("bash: cd: %s: Not a directory\n", param->flags[1]);
 			g_data.status = 1;
 		}
 	}	
