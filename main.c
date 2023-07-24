@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/24 12:55:09 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/24 14:06:53 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,19 @@ char	**ft_flags_execve(t_block *b_c)
 	return (flags);
 }
 
+void	ft_user(int signal)
+{
+	if (signal == SIGUSR1)
+	{
+		g_data.status = 127;
+	}
+	if (signal == SIGUSR2)
+	{
+		g_data.status = 126;
+	}
+	printf("Error status %d\n", g_data.status);
+}
+
 void	check_args(int ac, char **av, char **env)
 {
 	(void)av;
@@ -50,6 +63,8 @@ void	check_args(int ac, char **av, char **env)
 	// init_termios();
 	// signal(SIGINT, custom_handler);
 	// signal(SIGQUIT, custom_handler);
+	signal(SIGUSR1, ft_user);
+	signal(SIGUSR2, ft_user);
 	env_copy1(env);
 }
 
@@ -78,6 +93,7 @@ int	main(int argc, char **argv, char **env)
 		i = 0;
 		while (test)
 		{
+			g_data.status = 0;
 			block_content = (t_block *) test->content;
 			param = ft_param(lst_size, block_content, i, p1);
 			if (ft_built_exec(param) == -1)

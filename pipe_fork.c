@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_fork.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:30:21 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/24 12:53:15 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/24 13:57:14 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,10 @@ int	*ft_new_pid(int *pid)
 void	ft_fork(t_param *param, int **p1, int *pid)
 {
 	int	i;
+	int	pid_parent;
 
 	i = 0;
+	pid_parent = getpid();
 	while (pid[i + 1])
 		i++;
 	pid[i] = fork();
@@ -59,6 +61,11 @@ void	ft_fork(t_param *param, int **p1, int *pid)
 			close (param->fd_out);
 		ft_closepipe(p1, param->lst_size);
 		execve(param->cmd, param->flags, NULL);
+		printf("command = %s \n\n", param->cmd);
+		if (param->cmd == NULL)
+			kill(pid_parent, SIGUSR1);
+		else
+			kill(pid_parent, SIGUSR2);
 		exit(0);
 	}
 }
