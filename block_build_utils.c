@@ -6,7 +6,7 @@
 /*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 17:20:13 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/18 15:39:08 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/21 14:38:39 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,18 @@ int	ft_inout(t_list **temp, t_block *b_c)
 	if (c->txt[0] == '>')
 	{
 		if (c->txt[1] == '>')
-			b_c->outfile = ft_nl_charchar(b_c->outfile, ft_strjoin("2", c->txt + 2));
+			b_c->out = ft_nl_charchar(b_c->out, ft_strjoin("2", c->txt + 2));
 		else
-			b_c->outfile = ft_nl_charchar(b_c->outfile, ft_strjoin("1", c->txt + 1));
+			b_c->out = ft_nl_charchar(b_c->out, ft_strjoin("1", c->txt + 1));
 		*temp = (*temp)->next;
 		return (1);
 	}
 	else if (c->txt[0] == '<')
 	{
 		if (c->txt[1] == '<')
-			b_c->infile = ft_nl_charchar(b_c->infile, ft_strjoin("2", c->txt + 2));
+			b_c->in = ft_nl_charchar(b_c->in, ft_strjoin("2", c->txt + 2));
 		else
-			b_c->infile = ft_nl_charchar(b_c->infile, ft_strjoin("1", c->txt + 1));
+			b_c->in = ft_nl_charchar(b_c->in, ft_strjoin("1", c->txt + 1));
 		*temp = (*temp)->next;
 		return (1);
 	}
@@ -50,14 +50,14 @@ t_block	*ft_init_block(void)
 	if (!block_content->arg)
 		return (NULL);
 	block_content->arg[0] = NULL;
-	block_content->infile = malloc(sizeof(char *));
-	if (!block_content->infile)
+	block_content->in = malloc(sizeof(char *));
+	if (!block_content->in)
 		return (NULL);
-	block_content->infile[0] = NULL;
-	block_content->outfile = malloc(sizeof(char *));
-	if (!block_content->outfile)
+	block_content->in[0] = NULL;
+	block_content->out = malloc(sizeof(char *));
+	if (!block_content->out)
 		return (NULL);
-	block_content->outfile[0] = NULL;
+	block_content->out[0] = NULL;
 	return (block_content);
 }
 
@@ -123,12 +123,12 @@ int	ft_treat_redir_after(t_list **temp, t_block *b_c)
 		res = 1;
 	}
 	if (c->c_g == 1)
-		b_c->infile = ft_nl_charchar(b_c->infile, ft_strjoin("1", c_n->txt));
+		b_c->in = ft_nl_charchar(b_c->in, ft_strjoin("1", c_n->txt));
 	if (c->c_d == 1)
-		b_c->outfile = ft_nl_charchar(b_c->outfile, ft_strjoin("1", c_n->txt));
+		b_c->out = ft_nl_charchar(b_c->out, ft_strjoin("1", c_n->txt));
 	if (c->dc_g == 1)
-		b_c->infile = ft_nl_charchar(b_c->infile, ft_strjoin("2", c_n->txt));
+		b_c->in = ft_nl_charchar(b_c->in, ft_strjoin("2", c_n->txt));
 	if (c->dc_d == 1)
-		b_c->outfile = ft_nl_charchar(b_c->outfile, ft_strjoin("2", c_n->txt));
+		b_c->out = ft_nl_charchar(b_c->out, ft_strjoin("2", c_n->txt));
 	return (res);
 }

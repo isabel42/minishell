@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 18:29:21 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/20 17:43:27 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/24 12:53:15 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,18 @@ void	ft_infile(t_param *param, t_block *b_c)
 	i = 0;
 	param->infile = NULL;
 	param->heredoc = NULL;
-	while (b_c->infile[i] != NULL)
+	while (b_c->in[i] != NULL)
 	{
-		if (b_c->infile[i][0] == '2')
-			ft_heredoc(b_c->infile[i] + 1, param, done);
+		if (b_c->in[i][0] == '2')
+			ft_heredoc(b_c->in[i] + 1, param, done);
 		else
-			ft_infile_cp(&done, b_c->infile[i] + 1, param);
+			ft_infile_cp(&done, b_c->in[i] + 1, param);
 		i++;
 	}
-	if (i > 0 && done == 0 && b_c->infile[i - 1][0] == '1')
+	if (i > 0 && done == 0 && b_c->in[i - 1][0] == '1')
 	{
 		param->infile = ft_find_pwd(ft_envp(g_data.env_copy, "PWD="),
-				b_c->infile[i - 1] + 1);
+				b_c->in[i - 1] + 1);
 		if (param->heredoc != NULL)
 			free(param->heredoc);
 		param->heredoc = NULL;
@@ -84,13 +84,13 @@ void	ft_outfile(t_param *param, t_block *b_c)
 
 	i = 0;
 	pathoutfile = NULL;
-	while (b_c->outfile[i] != NULL)
+	while (b_c->out[i] != NULL)
 	{
 		if (pathoutfile)
 			free(pathoutfile);
 		pathoutfile = ft_find_pwd(ft_envp(g_data.env_copy,
-					"PWD="), b_c->outfile[i] + 1);
-		if (b_c->outfile[i][0] == '1')
+					"PWD="), b_c->out[i] + 1);
+		if (b_c->out[i][0] == '1')
 		{
 			b = open (pathoutfile,
 					O_TRUNC | O_CREAT | O_WRONLY | O_CLOEXEC, 00644);
@@ -98,7 +98,7 @@ void	ft_outfile(t_param *param, t_block *b_c)
 		}
 		i++;
 	}
-	ft_outfile_cp(param, b_c->outfile[i - 1], pathoutfile);
+	ft_outfile_cp(param, b_c->out[i - 1], pathoutfile);
 }
 
 t_param	*ft_param(int lst_size, t_block *b_c, int i, int **p1)
@@ -109,7 +109,7 @@ t_param	*ft_param(int lst_size, t_block *b_c, int i, int **p1)
 	(void) i;
 	param = malloc(sizeof(t_param));
 	if (!param)
-		return (NULL);//exit(0);
+		return (NULL);
 	param->flags = ft_flags_execve(b_c);
 	ft_infile(param, b_c);
 	ft_outfile(param, b_c);
@@ -118,14 +118,15 @@ t_param	*ft_param(int lst_size, t_block *b_c, int i, int **p1)
 	param->lst_size = lst_size;
 	param->fd_in = ft_pipe_in(param, p1, i);
 	param->fd_out = ft_pipe_out(param, p1, i);
-	printf("cmd:%s*\n", param->cmd);
-	printf("flag0: %s\n", param->flags[0]);
-	printf("flag1: %s\n", param->flags[1]);
-	// printf("flag2: %s\n", param->flags[2]);
-	printf("param1: %s\n", param->infile);
-	printf("param2: %s\n", param->outfile);
-	printf("param3: %s\n", param->heredoc);
-	printf("param4: %d\n", param->lst_size);
-	printf("param5: %s\n", param->chev_out);
 	return (param);
 }
+
+// printf("param0: %s\n", param->cmd);
+// printf("flag0: %s\n", param->flags[0]);
+// printf("flag1: %s\n", param->flags[1]);
+// // printf("flag2: %s\n", param->flags[2]);
+// printf("param1: %s\n", param->infile);
+// printf("param2: %s\n", param->outfile);
+// printf("param3: %s\n", param->heredoc);	
+// printf("param4: %d\n", param->lst_size);
+// printf("param5: %s\n", param->chev_out);

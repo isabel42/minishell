@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   constants.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 13:19:45 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/20 15:33:36 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/21 13:08:53 by ktomat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void	ft_perror_comm(char *command, char *infile)
 			ft_putstr_fd("No such file or directory\n", 1);
 		close (a);
 	}
-	else if (check_builtin(command) == -1 && command != NULL && access(command, X_OK) != 0)
+	else if (check_builtin(command) == -1
+		&& command != NULL && access(command, X_OK) != 0)
 	{
 		ft_putstr_fd("Command not found: ", 1);
 		if (command)
@@ -60,7 +61,7 @@ char	*ft_find_path(char *path, char *command, char *infile)
 	if (command)
 	{
 		slash_command = ft_strjoin("/", command);
-		if(path == NULL)
+		if (path == NULL)
 			path_split = NULL;
 		else
 		{
