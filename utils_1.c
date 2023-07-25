@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 14:53:37 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/24 14:36:43 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/25 15:02:43 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ char	**ft_nl_charchar(char **tab, char *txt)
 
 void	ft_cd_util(char *current_path, char *old_path)
 {
-	int	i;
+	int		i;
+	char	*join_old;
+	char	*join_current;
 
 	i = 0;
 	while (g_data.env_copy[i])
@@ -52,9 +54,19 @@ void	ft_cd_util(char *current_path, char *old_path)
 		{
 			free(g_data.env_copy[i]);
 			free(g_data.env_copy[i - 1]);
-			g_data.env_copy[i] = ft_strdup(ft_strjoin("OLDPWD=", old_path));
-			g_data.env_copy[i - 1] = ft_strdup
-				(ft_strjoin("PWD=", current_path));
+			join_old = ft_strjoin("OLDPWD=", old_path);
+			join_current = ft_strjoin("PWD=", current_path);
+			g_data.env_copy[i] = malloc(sizeof(char) * (ft_strlen(join_old) + 1));
+			if (!g_data.env_copy[i])
+				return ;
+			ft_strlcpy(g_data.env_copy[i], join_old, ft_strlen(join_old) + 1);
+			g_data.env_copy[i - 1] = malloc(sizeof(char) * (ft_strlen(join_current) + 1));
+			if (!g_data.env_copy[i - 1])
+				return ;
+			ft_strlcpy(g_data.env_copy[i - 1], join_current, ft_strlen(join_current) + 1);
+			free(join_old);
+			free(join_current);
+			break ;
 		}
 		i++;
 	}

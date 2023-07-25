@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:01:58 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/24 18:22:45 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/25 13:44:37 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,9 @@ t_list	*ft_parsing(char *prompt, char *b)
 		ft_lstadd_back(&inputs, ft_lstnew(&(*content)));
 	}
 	if (ft_check_inputs(&inputs) == 0)
+	{
+		ft_lstclear(&inputs, (void *) &ft_clean_inputs);
 		return (NULL);
+	}
 	return (inputs);
 }

@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 17:23:20 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/24 18:18:59 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/25 13:44:37 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ t_list	*ft_block(void)
 	{
 		printf("Syntax error\n");
 		g_data.status = 258;
-		return NULL;
+		free(prompt);
+		return (NULL);
 	}
 	block = ft_block_build(&inputs);
 	ft_lstclear(&inputs, (void *) &ft_clean_inputs);

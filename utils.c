@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:10:25 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/24 17:54:34 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/25 15:08:37 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ char	*find_home(void)
 {
 	int		i;
 	char	**result;
+	char	*res;
 
 	i = 0;
 	while (g_data.env_copy[i])
@@ -36,9 +37,15 @@ char	*find_home(void)
 		if (!ft_strncmp("HOME=", g_data.env_copy[i], 5))
 		{
 			result = ft_split(g_data.env_copy[i], '=');
+			res = malloc(sizeof(char) * (ft_strlen(result[1]) + 1));
+			if (!res)
+				return (NULL);
+			ft_strlcpy(res, result[1], ft_strlen(result[1]) + 1);
 			if (result[1])
 				free(result[1]);
-			return (result[1]);
+			free(result[0]);
+			free(result);
+			return (res);
 		}
 		i++;
 	}

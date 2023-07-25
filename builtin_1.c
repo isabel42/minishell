@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:44:18 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/24 14:55:08 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/25 15:12:21 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,15 +83,18 @@ void	ft_cd(t_param *param)
 {
 	char	current_path[4096];
 	char	old_path[4096];
+	char	*home;
 
 	getcwd(old_path, 4096);
 	if (!param->flags[1])
 	{
-		if (chdir(find_home()) != 0)
+		home = find_home();
+		if (chdir(home) != 0)
 		{
 			printf("Minishell: cd: HOME not set\n");
 			g_data.status = 1;
 		}
+		free(home);
 	}
 	else
 	{

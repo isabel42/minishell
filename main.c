@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/24 18:17:13 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/25 13:43:51 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,6 @@ void	ft_user(int signal)
 {
 	if (signal == SIGUSR1)
 		g_data.status = 126;
-	if (signal == SIGUSR2)
-	{
-		g_data.status = 258;
-		printf("aaa\n");
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
 }
 
 void	check_args(int ac, char **av, char **env)
@@ -65,7 +57,6 @@ void	check_args(int ac, char **av, char **env)
 	signal(SIGINT, custom_handler);
 	signal(SIGQUIT, custom_handler);
 	signal(SIGUSR1, ft_user);
-	signal(SIGUSR2, ft_user);
 	env_copy1(env);
 }
 
@@ -98,7 +89,7 @@ int	main(int argc, char **argv, char **env)
 		{
 			g_data.status = 0;
 			block_content = (t_block *) test->content;
-			param = ft_param(lst_size, block_content, i, p1);
+			param = ft_param_c(lst_size, block_content, i, p1);
 			if (ft_built_exec(param) == -1)
 			{
 				pid = ft_new_pid(pid);
