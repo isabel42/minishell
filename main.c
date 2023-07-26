@@ -6,7 +6,7 @@
 /*   By: kimitomat <kimitomat@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/25 11:11:24 by kimitomat        ###   ########.fr       */
+/*   Updated: 2023/07/25 16:13:50 by kimitomat        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ int	main(int argc, char **argv, char **env)
 	while (42)
 	{
 		block = ft_block();
+		if (block == NULL)
+			continue ;
 		test = block;
 		lst_size = ft_lstsize(test);
 		pid = malloc(sizeof(int));
@@ -87,7 +89,7 @@ int	main(int argc, char **argv, char **env)
 		{
 			g_data.status = 0;
 			block_content = (t_block *) test->content;
-			param = ft_param(lst_size, block_content, i, p1);
+			param = ft_param_c(lst_size, block_content, i, p1);
 			if (ft_built_exec(param) == -1)
 			{
 				pid = ft_new_pid(pid);

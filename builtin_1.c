@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kimitomat <kimitomat@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 12:44:18 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/24 16:49:23 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/25 16:13:40 by kimitomat        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,15 +80,18 @@ void	ft_cd(t_param *param)
 {
 	char	current_path[4096];
 	char	old_path[4096];
+	char	*home;
 
 	getcwd(old_path, 4096);
 	if (!param->flags[1])
 	{
-		if (chdir(find_home()) != 0)
+		home = find_home();
+		if (chdir(home) != 0)
 		{
 			printf("Minishell: cd: HOME not set\n");
 			g_data.status = 1;
 		}
+		free(home);
 	}
 	else
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   param.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 18:29:21 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/24 12:55:15 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/25 13:36:53 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,12 +101,10 @@ void	ft_outfile(t_param *param, t_block *b_c)
 	ft_outfile_cp(param, b_c->out[i - 1], pathoutfile);
 }
 
-t_param	*ft_param(int lst_size, t_block *b_c, int i, int **p1)
+t_param	*ft_param_c(int lst_size, t_block *b_c, int i, int **p1)
 {
 	t_param	*param;
 
-	(void) p1;
-	(void) i;
 	param = malloc(sizeof(t_param));
 	if (!param)
 		return (NULL);
@@ -119,6 +117,28 @@ t_param	*ft_param(int lst_size, t_block *b_c, int i, int **p1)
 	param->fd_in = ft_pipe_in(param, p1, i);
 	param->fd_out = ft_pipe_out(param, p1, i);
 	return (param);
+}
+
+t_list	*ft_param(t_list **block, int **p1, int lst_size)
+{
+	t_list	*test;
+	t_param	*param;
+	t_block	*b_c;
+	int		i;
+	t_list	*param_list;
+
+	test = *block;
+	i = 0;
+	param_list = NULL;
+	while (test)
+	{
+		b_c = (t_block *) test->content;
+		param = ft_param_c(lst_size, b_c, i, p1);
+		ft_lstadd_back(&param_list, ft_lstnew(&(*param)));
+		i++;
+		test = test->next;
+	}
+	return (param_list);
 }
 
 // printf("param0: %s\n", param->cmd);

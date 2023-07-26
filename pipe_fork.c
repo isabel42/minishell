@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_fork.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kimitomat <kimitomat@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:30:21 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/24 16:37:36 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/25 16:13:42 by kimitomat        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ void	ft_fork(t_param *param, int **p1, int *pid)
 			close (param->fd_out);
 		ft_closepipe(p1, param->lst_size);
 		execve(param->cmd, param->flags, NULL);
-		kill(pid_parent, SIGUSR1);
+		if (g_data.status == 0)
+			kill(pid_parent, SIGUSR1);
 		exit(0);
 	}
 }

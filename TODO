@@ -1,3 +1,4 @@
 1. Faire le gestionaire de code de sortie
 2. gerer le pipe vide : sytax error
-3. "     ;     " et trim
+3. echo $? when 0
+

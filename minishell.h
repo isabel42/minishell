@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/24 14:42:28 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/25 14:25:09 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 typedef struct s_data
 {
 	char					**env_copy;
-	volatile sig_atomic_t	status;
+	int						status;
 }				t_data;
 
 t_data	g_data;
@@ -153,7 +153,8 @@ int		ft_pipe_in(t_param *param, int **p1, int i);
 int		check_builtin(char *cmd_long);
 int		ft_built_exec(t_param *param);
 
-t_param	*ft_param(int lst_size, t_block *b_c, int i, int **p1);
+t_param	*ft_param_c(int lst_size, t_block *b_c, int i, int **p1);
+t_list	*ft_param(t_list **block, int **p1, int lst_size);
 void	ft_fork(t_param *param, int **p1, int *pid);
 int		*ft_new_pid(int *pid);
 
@@ -162,5 +163,7 @@ void	msg_error(char *str, int status);
 
 //TEST//
 char	*ft_getpath(char **envp, char *prog);
+
+int	ft_txt_redir(char *txt);
 
 #endif

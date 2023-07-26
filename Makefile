@@ -5,7 +5,7 @@ SRCS	= main.c \
 			block_build_utils.c \
 			block.c \
 			free_clean.c \
-			builtin.c \
+			echo.c \
 			builtin_1.c \
 			export.c \
 			unset.c \

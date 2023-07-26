@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   constants.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kimitomat <kimitomat@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 13:19:45 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/24 16:37:26 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/25 16:13:41 by kimitomat        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ char	*ft_find_pwd(char *pwd, char *infile)
 
 void	ft_cmd_nf(char *command)
 {
-	ft_putstr_fd("Command not found: ", 1);
+	ft_putstr_fd("minishell: ", 1);
 	if (command)
 		ft_putstr_fd(command, 1);
-	ft_putstr_fd("\n", 1);
+	ft_putstr_fd("command not found\n", 1);
 	g_data.status = 127;
 }
 
@@ -39,7 +39,10 @@ void	ft_perror_comm(char *command, char *infile)
 	{
 		a = open (infile, O_RDONLY | O_CLOEXEC);
 		if (a >= 0)
-			ft_cmd_nf(command);
+		{
+			if (command)
+				ft_cmd_nf(command);
+		}
 		else
 		{
 			ft_putstr_fd("No such file or directory\n", 1);
@@ -49,7 +52,7 @@ void	ft_perror_comm(char *command, char *infile)
 	}
 	else if (check_builtin(command) == -1
 		&& command != NULL && access(command, X_OK) != 0)
-		ft_cmd_nf(command);
+			ft_cmd_nf(command);
 }
 
 char	*ft_find_path(char *path, char *command, char *infile)
