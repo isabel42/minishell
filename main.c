@@ -6,7 +6,7 @@
 /*   By: kimitomat <kimitomat@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/25 16:13:50 by kimitomat        ###   ########.fr       */
+/*   Updated: 2023/07/26 20:57:27 by kimitomat        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ void	check_args(int ac, char **av, char **env)
 		printf("Minishell don't take any argument\n");
 		exit(1);
 	}
-	//init_termios();
-	//signal(SIGINT, custom_handler);
-	//signal(SIGQUIT, custom_handler);
+	// init_termios();
+	// signal(SIGINT, custom_handler);
+	// signal(SIGQUIT, custom_handler);
 	signal(SIGUSR1, ft_user);
 	env_copy1(env);
 }
@@ -67,16 +67,17 @@ int	main(int argc, char **argv, char **env)
 	t_block	*block_content;
 	int		*pid;
 	int		**p1;
-	int		i = 0;
+	int		i;
 	t_param	*param;
 	int		lst_size;
+	int		size_pid;
 
 	check_args(argc, argv, env);
 	while (42)
 	{
 		block = ft_block();
 		if (block == NULL)
-			continue ;
+			return (0) ;
 		test = block;
 		lst_size = ft_lstsize(test);
 		pid = malloc(sizeof(int));
@@ -85,6 +86,7 @@ int	main(int argc, char **argv, char **env)
 		p1 = ft_pipe(lst_size);
 		test = block;
 		i = 0;
+		size_pid = 0;
 		while (test)
 		{
 			g_data.status = 0;
@@ -92,8 +94,9 @@ int	main(int argc, char **argv, char **env)
 			param = ft_param_c(lst_size, block_content, i, p1);
 			if (ft_built_exec(param) == -1)
 			{
-				pid = ft_new_pid(pid);
-				ft_fork(param, p1, pid);
+				size_pid++;
+				pid = ft_new_pid(pid, size_pid);
+				ft_fork(param, p1, pid, size_pid);
 			}
 			ft_free_param(param);
 			test = test->next;
@@ -101,9 +104,10 @@ int	main(int argc, char **argv, char **env)
 		}
 		ft_lstclear(&block, (void *) &ft_clean_block);
 		ft_closepipe(p1, lst_size);
-		ft_waitpid(pid);
+		ft_waitpid(pid, size_pid);
 		free(pid);
 		ft_free_pipe(p1, lst_size);
 	}
 	return (0);
 }
+

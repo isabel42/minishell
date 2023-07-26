@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:47:40 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/19 17:18:26 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/26 16:29:21 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ void	ft_closepipe(int **p1, int lst_size)
 	}
 }
 
-void	ft_waitpid(int *pid)
+void	ft_waitpid(int *pid, int size_pid)
 {
 	int	i;
 
 	i = 0;
-	while (pid[i])
+	while (i < size_pid)
 	{
 		waitpid(pid[i], NULL, 0);
 		i++;
