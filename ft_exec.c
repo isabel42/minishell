@@ -3,36 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 11:09:56 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/24 12:46:21 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/26 15:30:40 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void	ft_free_c_c(char *a, char *b)
+{
+	free(a);
+	free(b);
+}
+
 char	*ft_read(char *b_c_infile)
 {
 	char	*prompt;
 	char	*res;
-	int		i;
+	char	*res_prompt;
 
-	i = 0;
-	res = "\0";
+	res = ft_calloc(sizeof(char), 1);
 	while (42)
 	{
 		prompt = readline("> ");
-		if (ft_strlen(prompt) == 0)
-			continue ;
-		if (!ft_strncmp(prompt, b_c_infile,
-				ft_strlen(prompt)))
-			break ;
 		if (prompt == NULL)
-			return (NULL);
-		res = ft_strjoin(res, prompt);
-		res = ft_strjoin(res, "\n");
-		i++;
+			return (res);
+		if ((!ft_strncmp(prompt, b_c_infile, ft_strlen(prompt))
+				&& !ft_strncmp(prompt, b_c_infile, ft_strlen(b_c_infile)))
+			|| ft_strlen(prompt) == 0)
+		{
+			free(prompt);
+			if (ft_strlen(prompt) == 0)
+				continue ;
+			break ;
+		}
+		res_prompt = ft_strjoin(res, prompt);
+		free(res);
+		res = ft_strjoin(res_prompt, "\n");
+		ft_free_c_c(res_prompt, prompt);
 	}
 	return (res);
 }
@@ -55,6 +65,7 @@ void	ft_heredoc(char *b_c_infile, t_param *param, int done)
 	if (!param->heredoc)
 		return ;
 	ft_strlcpy(param->heredoc, res, ft_strlen(res) + 1);
+	free (res);
 }
 
 int	ft_fd_heredoc(char *heredoc)
