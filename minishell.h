@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/25 14:25:09 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/26 16:46:01 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ void	ft_free_cc_c(char **cc, char *c);
 //pipe.c
 int		**ft_pipe(int lst_size);
 void	ft_closepipe(int **p1, int lst_size);
-void	ft_waitpid(int *pid);
+void	ft_waitpid(int *pid, int size_pid);
 int		ft_pipe_out(t_param *param, int **p1, int i);
 int		ft_pipe_in(t_param *param, int **p1, int i);
 
@@ -155,8 +155,8 @@ int		ft_built_exec(t_param *param);
 
 t_param	*ft_param_c(int lst_size, t_block *b_c, int i, int **p1);
 t_list	*ft_param(t_list **block, int **p1, int lst_size);
-void	ft_fork(t_param *param, int **p1, int *pid);
-int		*ft_new_pid(int *pid);
+void	ft_fork(t_param *param, int **p1, int *pid, int size_pid);
+int		*ft_new_pid(int *pid, int size_pid);
 
 //error
 void	msg_error(char *str, int status);
