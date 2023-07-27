@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:01:58 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/27 13:57:55 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/27 16:27:25 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@ int	ft_cp_line_core(char *prompt, int *i, char *b, char *res)
 	while (j < k && prompt[*i] != '\0')
 	{
 		if (ft_strrchr(b, prompt[*i]) && o_q == 0)
+		{
 			o_q = 1;
-		if (ft_strrchr(b, prompt[*i]) && o_q == 0)
 			q = ft_strrchr(b, prompt[*i]);
+		}
 		else if (q == ft_strrchr(b, prompt[*i]) && o_q == 1)
 			o_q = 0;
 		else if (prompt[*i] == '$' && (o_q == 0 || (q[0] == '"' && o_q == 1)))

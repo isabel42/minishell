@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/27 15:20:54 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/27 17:15:45 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,26 +47,23 @@ int	ft_loop_prompt(t_list **block, int **pid_o, int **p1, int lst_size)
 	int		i;
 	int		size_pid;
 	t_param	*param;
-	int		*pid;
+	t_block	*block_content;
+	t_list	*test;
 
 	i = 0;
+	test = *block;
 	size_pid = 0;
-	pid = *pid_o;
-	while (*block)
+	while (test)
 	{
+		block_content = (t_block *)test->content;
 		g_data.status = 0;
-		param = ft_param_c(lst_size, (t_block *)(*block)->content, i, p1);
+		param = ft_param_c(lst_size, block_content, i, p1);
 		if (ft_built_exec(param) == -1)
-		{
-			size_pid++;
-			pid = ft_new_pid(pid, size_pid);
-			ft_fork(param, p1, pid, size_pid);
-		}
+			ft_fork(param, p1, pid_o, &size_pid);
 		ft_free_param(param);
-		*block = (*block)->next;
+		test = test->next;
 		i++;
 	}
-	*pid_o = pid;
 	return (size_pid);
 }
 

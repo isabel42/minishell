@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/27 13:23:39 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/27 17:10:34 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ void	ft_init_type(char *txt, t_type *content);
 t_list	*ft_parsing(char *prompt, char *b);
 
 // pipe_fork.c
-void	ft_fork(t_param *param, int **p1, int *pid, int size_pid);
+void	ft_fork(t_param *param, int **p1, int **pid, int *size_pid);
 int		*ft_new_pid(int *pid, int size_pid);
 
 //pipe.c

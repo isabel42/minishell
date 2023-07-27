@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:30:21 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/27 15:18:01 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/27 17:10:53 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,18 @@ int	*ft_new_pid(int *pid, int size_pid)
 	return (new_pid);
 }
 
-void	ft_fork(t_param *param, int **p1, int *pid, int size_pid)
+void	ft_fork(t_param *param, int **p1, int **pid_o, int *size_pid)
 {
 	int	pid_parent;
+	int	*pid;
 
 	pid_parent = getpid();
-	pid[size_pid - 1] = fork();
-	if (pid[size_pid - 1] == 0)
+	*size_pid = *size_pid + 1;
+	pid = *pid_o;
+	pid = ft_new_pid(pid, *size_pid);
+	pid[*size_pid - 1] = fork();
+	*pid_o = pid;
+	if (pid[*size_pid - 1] == 0)
 	{
 		dup2(param->fd_in, STDIN_FILENO);
 		dup2(param->fd_out, STDOUT_FILENO);

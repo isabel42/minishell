@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:01:58 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/27 15:14:01 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/27 16:26:08 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ int	ft_cp_line_long_else(char *pr, int i, char *b)
 	int		k;
 
 	j = 0;
-	o_q = 0;
 	k = 1;
+	o_q = 0;
 	while (pr[i + j] != '\0' && (ft_char_cont(pr[i + j]) || o_q == 1))
 	{
 		if (ft_strrchr(b, pr[i + j]) && o_q == 0)
@@ -50,7 +50,7 @@ int	ft_cp_line_long_else(char *pr, int i, char *b)
 			k++;
 		j++;
 	}
-	if (ft_char_stop(pr[i + j]) == 1 && k > 1)
+	if (ft_char_stop(pr[i + j]) && k > 1)
 		k--;
 	return (k);
 }
