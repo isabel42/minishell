@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 13:19:45 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/24 16:45:37 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/27 09:57:31 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,14 @@ void	ft_cmd_nf(char *command)
 	ft_putstr_fd("minishell: ", 1);
 	if (command)
 		ft_putstr_fd(command, 1);
-	ft_putstr_fd("command not found\n", 1);
+	ft_putstr_fd(": command not found\n", 1);
 	g_data.status = 127;
 }
 
 void	ft_perror_comm(char *command, char *infile)
 {
 	int	a;
+	int	i;
 
 	if (infile != NULL)
 	{
@@ -45,17 +46,21 @@ void	ft_perror_comm(char *command, char *infile)
 		}
 		else
 		{
-			ft_putstr_fd("No such file or directory\n", 1);
+			i = ft_strlen(infile) - 1;
+			while (infile[i] != '/')
+				i--;
+			printf("minishell: %s: ", infile + i + 1);
+			printf("no such a file or directory\n");
 			g_data.status = 1;
 		}
 		close (a);
 	}
 	else if (check_builtin(command) == -1
 		&& command != NULL && access(command, X_OK) != 0)
-			ft_cmd_nf(command);
+		ft_cmd_nf(command);
 }
 
-char	*ft_find_path(char *path, char *command, char *infile)
+char	*ft_find_path_comm(char *path, char *command)
 {
 	char	**path_split;
 	char	*path_command;
@@ -63,28 +68,35 @@ char	*ft_find_path(char *path, char *command, char *infile)
 	int		i;
 
 	i = 0;
+	if (path == NULL)
+		return (NULL);
+	slash_command = ft_strjoin("/", command);
+	path_split = ft_split(path, ':');
+	while (path_split != NULL && path_split[i])
+	{
+		path_command = ft_strjoin(path_split[i], slash_command);
+		if (access(path_command, X_OK) == 0)
+		{
+			ft_free_cc_c(path_split, slash_command);
+			return (path_command);
+		}
+		free(path_command);
+		i++;
+	}
+	ft_free_cc(path_split);
+	free(slash_command);
+	return (NULL);
+}
+
+char	*ft_find_path(char *path, char *command, char *infile)
+{
+	char	*path_command;
+
 	if (command)
 	{
-		slash_command = ft_strjoin("/", command);
-		if (path == NULL)
-			path_split = NULL;
-		else
-		{
-			path_split = ft_split(path, ':');
-			while (path_split != NULL && path_split[i])
-			{
-				path_command = ft_strjoin(path_split[i], slash_command);
-				if (access(path_command, X_OK) == 0)
-				{
-					ft_free_cc_c(path_split, slash_command);
-					return (path_command);
-				}
-				free(path_command);
-				i++;
-			}
-			ft_free_cc(path_split);
-		}
-		free(slash_command);
+		path_command = ft_find_path_comm(path, command);
+		if (path_command != NULL)
+			return (path_command);
 	}
 	ft_perror_comm(command, infile);
 	if (command != NULL)

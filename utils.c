@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:10:25 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/25 15:08:37 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/27 09:43:41 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,4 @@ char	*ft_envp(char **envp, char *pwd)
 		i++;
 	}
 	return (NULL);
-}
-
-void	ft_exit_isa(char *s)
-{
-	int	pid;
-	pid = getpid();
-	printf("%s", s);
-	kill(pid, SIGUSR2);
 }

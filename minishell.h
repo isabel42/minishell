@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/26 16:46:01 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/26 17:45:01 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,6 @@ void	msg_error(char *str, int status);
 //TEST//
 char	*ft_getpath(char **envp, char *prog);
 
-int	ft_txt_redir(char *txt);
+int		ft_txt_redir(char *txt);
 
 #endif

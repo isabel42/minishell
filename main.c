@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/26 16:49:52 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/26 17:47:34 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	main(int argc, char **argv, char **env)
 	{
 		block = ft_block();
 		if (block == NULL)
-			return (0) ;
+			return (0);
 		test = block;
 		lst_size = ft_lstsize(test);
 		pid = malloc(sizeof(int));
@@ -110,4 +110,3 @@ int	main(int argc, char **argv, char **env)
 	}
 	return (0);
 }
-
