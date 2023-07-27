@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 14:26:13 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/27 12:32:58 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/27 13:23:39 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 
 typedef struct s_data
 {
-	char					**env_copy;
-	int						status;
+	char								**env_copy;
+	unsigned int						status;
 }				t_data;
 
 t_data	g_data;
@@ -124,6 +124,9 @@ void	ft_exit(t_param *param);
 void	ft_heredoc(char *b_c_infile, t_param *param, int done);
 int		ft_fd_heredoc(char *heredoc);
 
+// param_flags.c
+char	**ft_flags_execve(t_block *b_c);
+
 // param.c
 t_param	*ft_param_c(int lst_size, t_block *b_c, int i, int **p1);
 
@@ -132,7 +135,7 @@ int		ft_txt_redir(char *txt);
 int		ft_check_inputs(t_list **inputs);
 
 // parsing_long.c
-int	ft_cp_line_long(char *pr, int i, char *b);
+int		ft_cp_line_long(char *pr, int i, char *b);
 
 // parsing.c
 int		ft_cp_line_core(char *prompt, int *i, char *b, char *res);
@@ -140,16 +143,33 @@ char	*ft_cp_line(char *prompt, int *i, char *b);
 void	ft_init_type(char *txt, t_type *content);
 t_list	*ft_parsing(char *prompt, char *b);
 
+// pipe_fork.c
+void	ft_fork(t_param *param, int **p1, int *pid, int size_pid);
+int		*ft_new_pid(int *pid, int size_pid);
+
+//pipe.c
+int		**ft_pipe(int lst_size);
+void	ft_closepipe(int **p1, int lst_size);
+void	ft_waitpid(int *pid, int size_pid);
+int		ft_pipe_in(t_param *param, int **p1, int i);
+int		ft_pipe_out(t_param *param, int **p1, int i);
+
+//signal.c
+void	ft_user(int signal);
+void	custom_handler(int signal);
+void	init_termios(void);
+
+// unset.c
+void	ft_unset(t_param *param);
+
+// utils_1.c
+char	**ft_nl_charchar(char **tab, char *txt);
+
 // utils.c
 int		find_index_envp(char **envp);
 char	*find_home(void);
 char	*ft_getpath(char **envp, char *prog);
 char	*ft_envp(char **envp, char *pwd);
-
-// utils_1.c
-char	**ft_nl_charchar(char **tab, char *txt);
-void	ft_cd_util(char *current_path, char *old_path);
-char	**ft_flags_execve(t_block *b_c);
 
 //builtin
 void	ft_env(t_param *param);
@@ -157,42 +177,8 @@ void	ft_exit(t_param *param);
 void	ft_pwd(t_param *param);
 void	ft_cd(t_param *param);
 void	ft_export(t_param *param);
-void	ft_unset(t_param *param);
 
-//signal
-
-void	ft_user(int signal);
-void	custom_handler(int signal);
-void	init_termios(void);
-
+// from brew library readline
 int		rl_replace_line(const char *text, int i);
-char	*find_home(void);
-
-//pipex
-char	*ft_envp(char **envp, char *pwd);
-char	*ft_find_pwd(char *pwd, char *infile);
-char	*ft_find_path(char *path, char *command, char *infile);
-
-void	ft_free_cc(char **split);
-
-//pipe.c
-int		**ft_pipe(int lst_size);
-void	ft_closepipe(int **p1, int lst_size);
-void	ft_waitpid(int *pid, int size_pid);
-int		ft_pipe_out(t_param *param, int **p1, int i);
-int		ft_pipe_in(t_param *param, int **p1, int i);
-
-//builtins-exec.c
-int		check_builtin(char *cmd_long);
-int		ft_built_exec(t_param *param);
-
-void	ft_fork(t_param *param, int **p1, int *pid, int size_pid);
-int		*ft_new_pid(int *pid, int size_pid);
-
-
-//TEST//
-char	*ft_getpath(char **envp, char *prog);
-
-int		ft_txt_redir(char *txt);
 
 #endif

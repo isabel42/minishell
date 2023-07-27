@@ -16,13 +16,13 @@ SRCS	= main.c \
 			constants.c \
 			free.c \
 			param.c \
+			param_flags.c \
 			pipe_fork.c \
-			error.c \
 			pipe.c \
 			builtin_exec.c \
 			ft_exit.c \
 			cd.c \
-			# signal.c \
+			signal.c \
 
 OBJS 	= ${SRCS:.c=.o}
 

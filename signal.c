@@ -6,12 +6,11 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 15:38:36 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/27 11:40:15 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/27 12:58:13 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 void	ft_user(int signal)
 {

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin.c                                          :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 14:54:47 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/24 14:27:21 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/27 13:27:25 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	echo_flag(t_param *param)
 	{
 		if (i != 2)
 			ft_putstr_fd(" ", param->fd_out);
-		ft_putstr_fd(param->flags[i++], param->fd_out);
+		ft_putstr_fd(param->flags[i], param->fd_out);
+		i++;
 	}
 }
 
@@ -34,7 +35,8 @@ void	echo_normal(t_param *param)
 	{
 		if (i != 1)
 			ft_putstr_fd(" ", param->fd_out);
-		ft_putstr_fd(param->flags[i++], param->fd_out);
+		ft_putstr_fd(param->flags[i], param->fd_out);
+		i++;
 	}
 	if (param->flags[1])
 		ft_putstr_fd("\n", param->fd_out);

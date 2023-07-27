@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 12:26:33 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/27 08:54:53 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/27 13:48:02 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ char	*ft_dolar_char_qm(int *i, char *prompt, int *j, char *res)
 		itoa = ft_itoa(g_data.status);
 		ft_strlcpy(res + *j, itoa, ft_strlen(itoa) + 1);
 		*j = *j + (int)ft_strlen(itoa);
-		*i = *i + 1;
 		free(itoa);
 		return (res);
 	}
