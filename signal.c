@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 15:38:36 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/21 12:31:32 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/27 11:40:15 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+
+void	ft_user(int signal)
+{
+	if (signal == SIGUSR1)
+		g_data.status = 126;
+}
 
 void	custom_handler(int signal)
 {

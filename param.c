@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 18:29:21 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/26 12:38:06 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/27 12:23:37 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,34 +119,24 @@ t_param	*ft_param_c(int lst_size, t_block *b_c, int i, int **p1)
 	return (param);
 }
 
-t_list	*ft_param(t_list **block, int **p1, int lst_size)
-{
-	t_list	*test;
-	t_param	*param;
-	t_block	*b_c;
-	int		i;
-	t_list	*param_list;
+// t_list	*ft_param(t_list **block, int **p1, int lst_size)
+// {
+// 	t_list	*test;
+// 	t_param	*param;
+// 	t_block	*b_c;
+// 	int		i;
+// 	t_list	*param_list;
 
-	test = *block;
-	i = 0;
-	param_list = NULL;
-	while (test)
-	{
-		b_c = (t_block *) test->content;
-		param = ft_param_c(lst_size, b_c, i, p1);
-		ft_lstadd_back(&param_list, ft_lstnew(&(*param)));
-		i++;
-		test = test->next;
-	}
-	return (param_list);
-}
-
-// printf("param0: %s\n", param->cmd);
-// printf("flag0: %s\n", param->flags[0]);
-// printf("flag1: %s\n", param->flags[1]);
-// // printf("flag2: %s\n", param->flags[2]);
-// printf("param1: %s\n", param->infile);
-// printf("param2: %s\n", param->outfile);
-// printf("param3: %s\n", param->heredoc);	
-// printf("param4: %d\n", param->lst_size);
-// printf("param5: %s\n", param->chev_out);
+// 	test = *block;
+// 	i = 0;
+// 	param_list = NULL;
+// 	while (test)
+// 	{
+// 		b_c = (t_block *) test->content;
+// 		param = ft_param_c(lst_size, b_c, i, p1);
+// 		ft_lstadd_back(&param_list, ft_lstnew(&(*param)));
+// 		i++;
+// 		test = test->next;
+// 	}
+// 	return (param_list);
+// }

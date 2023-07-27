@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 13:45:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/21 13:07:20 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/27 12:19:59 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,17 @@ void	ft_free_ii(int **split, int j)
 	free(split);
 }
 
-void	ft_free_param(t_param *param)
+void	ft_free_cc(char **tab)
 {
 	int	i;
 
-	i = 1;
-	free(param->cmd);
-	free(param->infile);
-	free(param->outfile);
-	free(param->heredoc);
-	free(param->chev_out);
-	while (param->flags[i] != NULL)
+	i = 0;
+	while (tab[i])
 	{
-		free(param->flags[i]);
+		free(tab[i]);
 		i++;
 	}
-	free(param->flags);
-	free(param);
+	free(tab);
 }
 
 void	ft_free_cc_c(char **cc, char *c)
@@ -50,20 +44,8 @@ void	ft_free_cc_c(char **cc, char *c)
 	free(c);
 }
 
-void	ft_free_pipe(int **p1, int lst_size)
+void	ft_free_c_c(char *a, char *b)
 {
-	int	i;
-
-	i = 0;
-	if (lst_size == 1)
-		free(p1[0]);
-	else
-	{
-		while (i < lst_size - 1)
-		{
-			free(p1[i]);
-			i++;
-		}
-	}
-	free(p1);
+	free(a);
+	free(b);
 }

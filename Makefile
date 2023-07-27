@@ -2,6 +2,8 @@ SRCS	= main.c \
 			utils.c \
 			utils_1.c \
 			parsing.c \
+			parsing_check_inputs.c \
+			parsing_long.c \
 			block_build_utils.c \
 			block.c \
 			free_clean.c \
@@ -10,7 +12,7 @@ SRCS	= main.c \
 			export.c \
 			unset.c \
 			dolar.c \
-			ft_exec.c \
+			ft_heredoc.c \
 			constants.c \
 			free.c \
 			param.c \
@@ -19,6 +21,7 @@ SRCS	= main.c \
 			pipe.c \
 			builtin_exec.c \
 			ft_exit.c \
+			cd.c \
 			# signal.c \
 
 OBJS 	= ${SRCS:.c=.o}

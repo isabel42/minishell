@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 13:28:34 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/21 14:01:10 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/27 11:51:06 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ char	*all_lower(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] >= 65 && str[i] <= 90)
-			str[i] += 32;
+		ft_tolower(str[i]);
 		i++;
 	}
 	return (str);

@@ -3,22 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktomat <ktomat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 13:13:27 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/21 13:10:27 by ktomat           ###   ########.fr       */
+/*   Updated: 2023/07/27 11:59:31 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	ft_isalnum1(int c)
-{
-	if ((c >= 48 && c <= 57) || (c >= 65 && c <= 90) || (c >= 97 && c <= 122))
-		return (1);
-	else
-		return (0);
-}
 
 int	is_equal_sign(char *str)
 {
@@ -35,7 +27,7 @@ int	is_equal_sign(char *str)
 		return (0);
 	while (str[i])
 	{
-		if (str[i] == '=' && ft_isalnum1(str[i - 1]) == 1)
+		if (str[i] == '=' && ft_isalnum(str[i - 1]) == 1)
 			b = 1;
 		if (str[i - 1] == '=' && (str[i] != '<' || str[i] != '>'
 				|| str[i] != '|'))
