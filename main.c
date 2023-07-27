@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 17:01:03 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/27 14:09:03 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/27 14:19:09 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,24 +32,30 @@ void	check_args(int ac, char **av, char **env)
 	env_copy1(env);
 }
 
-int	ft_loop_prompt(t_list *block, int **pid_o, int **p1, int lst_size)
+int	ft_lstsize_adhoc(t_list *block)
+{
+	t_list	*test;
+	int		lst_size;
+
+	test = block;
+	lst_size = ft_lstsize(test);
+	return (lst_size);
+}
+
+int	ft_loop_prompt(t_list **block, int **pid_o, int **p1, int lst_size)
 {
 	int		i;
 	int		size_pid;
 	t_param	*param;
-	t_block	*block_content;
-	t_list	*test;
 	int		*pid;
 
-	test = block;
 	i = 0;
 	size_pid = 0;
 	pid = *pid_o;
-	while (test)
+	while (*block)
 	{
 		g_data.status = 0;
-		block_content = (t_block *) test->content;
-		param = ft_param_c(lst_size, block_content, i, p1);
+		param = ft_param_c(lst_size, (t_block *)(*block)->content, i, p1);
 		if (ft_built_exec(param) == -1)
 		{
 			size_pid++;
@@ -57,7 +63,7 @@ int	ft_loop_prompt(t_list *block, int **pid_o, int **p1, int lst_size)
 			ft_fork(param, p1, pid, size_pid);
 		}
 		ft_free_param(param);
-		test = test->next;
+		*block = (*block)->next;
 		i++;
 	}
 	*pid_o = pid;
@@ -67,7 +73,6 @@ int	ft_loop_prompt(t_list *block, int **pid_o, int **p1, int lst_size)
 int	main(int argc, char **argv, char **env)
 {
 	t_list	*block;
-	t_list	*test;
 	int		*pid;
 	int		**p1;
 	int		lst_size;
@@ -79,13 +84,12 @@ int	main(int argc, char **argv, char **env)
 		block = ft_block();
 		if (block == NULL)
 			return (0);
-		test = block;
-		lst_size = ft_lstsize(test);
+		lst_size = ft_lstsize_adhoc(block);
 		pid = malloc(sizeof(int));
 		if (!pid)
 			return (0);
 		p1 = ft_pipe(lst_size);
-		size_pid = ft_loop_prompt(block, &pid, p1, lst_size);
+		size_pid = ft_loop_prompt(&block, &pid, p1, lst_size);
 		ft_lstclear(&block, (void *) &ft_clean_block);
 		ft_closepipe(p1, lst_size);
 		ft_waitpid(pid, size_pid);

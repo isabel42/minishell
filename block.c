@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 17:23:20 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/27 13:14:59 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/27 14:10:42 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_list	*ft_block(void)
 	t_list	*inputs;
 	t_list	*block;
 
-	prompt = ft_strtrim(readline("minishell> ")," ");
+	prompt = ft_strtrim(readline("minishell> "), " ");
 	if (prompt == NULL)
 		exit(0);
 	if (ft_strlen(prompt) != 0)
