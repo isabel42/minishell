@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:01:58 by itovar-n          #+#    #+#             */
-/*   Updated: 2023/07/27 12:58:05 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/27 15:14:01 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_char_stop(char c)
 	return (0);
 }
 
-int	ft_cp_line_long(char *pr, int i, char *b)
+int	ft_cp_line_long_else(char *pr, int i, char *b)
 {
 	int		j;
 	int		o_q;
@@ -52,5 +52,16 @@ int	ft_cp_line_long(char *pr, int i, char *b)
 	}
 	if (ft_char_stop(pr[i + j]) == 1 && k > 1)
 		k--;
+	return (k);
+}
+
+int	ft_cp_line_long(char *pr, int i, char *b)
+{
+	int	k;
+
+	if ((pr[i] == '<' && pr[i + 1] == '<')
+		|| (pr[i] == '>' && pr[i + 1] == '>'))
+		return (2);
+	k = ft_cp_line_long_else(pr, i, b);
 	return (k);
 }

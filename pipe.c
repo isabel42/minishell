@@ -6,7 +6,7 @@
 /*   By: itovar-n <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 15:47:40 by ktomat            #+#    #+#             */
-/*   Updated: 2023/07/26 16:29:21 by itovar-n         ###   ########.fr       */
+/*   Updated: 2023/07/27 15:45:04 by itovar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,10 @@ int	ft_pipe_in(t_param *param, int **p1, int i)
 		a = open (param->infile, O_RDONLY | O_CLOEXEC);
 		if (a < 0)
 		{
+			printf("ninishell: ");
 			perror(NULL);
-			a = p1[i - 1][0];
+			param->cmd = NULL;
+			a = 0;
 		}
 	}
 	else if (param->heredoc != NULL)
